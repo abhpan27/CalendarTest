@@ -13,6 +13,9 @@
 		46C8228E2003D1030086061F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C8228D2003D1030086061F /* Assets.xcassets */; };
 		46C822912003D1030086061F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46C8228F2003D1030086061F /* LaunchScreen.storyboard */; };
 		46C8229C2003D1030086061F /* CalendarTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C8229B2003D1030086061F /* CalendarTestTests.swift */; };
+		46C822A82003D2030086061F /* CTCalDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C822A72003D2030086061F /* CTCalDataGenerator.swift */; };
+		46C822AB2003D33C0086061F /* CTDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C822AA2003D33C0086061F /* CTDateExtension.swift */; };
+		46C822AD2003D4F60086061F /* CTCalendarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C822AC2003D4F60086061F /* CTCalendarExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,9 @@
 		46C822972003D1030086061F /* CalendarTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalendarTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C8229B2003D1030086061F /* CalendarTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTestTests.swift; sourceTree = "<group>"; };
 		46C8229D2003D1030086061F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		46C822A72003D2030086061F /* CTCalDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCalDataGenerator.swift; sourceTree = "<group>"; };
+		46C822AA2003D33C0086061F /* CTDateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTDateExtension.swift; sourceTree = "<group>"; };
+		46C822AC2003D4F60086061F /* CTCalendarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCalendarExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +83,8 @@
 		46C822852003D1020086061F /* CalendarTest */ = {
 			isa = PBXGroup;
 			children = (
+				46C822A92003D3280086061F /* Foundation Extensions */,
+				46C822A62003D1C40086061F /* Data Helper */,
 				46C822862003D1020086061F /* AppDelegate.swift */,
 				46C822882003D1020086061F /* ViewController.swift */,
 				46C8228A2003D1020086061F /* Main.storyboard */,
@@ -94,6 +102,23 @@
 				46C8229D2003D1030086061F /* Info.plist */,
 			);
 			path = CalendarTestTests;
+			sourceTree = "<group>";
+		};
+		46C822A62003D1C40086061F /* Data Helper */ = {
+			isa = PBXGroup;
+			children = (
+				46C822A72003D2030086061F /* CTCalDataGenerator.swift */,
+			);
+			path = "Data Helper";
+			sourceTree = "<group>";
+		};
+		46C822A92003D3280086061F /* Foundation Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				46C822AA2003D33C0086061F /* CTDateExtension.swift */,
+				46C822AC2003D4F60086061F /* CTCalendarExtension.swift */,
+			);
+			path = "Foundation Extensions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,7 +171,7 @@
 				TargetAttributes = {
 					46C822822003D1020086061F = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					46C822962003D1030086061F = {
 						CreatedOnToolsVersion = 9.2;
@@ -199,7 +224,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46C822AD2003D4F60086061F /* CTCalendarExtension.swift in Sources */,
 				46C822892003D1020086061F /* ViewController.swift in Sources */,
+				46C822AB2003D33C0086061F /* CTDateExtension.swift in Sources */,
+				46C822A82003D2030086061F /* CTCalDataGenerator.swift in Sources */,
 				46C822872003D1020086061F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,11 +381,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CalendarTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Abhishek.CalendarTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -367,11 +397,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CalendarTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Abhishek.CalendarTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
