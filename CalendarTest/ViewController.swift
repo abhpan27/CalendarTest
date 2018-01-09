@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CTLaunchViewController: UIViewController {
 	let calData = CTCalDataGenerator().getBasicCalData()
 	override func viewDidLoad() {
 		super.viewDidLoad()

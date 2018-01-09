@@ -11,31 +11,40 @@ import Foundation
 final class CTCellUIData {
 
 	let shouldDrawInGrey:Bool
-	let dateString:String
+	let dateEpoch:TimeInterval //this will be -1 for blank dates
+	let dateNumberString:String // only date number i.e. 1,2, 30 etc
+	let fullDateString:String // for start of month
 
 	var isBlankDay:Bool {
-		return self.dateString.isEmpty
+		return self.fullDateString.isEmpty
 	}
 
-	init(dateString:String, shouldDrawInGrey:Bool) {
-		self.dateString = dateString
+	init(dateEpoch:TimeInterval, shouldDrawInGrey:Bool) {
+		self.dateEpoch = dateEpoch
 		self.shouldDrawInGrey = shouldDrawInGrey
-	}
 
-	//formatting of date
-	convenience init(date:Date, shouldUseGreyColor:Bool) {
-		let dateFormatter = DateFormatter()
-		if date.isFirstDateOfMonth {
-			if date.isInCurrentYear {
-				dateFormatter.dateFormat = "d MMM"
+		//getting all the UI data here so that no need to calculate it at runtime thus smooth scroll will be achived
+		if  dateEpoch != -1 {
+			let date = Date(timeIntervalSince1970: dateEpoch)
+			let dateFormatter = DateFormatter()
+			dateFormatter.dateFormat = "d"
+			dateNumberString = dateFormatter.string(from: date)
+
+			//full date string
+			if date.isFirstDateOfMonth {
+				if date.isInCurrentYear {
+					dateFormatter.dateFormat = "d#MMM"
+				}else {
+					dateFormatter.dateFormat = "MMM#d#yyyy"
+				}
 			}else {
-				dateFormatter.dateFormat = "MMM d yyyy"
+				dateFormatter.dateFormat = "d"
 			}
+			self.fullDateString = dateFormatter.string(from: date).replacingOccurrences(of: "#", with: "\n")
 		}else {
-			dateFormatter.dateFormat = " d"
+			dateNumberString = ""
+			fullDateString = ""
 		}
-		let dateString = dateFormatter.string(from: date).replacingOccurrences(of: " ", with: "\n")
-		self.init(dateString: dateString, shouldDrawInGrey: shouldUseGreyColor)
 	}
 }
 
@@ -53,7 +62,7 @@ final class CTCalDataGenerator {
 		//fill first row intial empty days
 		while currentDay < currentDateInIteration.day {
 			//Empty date string means blank date
-			let emptyCell = CTCellUIData(dateString: "", shouldDrawInGrey: false)
+			let emptyCell = CTCellUIData(dateEpoch: -1, shouldDrawInGrey: false)
 			currentRowData.append(emptyCell)
 			currentDay += 1
 		}
@@ -63,10 +72,11 @@ final class CTCalDataGenerator {
 			//row fill -- no of days in week is 7 - 1..8 (1- sunday 8- saturday)
 			while currentDay < 8 {
 				//next date can be empty cell if last row is in iteration
-				let nextCellUIData = currentDateInIteration <= endDate ? CTCellUIData(date: currentDateInIteration, shouldUseGreyColor: shouldFillGrey) : CTCellUIData(dateString: "", shouldDrawInGrey: false)
+
+				let nextCellUIData = currentDateInIteration <= endDate ? CTCellUIData(dateEpoch: currentDateInIteration.timeIntervalSince1970, shouldDrawInGrey: shouldFillGrey) : CTCellUIData(dateEpoch: -1, shouldDrawInGrey: false)
 				currentRowData.append(nextCellUIData)
 				let nextDate = currentDateInIteration.nextDate.startOfDate
-				if nextDate.isInSameMonth(withDate: currentDateInIteration) {
+				if !nextDate.isInSameMonth(withDate: currentDateInIteration) {
 					shouldFillGrey = !shouldFillGrey
 				}
 				currentDateInIteration = nextDate

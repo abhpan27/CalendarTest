@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4684683820046CEB007F71CF /* CTAppControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683720046CEB007F71CF /* CTAppControl.swift */; };
+		4684683A20046DE2007F71CF /* CTUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683920046DE2007F71CF /* CTUIController.swift */; };
+		4684683C20046E48007F71CF /* CTAgendaDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683B20046E48007F71CF /* CTAgendaDataHelper.swift */; };
+		4684684020047019007F71CF /* CTCentralContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683E20047019007F71CF /* CTCentralContainerViewController.swift */; };
+		4684684120047019007F71CF /* CTCentralContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4684683F20047019007F71CF /* CTCentralContainerViewController.xib */; };
+		4684684420047203007F71CF /* CTCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684684220047203007F71CF /* CTCalendarViewController.swift */; };
+		4684684520047203007F71CF /* CTCalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4684684320047203007F71CF /* CTCalendarViewController.xib */; };
+		4684684A20047403007F71CF /* CTCalDayViewCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684684820047403007F71CF /* CTCalDayViewCellCollectionViewCell.swift */; };
+		4684684B20047403007F71CF /* CTCalDayViewCellCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4684684920047403007F71CF /* CTCalDayViewCellCollectionViewCell.xib */; };
+		4684684D200475E2007F71CF /* CTTopBarOnCentralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684684C200475E2007F71CF /* CTTopBarOnCentralView.swift */; };
+		4684685120047B76007F71CF /* CTCentralControllerUIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684685020047B76007F71CF /* CTCentralControllerUIHelper.swift */; };
+		4684685320048588007F71CF /* CTGeneralExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684685220048588007F71CF /* CTGeneralExtension.swift */; };
 		46C822872003D1020086061F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C822862003D1020086061F /* AppDelegate.swift */; };
 		46C822892003D1020086061F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C822882003D1020086061F /* ViewController.swift */; };
 		46C8228C2003D1020086061F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46C8228A2003D1020086061F /* Main.storyboard */; };
@@ -29,6 +41,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4684683720046CEB007F71CF /* CTAppControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAppControl.swift; sourceTree = "<group>"; };
+		4684683920046DE2007F71CF /* CTUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTUIController.swift; sourceTree = "<group>"; };
+		4684683B20046E48007F71CF /* CTAgendaDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAgendaDataHelper.swift; sourceTree = "<group>"; };
+		4684683E20047019007F71CF /* CTCentralContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCentralContainerViewController.swift; sourceTree = "<group>"; };
+		4684683F20047019007F71CF /* CTCentralContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CTCentralContainerViewController.xib; sourceTree = "<group>"; };
+		4684684220047203007F71CF /* CTCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCalendarViewController.swift; sourceTree = "<group>"; };
+		4684684320047203007F71CF /* CTCalendarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CTCalendarViewController.xib; sourceTree = "<group>"; };
+		4684684820047403007F71CF /* CTCalDayViewCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCalDayViewCellCollectionViewCell.swift; sourceTree = "<group>"; };
+		4684684920047403007F71CF /* CTCalDayViewCellCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CTCalDayViewCellCollectionViewCell.xib; sourceTree = "<group>"; };
+		4684684C200475E2007F71CF /* CTTopBarOnCentralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTTopBarOnCentralView.swift; sourceTree = "<group>"; };
+		4684685020047B76007F71CF /* CTCentralControllerUIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCentralControllerUIHelper.swift; sourceTree = "<group>"; };
+		4684685220048588007F71CF /* CTGeneralExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTGeneralExtension.swift; sourceTree = "<group>"; };
 		46C822832003D1020086061F /* CalendarTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C822862003D1020086061F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46C822882003D1020086061F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +86,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4684683620046CC8007F71CF /* App Flow */ = {
+			isa = PBXGroup;
+			children = (
+				4684683720046CEB007F71CF /* CTAppControl.swift */,
+				4684683920046DE2007F71CF /* CTUIController.swift */,
+				4684685220048588007F71CF /* CTGeneralExtension.swift */,
+			);
+			path = "App Flow";
+			sourceTree = "<group>";
+		};
+		4684683D20046FF7007F71CF /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				4684684620047264007F71CF /* Central Container */,
+				4684684720047274007F71CF /* Calendar View */,
+				4684684C200475E2007F71CF /* CTTopBarOnCentralView.swift */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		4684684620047264007F71CF /* Central Container */ = {
+			isa = PBXGroup;
+			children = (
+				4684683E20047019007F71CF /* CTCentralContainerViewController.swift */,
+				4684683F20047019007F71CF /* CTCentralContainerViewController.xib */,
+				4684685020047B76007F71CF /* CTCentralControllerUIHelper.swift */,
+			);
+			path = "Central Container";
+			sourceTree = "<group>";
+		};
+		4684684720047274007F71CF /* Calendar View */ = {
+			isa = PBXGroup;
+			children = (
+				4684684220047203007F71CF /* CTCalendarViewController.swift */,
+				4684684320047203007F71CF /* CTCalendarViewController.xib */,
+				4684684820047403007F71CF /* CTCalDayViewCellCollectionViewCell.swift */,
+				4684684920047403007F71CF /* CTCalDayViewCellCollectionViewCell.xib */,
+			);
+			path = "Calendar View";
+			sourceTree = "<group>";
+		};
 		46C8227A2003D1020086061F = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +148,8 @@
 		46C822852003D1020086061F /* CalendarTest */ = {
 			isa = PBXGroup;
 			children = (
+				4684683D20046FF7007F71CF /* Modules */,
+				4684683620046CC8007F71CF /* App Flow */,
 				46C822A92003D3280086061F /* Foundation Extensions */,
 				46C822A62003D1C40086061F /* Data Helper */,
 				46C822862003D1020086061F /* AppDelegate.swift */,
@@ -108,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				46C822A72003D2030086061F /* CTCalDataGenerator.swift */,
+				4684683B20046E48007F71CF /* CTAgendaDataHelper.swift */,
 			);
 			path = "Data Helper";
 			sourceTree = "<group>";
@@ -204,9 +272,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4684684B20047403007F71CF /* CTCalDayViewCellCollectionViewCell.xib in Resources */,
+				4684684520047203007F71CF /* CTCalendarViewController.xib in Resources */,
 				46C822912003D1030086061F /* LaunchScreen.storyboard in Resources */,
 				46C8228E2003D1030086061F /* Assets.xcassets in Resources */,
 				46C8228C2003D1020086061F /* Main.storyboard in Resources */,
+				4684684120047019007F71CF /* CTCentralContainerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,10 +295,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4684683A20046DE2007F71CF /* CTUIController.swift in Sources */,
+				4684685320048588007F71CF /* CTGeneralExtension.swift in Sources */,
 				46C822AD2003D4F60086061F /* CTCalendarExtension.swift in Sources */,
 				46C822892003D1020086061F /* ViewController.swift in Sources */,
+				4684684420047203007F71CF /* CTCalendarViewController.swift in Sources */,
 				46C822AB2003D33C0086061F /* CTDateExtension.swift in Sources */,
+				4684683C20046E48007F71CF /* CTAgendaDataHelper.swift in Sources */,
+				4684684D200475E2007F71CF /* CTTopBarOnCentralView.swift in Sources */,
 				46C822A82003D2030086061F /* CTCalDataGenerator.swift in Sources */,
+				4684684020047019007F71CF /* CTCentralContainerViewController.swift in Sources */,
+				4684685120047B76007F71CF /* CTCentralControllerUIHelper.swift in Sources */,
+				4684683820046CEB007F71CF /* CTAppControl.swift in Sources */,
+				4684684A20047403007F71CF /* CTCalDayViewCellCollectionViewCell.swift in Sources */,
 				46C822872003D1020086061F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

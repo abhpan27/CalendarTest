@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CTCalDayViewCellCollectionViewCell" customModule="CalendarTest" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="104" height="112"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="104" height="112"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ick-Di-tWA">
+                        <rect key="frame" x="32" y="36" width="40" height="40"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="9IN-ja-w3i"/>
+                            <constraint firstAttribute="height" constant="40" id="VbK-6s-6UL"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYP-Tc-kMh">
+                        <rect key="frame" x="31" y="45.5" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="lYP-Tc-kMh" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="RLv-96-Lt0"/>
+                <constraint firstItem="lYP-Tc-kMh" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="cg9-uj-CU8"/>
+                <constraint firstItem="ick-Di-tWA" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="gAU-f6-Xj3"/>
+                <constraint firstItem="ick-Di-tWA" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="pgP-U8-SOy"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="104" height="112"/>
+            <connections>
+                <outlet property="backgroundHighlighterView" destination="ick-Di-tWA" id="geQ-zB-zR6"/>
+                <outlet property="dateLabel" destination="lYP-Tc-kMh" id="Sjw-O3-tFi"/>
+            </connections>
+            <point key="canvasLocation" x="61" y="132"/>
+        </collectionViewCell>
+    </objects>
+</document>
