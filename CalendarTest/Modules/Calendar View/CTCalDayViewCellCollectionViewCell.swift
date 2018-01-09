@@ -43,7 +43,7 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 	}
 
 	private func updateFontAndColor() {
-		guard let uiData = self.cellUIData else {return}
+		guard let uiData = self.cellUIData else { return }
 		self.backgroundHighlighterView.backgroundColor = UIColor.clear
 		if uiData.shouldDrawInGrey {
 			self.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0)

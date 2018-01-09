@@ -95,7 +95,7 @@ final class CTCalDataGenerator {
 
 	private func minMaxDateToShow() -> (minDate:Date, maxDate:Date) {
 		let minDate = Calendar.current.pastMonth(noOfMonths: 3, date: Date()).startOfDate
-		let maxDate = Calendar.current.futureMonth(noOfMonths: 11, date: Date()).startOfDate
+		let maxDate = Calendar.current.futureMonth(noOfMonths: 12, date: Date()).startOfDate
 		return (minDate, maxDate)
 	}
 }

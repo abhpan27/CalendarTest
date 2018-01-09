@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		465157E42004C02800B0CEC7 /* CTCalDateCalculationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465157E32004C02800B0CEC7 /* CTCalDateCalculationUtils.swift */; };
 		4684683820046CEB007F71CF /* CTAppControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683720046CEB007F71CF /* CTAppControl.swift */; };
 		4684683A20046DE2007F71CF /* CTUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683920046DE2007F71CF /* CTUIController.swift */; };
 		4684683C20046E48007F71CF /* CTAgendaDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683B20046E48007F71CF /* CTAgendaDataHelper.swift */; };
@@ -19,6 +20,9 @@
 		4684684D200475E2007F71CF /* CTTopBarOnCentralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684684C200475E2007F71CF /* CTTopBarOnCentralView.swift */; };
 		4684685120047B76007F71CF /* CTCentralControllerUIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684685020047B76007F71CF /* CTCentralControllerUIHelper.swift */; };
 		4684685320048588007F71CF /* CTGeneralExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684685220048588007F71CF /* CTGeneralExtension.swift */; };
+		4684685620049D73007F71CF /* CTFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684685520049D73007F71CF /* CTFont.swift */; };
+		468468582004A1DC007F71CF /* CTTopBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 468468572004A1DC007F71CF /* CTTopBarView.xib */; };
+		4684685A2004A233007F71CF /* CTBundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468468592004A233007F71CF /* CTBundleExtension.swift */; };
 		46C822872003D1020086061F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C822862003D1020086061F /* AppDelegate.swift */; };
 		46C822892003D1020086061F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C822882003D1020086061F /* ViewController.swift */; };
 		46C8228C2003D1020086061F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46C8228A2003D1020086061F /* Main.storyboard */; };
@@ -41,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		465157E32004C02800B0CEC7 /* CTCalDateCalculationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCalDateCalculationUtils.swift; sourceTree = "<group>"; };
 		4684683720046CEB007F71CF /* CTAppControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAppControl.swift; sourceTree = "<group>"; };
 		4684683920046DE2007F71CF /* CTUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTUIController.swift; sourceTree = "<group>"; };
 		4684683B20046E48007F71CF /* CTAgendaDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAgendaDataHelper.swift; sourceTree = "<group>"; };
@@ -53,6 +58,9 @@
 		4684684C200475E2007F71CF /* CTTopBarOnCentralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTTopBarOnCentralView.swift; sourceTree = "<group>"; };
 		4684685020047B76007F71CF /* CTCentralControllerUIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCentralControllerUIHelper.swift; sourceTree = "<group>"; };
 		4684685220048588007F71CF /* CTGeneralExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTGeneralExtension.swift; sourceTree = "<group>"; };
+		4684685520049D73007F71CF /* CTFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTFont.swift; sourceTree = "<group>"; };
+		468468572004A1DC007F71CF /* CTTopBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CTTopBarView.xib; sourceTree = "<group>"; };
+		468468592004A233007F71CF /* CTBundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTBundleExtension.swift; sourceTree = "<group>"; };
 		46C822832003D1020086061F /* CalendarTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C822862003D1020086061F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46C822882003D1020086061F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -91,7 +99,6 @@
 			children = (
 				4684683720046CEB007F71CF /* CTAppControl.swift */,
 				4684683920046DE2007F71CF /* CTUIController.swift */,
-				4684685220048588007F71CF /* CTGeneralExtension.swift */,
 			);
 			path = "App Flow";
 			sourceTree = "<group>";
@@ -99,9 +106,10 @@
 		4684683D20046FF7007F71CF /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				4684685420049D5E007F71CF /* Utilities */,
 				4684684620047264007F71CF /* Central Container */,
 				4684684720047274007F71CF /* Calendar View */,
-				4684684C200475E2007F71CF /* CTTopBarOnCentralView.swift */,
+				4684685B2004A773007F71CF /* Top bar UI */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -119,12 +127,30 @@
 		4684684720047274007F71CF /* Calendar View */ = {
 			isa = PBXGroup;
 			children = (
+				465157E32004C02800B0CEC7 /* CTCalDateCalculationUtils.swift */,
 				4684684220047203007F71CF /* CTCalendarViewController.swift */,
 				4684684320047203007F71CF /* CTCalendarViewController.xib */,
 				4684684820047403007F71CF /* CTCalDayViewCellCollectionViewCell.swift */,
 				4684684920047403007F71CF /* CTCalDayViewCellCollectionViewCell.xib */,
 			);
 			path = "Calendar View";
+			sourceTree = "<group>";
+		};
+		4684685420049D5E007F71CF /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4684685520049D73007F71CF /* CTFont.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		4684685B2004A773007F71CF /* Top bar UI */ = {
+			isa = PBXGroup;
+			children = (
+				4684684C200475E2007F71CF /* CTTopBarOnCentralView.swift */,
+				468468572004A1DC007F71CF /* CTTopBarView.xib */,
+			);
+			path = "Top bar UI";
 			sourceTree = "<group>";
 		};
 		46C8227A2003D1020086061F = {
@@ -183,8 +209,10 @@
 		46C822A92003D3280086061F /* Foundation Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4684685220048588007F71CF /* CTGeneralExtension.swift */,
 				46C822AA2003D33C0086061F /* CTDateExtension.swift */,
 				46C822AC2003D4F60086061F /* CTCalendarExtension.swift */,
+				468468592004A233007F71CF /* CTBundleExtension.swift */,
 			);
 			path = "Foundation Extensions";
 			sourceTree = "<group>";
@@ -277,6 +305,7 @@
 				46C822912003D1030086061F /* LaunchScreen.storyboard in Resources */,
 				46C8228E2003D1030086061F /* Assets.xcassets in Resources */,
 				46C8228C2003D1020086061F /* Main.storyboard in Resources */,
+				468468582004A1DC007F71CF /* CTTopBarView.xib in Resources */,
 				4684684120047019007F71CF /* CTCentralContainerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,6 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4684685A2004A233007F71CF /* CTBundleExtension.swift in Sources */,
 				4684683A20046DE2007F71CF /* CTUIController.swift in Sources */,
 				4684685320048588007F71CF /* CTGeneralExtension.swift in Sources */,
 				46C822AD2003D4F60086061F /* CTCalendarExtension.swift in Sources */,
@@ -303,6 +333,8 @@
 				46C822AB2003D33C0086061F /* CTDateExtension.swift in Sources */,
 				4684683C20046E48007F71CF /* CTAgendaDataHelper.swift in Sources */,
 				4684684D200475E2007F71CF /* CTTopBarOnCentralView.swift in Sources */,
+				4684685620049D73007F71CF /* CTFont.swift in Sources */,
+				465157E42004C02800B0CEC7 /* CTCalDateCalculationUtils.swift in Sources */,
 				46C822A82003D2030086061F /* CTCalDataGenerator.swift in Sources */,
 				4684684020047019007F71CF /* CTCentralContainerViewController.swift in Sources */,
 				4684685120047B76007F71CF /* CTCentralControllerUIHelper.swift in Sources */,

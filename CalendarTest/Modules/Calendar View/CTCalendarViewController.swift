@@ -8,11 +8,44 @@
 
 import UIKit
 
-class CTCalendarViewController: UIViewController {
+protocol CTCalendarViewControllerDelegate:NSObjectProtocol {
+	func viewingModeDidChange(viewingMode:CalViewingMode)
+	func didSelectedDate(date:Date)
+}
 
-	private(set) var calUIData:[[CTCellUIData]]
-	let singleRowHeight:CGFloat = 65
+internal enum CalViewingMode {
+	case twoRows, fiveRows
+
+	var heightNeededForViewingMode:CGFloat {
+		let singleRowHeight = self.heightNeededForSingleRow
+		switch self {
+		case .twoRows:
+			return 2*singleRowHeight
+		case .fiveRows:
+			return 5*singleRowHeight
+		}
+	}
+
+	var heightNeededForSingleRow:CGFloat {
+		return 65
+	}
+}
+
+final class CTCalendarViewController: UIViewController {
+
 	@IBOutlet weak var calCollectionView: UICollectionView!
+	private(set) var calUIData:[[CTCellUIData]]
+	weak var delegate:CTCalendarViewControllerDelegate?
+	var pangestureRecognizer:UIPanGestureRecognizer?
+
+	var viewingMode:CalViewingMode = .fiveRows {
+		didSet {
+			if oldValue != viewingMode {
+				//this will reduce/increase calendar container size
+				self.delegate?.viewingModeDidChange(viewingMode: viewingMode)
+			}
+		}
+	}
 	
 	init(minimumCalData:[[CTCellUIData]]) {
 		self.calUIData = minimumCalData
@@ -26,7 +59,7 @@ class CTCalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		CTCalDayViewCellCollectionViewCell.registerCell(collectionView: calCollectionView, withIdentifier: "CTCalDayViewCellCollectionViewCell")
-		//run in next run loop so that frame calculation for collection view is complete
+		//run in next run loop so that frame calculation for collection view is completed before frame usage
 		runInMainQueue {
 			self.setUpBasicCalUI()
 		}
@@ -34,7 +67,7 @@ class CTCalendarViewController: UIViewController {
 
 	private func setUpBasicCalUI() {
 		let cellWidth : CGFloat = calCollectionView.frame.size.width / 7.0 
-		let cellSize = CGSize(width: cellWidth , height:self.singleRowHeight)
+		let cellSize = CGSize(width: cellWidth , height:self.viewingMode.heightNeededForSingleRow)
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .vertical
 		layout.itemSize = cellSize
@@ -43,6 +76,32 @@ class CTCalendarViewController: UIViewController {
 		layout.minimumInteritemSpacing = 0
 		calCollectionView.setCollectionViewLayout(layout, animated: false)
 		calCollectionView.reloadData()
+	}
+}
+
+extension CTCalendarViewController: UIScrollViewDelegate {
+
+	func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+		if self.viewingMode != .fiveRows {
+			self.viewingMode = .fiveRows
+		}
+	}
+}
+
+extension  CTCalendarViewController:UICollectionViewDelegate {
+
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		guard let dateForIndexPath = self.dateForIndexPath(indexPath: indexPath)
+			else {
+				Swift.print("Can't find date for index path, this should not happen")
+				return
+		}
+
+		self.delegate?.didSelectedDate(date: dateForIndexPath)
+	}
+
+	func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+		return !self.calUIData[indexPath.section][indexPath.row].isBlankDay
 	}
 }
 
@@ -61,5 +120,5 @@ extension CTCalendarViewController:UICollectionViewDataSource {
 		cell.updateCellWithUIData(uiData: self.calUIData[indexPath.section][indexPath.row])
 		return cell
 	}
-
+	
 }
