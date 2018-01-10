@@ -48,7 +48,7 @@ extension CTCalendarViewController {
 		}
 		
 		runInMainQueue {
-			self.calCollectionView.selectItem(at: indexPathForDate, animated: animated, scrollPosition: .centeredVertically)
+			self.calCollectionView.selectItem(at: indexPathForDate, animated: animated, scrollPosition: .top)
 		}
 	}
 }

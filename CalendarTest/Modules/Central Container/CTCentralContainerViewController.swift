@@ -14,9 +14,9 @@ class CTCentralContainerViewController: UIViewController {
 	let calendarViewController:CTCalendarViewController
 	var calendarViewHeightConstraint:NSLayoutConstraint!
 
-	init(minimumCalData:[[CTCellUIData]], minimumAgendaViewData:[CTAgendaViewRowUIData]) {
+	init() {
 		self.topBar = CTTopBarOnCentralView.loadTopBarView()
-		self.calendarViewController = CTCalendarViewController(minimumCalData: minimumCalData)
+		self.calendarViewController = CTCalendarViewController()
 		super.init(nibName: "CTCentralContainerViewController", bundle: nil)
 		self.calendarViewController.delegate = self
 	}
@@ -28,7 +28,6 @@ class CTCentralContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		addAndLayoutViews()
-		startWithToday()
     }
 
 	override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -39,11 +38,7 @@ class CTCentralContainerViewController: UIViewController {
 		addAndLayoutTopBar()
 		addAndLayoutCalendarView()
 		addCalAndAgendaViewSeparator()
-	}
-
-	private func startWithToday() {
-		self.calendarViewController.selectDate(date: Date(), animated: false)
-		self.topBar.updateMonthLabel(date: Date())
+		self.view.layoutIfNeeded()
 	}
 
 }
@@ -51,15 +46,15 @@ class CTCentralContainerViewController: UIViewController {
 extension CTCentralContainerViewController:CTCalendarViewControllerDelegate {
 	
 	func viewingModeDidChange(viewingMode:CalViewingMode) {
-		self.calendarViewHeightConstraint.constant = viewingMode.heightNeededForViewingMode
+		self.calendarViewHeightConstraint.constant = viewingMode.totalHeightNeeded
 		UIView.animate(withDuration: 0.3) {
 			self.view.layoutIfNeeded()
 		}
 	}
 
 	func didSelectedDate(date:Date) {
-		Swift.print("Date selected :\(date.logDate)")
-		//update other parts
+		Swift.print("Date selected in calendar view :\(date.logDate)")
+		//update other parts of app
 		self.topBar.updateMonthLabel(date: date)
 	}
 

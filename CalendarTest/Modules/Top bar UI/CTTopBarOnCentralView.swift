@@ -19,6 +19,7 @@ class CTTopBarOnCentralView: UIView {
 	override func awakeFromNib() {
 		addMonthLabel()
 		addWeekDayLabels()
+		updateMonthLabel(date: Date())
 		self.backgroundColor = UIColor(red: 0, green: 119/255, blue: 189/255, alpha: 1.0)
 	}
 

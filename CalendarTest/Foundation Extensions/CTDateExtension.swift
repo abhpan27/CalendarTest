@@ -52,6 +52,15 @@ extension Date {
 		dateFormatter.dateFormat = "EEEE, MMM d, yyyy HH:mm"
 		return dateFormatter.string(from: self)
 	}
+
+	var isToday:Bool {
+		return Calendar.current.isDateInToday(self)
+	}
+
+	func setHourMinuteAndSec(hours:Int, mintues:Int, seconds:Int) -> Date {
+		let calendar = Calendar.current
+		return calendar.date(bySettingHour: hours, minute: mintues, second: seconds, of: self)!
+	}
 	
 }
 

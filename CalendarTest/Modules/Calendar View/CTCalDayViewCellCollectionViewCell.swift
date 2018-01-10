@@ -16,7 +16,7 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 
 	override var isSelected: Bool {
 		didSet {
-			self.checkAndSetUI()
+			self.checkSelectionStateAndSetUI()
 		}
 	}
 
@@ -31,34 +31,40 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 
 	final func updateCellWithUIData(uiData:CTCellUIData) {
 		self.cellUIData = uiData
-		self.checkAndSetUI()
+		self.checkSelectionStateAndSetUI()
 	}
 
-	private func checkAndSetUI() {
+	private func checkSelectionStateAndSetUI() {
 		if self.isSelected {
-			updateUIForSelection()
+			updateUIForSelectedCell()
 		}else {
-			updateFontAndColor()
+			updateFontAndColorForNonSelectedCell()
 		}
 	}
 
-	private func updateFontAndColor() {
+	private func updateFontAndColorForNonSelectedCell() {
 		guard let uiData = self.cellUIData else { return }
 		self.backgroundHighlighterView.backgroundColor = UIColor.clear
+		self.dateLabel.text = uiData.fullDateString
+		self.dateLabel.textColor = UIColor(red: 67/255, green: 75/255, blue: 82/255, alpha: 1.0)
+		setBackgroundColor()
+	}
+
+	private func updateUIForSelectedCell() {
+		guard let uiData = self.cellUIData else { return }
+		self.backgroundHighlighterView.backgroundColor = UIColor(red: 41/255, green: 127/255, blue: 246/255, alpha: 1.0)
+		self.dateLabel.textColor = UIColor.white
+		self.dateLabel.text = uiData.dateNumberString
+		setBackgroundColor()
+	}
+
+	private func setBackgroundColor() {
+		guard let uiData = self.cellUIData else { return }
 		if uiData.shouldDrawInGrey {
 			self.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0)
 		}else {
 			self.backgroundColor = UIColor.white
 		}
-		self.dateLabel.text = uiData.fullDateString
-		self.dateLabel.textColor = UIColor(red: 67/255, green: 75/255, blue: 82/255, alpha: 1.0)
-	}
-
-	private func updateUIForSelection() {
-		guard let uiData = self.cellUIData else { return }
-		self.backgroundHighlighterView.backgroundColor = UIColor(red: 41/255, green: 127/255, blue: 246/255, alpha: 1.0)
-		self.dateLabel.textColor = UIColor.white
-		self.dateLabel.text = uiData.dateNumberString
 	}
 
 }

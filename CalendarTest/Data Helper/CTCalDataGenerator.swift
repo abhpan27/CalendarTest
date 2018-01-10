@@ -51,7 +51,7 @@ final class CTCellUIData {
 final class CTCalDataGenerator {
 
 	final func getBasicCalData() -> [[CTCellUIData]] {
-		let minMaxDateInfo = self.minMaxDateToShow()
+		let minMaxDateInfo = CTAppConstants.shared.minMaxDate
 		var currentDay = 1
 		var shouldFillGrey = false
 		var currentDateInIteration = minMaxDateInfo.minDate
@@ -91,11 +91,5 @@ final class CTCalDataGenerator {
 		}
 
 		return completeCalUIData
-	}
-
-	private func minMaxDateToShow() -> (minDate:Date, maxDate:Date) {
-		let minDate = Calendar.current.pastMonth(noOfMonths: 3, date: Date()).startOfDate
-		let maxDate = Calendar.current.futureMonth(noOfMonths: 12, date: Date()).startOfDate
-		return (minDate, maxDate)
 	}
 }

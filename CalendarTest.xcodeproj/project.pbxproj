@@ -8,6 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		465157E42004C02800B0CEC7 /* CTCalDateCalculationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465157E32004C02800B0CEC7 /* CTCalDateCalculationUtils.swift */; };
+		465157E72005194700B0CEC7 /* CTCoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465157E62005194700B0CEC7 /* CTCoreDataController.swift */; };
+		465157EA2005196300B0CEC7 /* CTEventModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 465157E82005196300B0CEC7 /* CTEventModel.xcdatamodeld */; };
+		465157EE20051D6C00B0CEC7 /* CTAppRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465157EC20051D6C00B0CEC7 /* CTAppRootViewController.swift */; };
+		465157EF20051D6C00B0CEC7 /* CTAppRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 465157ED20051D6C00B0CEC7 /* CTAppRootViewController.xib */; };
+		465157F1200521E800B0CEC7 /* CTIntialDummyDataFiller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465157F0200521E800B0CEC7 /* CTIntialDummyDataFiller.swift */; };
+		465157F52005391E00B0CEC7 /* CTCalendar+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465157F32005391E00B0CEC7 /* CTCalendar+CoreDataClass.swift */; };
+		465157F62005391E00B0CEC7 /* CTCalendar+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465157F42005391E00B0CEC7 /* CTCalendar+CoreDataProperties.swift */; };
+		465157FA2005C06700B0CEC7 /* CTPerson+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465157F82005C06700B0CEC7 /* CTPerson+CoreDataClass.swift */; };
+		465157FB2005C06700B0CEC7 /* CTPerson+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465157F92005C06700B0CEC7 /* CTPerson+CoreDataProperties.swift */; };
+		465157FE2005C41600B0CEC7 /* CTEvent+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465157FC2005C41600B0CEC7 /* CTEvent+CoreDataClass.swift */; };
+		465157FF2005C41600B0CEC7 /* CTEvent+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465157FD2005C41600B0CEC7 /* CTEvent+CoreDataProperties.swift */; };
+		465158012005C52D00B0CEC7 /* CTAppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465158002005C52D00B0CEC7 /* CTAppConstants.swift */; };
 		4684683820046CEB007F71CF /* CTAppControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683720046CEB007F71CF /* CTAppControl.swift */; };
 		4684683A20046DE2007F71CF /* CTUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683920046DE2007F71CF /* CTUIController.swift */; };
 		4684683C20046E48007F71CF /* CTAgendaDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683B20046E48007F71CF /* CTAgendaDataHelper.swift */; };
@@ -46,6 +58,18 @@
 
 /* Begin PBXFileReference section */
 		465157E32004C02800B0CEC7 /* CTCalDateCalculationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCalDateCalculationUtils.swift; sourceTree = "<group>"; };
+		465157E62005194700B0CEC7 /* CTCoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCoreDataController.swift; sourceTree = "<group>"; };
+		465157E92005196300B0CEC7 /* CTEventModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CTEventModel.xcdatamodel; sourceTree = "<group>"; };
+		465157EC20051D6C00B0CEC7 /* CTAppRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAppRootViewController.swift; sourceTree = "<group>"; };
+		465157ED20051D6C00B0CEC7 /* CTAppRootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CTAppRootViewController.xib; sourceTree = "<group>"; };
+		465157F0200521E800B0CEC7 /* CTIntialDummyDataFiller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTIntialDummyDataFiller.swift; sourceTree = "<group>"; };
+		465157F32005391E00B0CEC7 /* CTCalendar+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CTCalendar+CoreDataClass.swift"; sourceTree = "<group>"; };
+		465157F42005391E00B0CEC7 /* CTCalendar+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CTCalendar+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		465157F82005C06700B0CEC7 /* CTPerson+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CTPerson+CoreDataClass.swift"; sourceTree = "<group>"; };
+		465157F92005C06700B0CEC7 /* CTPerson+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CTPerson+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		465157FC2005C41600B0CEC7 /* CTEvent+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CTEvent+CoreDataClass.swift"; sourceTree = "<group>"; };
+		465157FD2005C41600B0CEC7 /* CTEvent+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CTEvent+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		465158002005C52D00B0CEC7 /* CTAppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAppConstants.swift; sourceTree = "<group>"; };
 		4684683720046CEB007F71CF /* CTAppControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAppControl.swift; sourceTree = "<group>"; };
 		4684683920046DE2007F71CF /* CTUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTUIController.swift; sourceTree = "<group>"; };
 		4684683B20046E48007F71CF /* CTAgendaDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAgendaDataHelper.swift; sourceTree = "<group>"; };
@@ -94,11 +118,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		465157E52005192B00B0CEC7 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				465157E82005196300B0CEC7 /* CTEventModel.xcdatamodeld */,
+				465157F2200538FD00B0CEC7 /* Managed Subclasses */,
+				465157E62005194700B0CEC7 /* CTCoreDataController.swift */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		465157EB20051D4D00B0CEC7 /* UI Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4684683920046DE2007F71CF /* CTUIController.swift */,
+				465157EC20051D6C00B0CEC7 /* CTAppRootViewController.swift */,
+				465157ED20051D6C00B0CEC7 /* CTAppRootViewController.xib */,
+			);
+			path = "UI Controller";
+			sourceTree = "<group>";
+		};
+		465157F2200538FD00B0CEC7 /* Managed Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				465157FC2005C41600B0CEC7 /* CTEvent+CoreDataClass.swift */,
+				465157FD2005C41600B0CEC7 /* CTEvent+CoreDataProperties.swift */,
+				465157F82005C06700B0CEC7 /* CTPerson+CoreDataClass.swift */,
+				465157F92005C06700B0CEC7 /* CTPerson+CoreDataProperties.swift */,
+				465157F32005391E00B0CEC7 /* CTCalendar+CoreDataClass.swift */,
+				465157F42005391E00B0CEC7 /* CTCalendar+CoreDataProperties.swift */,
+			);
+			path = "Managed Subclasses";
+			sourceTree = "<group>";
+		};
+		465157F7200539B000B0CEC7 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				46C822862003D1020086061F /* AppDelegate.swift */,
+				46C822882003D1020086061F /* ViewController.swift */,
+				46C8228A2003D1020086061F /* Main.storyboard */,
+				46C8228D2003D1030086061F /* Assets.xcassets */,
+				46C8228F2003D1030086061F /* LaunchScreen.storyboard */,
+				465158002005C52D00B0CEC7 /* CTAppConstants.swift */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
 		4684683620046CC8007F71CF /* App Flow */ = {
 			isa = PBXGroup;
 			children = (
+				465157EB20051D4D00B0CEC7 /* UI Controller */,
 				4684683720046CEB007F71CF /* CTAppControl.swift */,
-				4684683920046DE2007F71CF /* CTUIController.swift */,
 			);
 			path = "App Flow";
 			sourceTree = "<group>";
@@ -174,16 +244,12 @@
 		46C822852003D1020086061F /* CalendarTest */ = {
 			isa = PBXGroup;
 			children = (
+				46C822922003D1030086061F /* Info.plist */,
+				465157F7200539B000B0CEC7 /* Supporting files */,
 				4684683D20046FF7007F71CF /* Modules */,
 				4684683620046CC8007F71CF /* App Flow */,
 				46C822A92003D3280086061F /* Foundation Extensions */,
 				46C822A62003D1C40086061F /* Data Helper */,
-				46C822862003D1020086061F /* AppDelegate.swift */,
-				46C822882003D1020086061F /* ViewController.swift */,
-				46C8228A2003D1020086061F /* Main.storyboard */,
-				46C8228D2003D1030086061F /* Assets.xcassets */,
-				46C8228F2003D1030086061F /* LaunchScreen.storyboard */,
-				46C822922003D1030086061F /* Info.plist */,
 			);
 			path = CalendarTest;
 			sourceTree = "<group>";
@@ -200,8 +266,10 @@
 		46C822A62003D1C40086061F /* Data Helper */ = {
 			isa = PBXGroup;
 			children = (
+				465157E52005192B00B0CEC7 /* Core Data */,
 				46C822A72003D2030086061F /* CTCalDataGenerator.swift */,
 				4684683B20046E48007F71CF /* CTAgendaDataHelper.swift */,
+				465157F0200521E800B0CEC7 /* CTIntialDummyDataFiller.swift */,
 			);
 			path = "Data Helper";
 			sourceTree = "<group>";
@@ -306,6 +374,7 @@
 				46C8228E2003D1030086061F /* Assets.xcassets in Resources */,
 				46C8228C2003D1020086061F /* Main.storyboard in Resources */,
 				468468582004A1DC007F71CF /* CTTopBarView.xib in Resources */,
+				465157EF20051D6C00B0CEC7 /* CTAppRootViewController.xib in Resources */,
 				4684684120047019007F71CF /* CTCentralContainerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,18 +394,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				4684685A2004A233007F71CF /* CTBundleExtension.swift in Sources */,
+				465157E72005194700B0CEC7 /* CTCoreDataController.swift in Sources */,
 				4684683A20046DE2007F71CF /* CTUIController.swift in Sources */,
+				465157FF2005C41600B0CEC7 /* CTEvent+CoreDataProperties.swift in Sources */,
 				4684685320048588007F71CF /* CTGeneralExtension.swift in Sources */,
+				465157F1200521E800B0CEC7 /* CTIntialDummyDataFiller.swift in Sources */,
 				46C822AD2003D4F60086061F /* CTCalendarExtension.swift in Sources */,
+				465157FB2005C06700B0CEC7 /* CTPerson+CoreDataProperties.swift in Sources */,
+				465158012005C52D00B0CEC7 /* CTAppConstants.swift in Sources */,
 				46C822892003D1020086061F /* ViewController.swift in Sources */,
 				4684684420047203007F71CF /* CTCalendarViewController.swift in Sources */,
 				46C822AB2003D33C0086061F /* CTDateExtension.swift in Sources */,
 				4684683C20046E48007F71CF /* CTAgendaDataHelper.swift in Sources */,
+				465157FE2005C41600B0CEC7 /* CTEvent+CoreDataClass.swift in Sources */,
 				4684684D200475E2007F71CF /* CTTopBarOnCentralView.swift in Sources */,
+				465157EE20051D6C00B0CEC7 /* CTAppRootViewController.swift in Sources */,
 				4684685620049D73007F71CF /* CTFont.swift in Sources */,
+				465157EA2005196300B0CEC7 /* CTEventModel.xcdatamodeld in Sources */,
 				465157E42004C02800B0CEC7 /* CTCalDateCalculationUtils.swift in Sources */,
 				46C822A82003D2030086061F /* CTCalDataGenerator.swift in Sources */,
+				465157F52005391E00B0CEC7 /* CTCalendar+CoreDataClass.swift in Sources */,
+				465157FA2005C06700B0CEC7 /* CTPerson+CoreDataClass.swift in Sources */,
 				4684684020047019007F71CF /* CTCentralContainerViewController.swift in Sources */,
+				465157F62005391E00B0CEC7 /* CTCalendar+CoreDataProperties.swift in Sources */,
 				4684685120047B76007F71CF /* CTCentralControllerUIHelper.swift in Sources */,
 				4684683820046CEB007F71CF /* CTAppControl.swift in Sources */,
 				4684684A20047403007F71CF /* CTCalDayViewCellCollectionViewCell.swift in Sources */,
@@ -584,6 +664,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		465157E82005196300B0CEC7 /* CTEventModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				465157E92005196300B0CEC7 /* CTEventModel.xcdatamodel */,
+			);
+			currentVersion = 465157E92005196300B0CEC7 /* CTEventModel.xcdatamodel */;
+			path = CTEventModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 46C8227B2003D1020086061F /* Project object */;
 }

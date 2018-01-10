@@ -16,7 +16,7 @@ protocol CTCalendarViewControllerDelegate:NSObjectProtocol {
 internal enum CalViewingMode {
 	case twoRows, fiveRows
 
-	var heightNeededForViewingMode:CGFloat {
+	var totalHeightNeeded:CGFloat {
 		let singleRowHeight = self.heightNeededForSingleRow
 		switch self {
 		case .twoRows:
@@ -47,8 +47,8 @@ final class CTCalendarViewController: UIViewController {
 		}
 	}
 	
-	init(minimumCalData:[[CTCellUIData]]) {
-		self.calUIData = minimumCalData
+	init() {
+		self.calUIData = CTCalDataGenerator().getBasicCalData()
 		super.init(nibName: "CTCalendarViewController", bundle: nil)
 	}
 
@@ -59,24 +59,33 @@ final class CTCalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		CTCalDayViewCellCollectionViewCell.registerCell(collectionView: calCollectionView, withIdentifier: "CTCalDayViewCellCollectionViewCell")
-		//run in next run loop so that frame calculation for collection view is completed before frame usage
-		runInMainQueue {
-			self.setUpBasicCalUI()
+		//select current date after some delay so that current drawing of cells is completed
+		delayedRun(0.1) {
+			self.selectDate(date: Date(), animated: false)
 		}
     }
+}
 
-	private func setUpBasicCalUI() {
-		let cellWidth : CGFloat = calCollectionView.frame.size.width / 7.0 
-		let cellSize = CGSize(width: cellWidth , height:self.viewingMode.heightNeededForSingleRow)
-		let layout = UICollectionViewFlowLayout()
-		layout.scrollDirection = .vertical
-		layout.itemSize = cellSize
-		layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-		layout.minimumLineSpacing = 0
-		layout.minimumInteritemSpacing = 0
-		calCollectionView.setCollectionViewLayout(layout, animated: false)
-		calCollectionView.reloadData()
+extension CTCalendarViewController:UICollectionViewDelegateFlowLayout {
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+		return 0
 	}
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+		return 0
+	}
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		let cellWidth = UIScreen.main.bounds.width / 7.0
+		let cellSize = CGSize(width: cellWidth , height:self.viewingMode.heightNeededForSingleRow)
+		return cellSize
+	}
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+		return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+	}
+
 }
 
 extension CTCalendarViewController: UIScrollViewDelegate {
@@ -119,6 +128,10 @@ extension CTCalendarViewController:UICollectionViewDataSource {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CTCalDayViewCellCollectionViewCell", for: indexPath) as! CTCalDayViewCellCollectionViewCell
 		cell.updateCellWithUIData(uiData: self.calUIData[indexPath.section][indexPath.row])
 		return cell
+	}
+
+	func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+		(cell as! CTCalDayViewCellCollectionViewCell).updateCellWithUIData(uiData: self.calUIData[indexPath.section][indexPath.row])
 	}
 	
 }

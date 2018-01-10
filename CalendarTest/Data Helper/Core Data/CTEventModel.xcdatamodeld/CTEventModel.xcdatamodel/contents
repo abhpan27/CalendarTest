@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CTCalendar" representedClassName="CTCalendar" syncable="YES">
+        <attribute name="colorHex" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="uniqueID" attributeType="String" syncable="YES"/>
+        <relationship name="event" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CTEvent" inverseName="calendar" inverseEntity="CTEvent" syncable="YES"/>
+    </entity>
+    <entity name="CTEvent" representedClassName="CTEvent" syncable="YES">
+        <attribute name="endTime" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isAllDay" attributeType="Boolean" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="loactionString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startTime" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <attribute name="uniqueID" attributeType="String" syncable="YES"/>
+        <relationship name="attendees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CTPerson" inverseName="event" inverseEntity="CTPerson" syncable="YES"/>
+        <relationship name="calendar" maxCount="1" deletionRule="Nullify" destinationEntity="CTCalendar" inverseName="event" inverseEntity="CTCalendar" syncable="YES"/>
+    </entity>
+    <entity name="CTPerson" representedClassName="CTPerson" syncable="YES">
+        <attribute name="emailID" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="uniqueID" attributeType="String" syncable="YES"/>
+        <relationship name="event" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CTEvent" inverseName="attendees" inverseEntity="CTEvent" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CTCalendar" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="CTPerson" positionX="-54" positionY="18" width="128" height="105"/>
+        <element name="CTEvent" positionX="-36" positionY="45" width="128" height="165"/>
+    </elements>
+</model>
