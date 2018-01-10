@@ -20,7 +20,7 @@ class CTTopBarOnCentralView: UIView {
 		addMonthLabel()
 		addWeekDayLabels()
 		updateMonthLabel(date: Date())
-		self.backgroundColor = UIColor(red: 0, green: 119/255, blue: 189/255, alpha: 1.0)
+		self.backgroundColor = UIColor.white
 	}
 
 	final func updateMonthLabel(date:Date) {
@@ -30,23 +30,23 @@ class CTTopBarOnCentralView: UIView {
 		}else {
 			dateFormatter.dateFormat = "MMMM yyyy"
 		}
-		self.monthLabel?.text = dateFormatter.string(from: date)
+		self.monthLabel?.text = date.monthName
 	}
 
 	private func addMonthLabel() {
 		monthLabel = UILabel()
-		monthLabel?.textColor = UIColor.white
-		monthLabel?.font = CTFont.systemFont(ofSize: 22, weight: .Bold)
+		monthLabel?.textColor = UIColor(red: 41/255, green: 127/255, blue: 246/255, alpha: 1.0)
+		monthLabel?.font = CTFont.systemFont(ofSize: 22, weight: .Medium)
 		monthLabel?.text = "January"
 		monthLabel?.translatesAutoresizingMaskIntoConstraints = false
 		self.addSubview(monthLabel!)
-		let left = NSLayoutConstraint(item: monthLabel!, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1.0, constant: 15)
-		let bottom = NSLayoutConstraint(item: monthLabel!, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -25)
-		NSLayoutConstraint.activate([left, bottom])
+		let centerX = NSLayoutConstraint(item: monthLabel!, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0)
+		let bottom = NSLayoutConstraint(item: monthLabel!, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -30)
+		NSLayoutConstraint.activate([centerX, bottom])
 	}
 
 	private func addWeekDayLabels() {
-		let arrayOfWeekDayLabels = [getWeekLabel(withText: "SUN"), getWeekLabel(withText: "MON"), getWeekLabel(withText: "TUE"), getWeekLabel(withText: "WED"), getWeekLabel(withText: "THU"), getWeekLabel(withText: "FRI"), getWeekLabel(withText: "SAT")]
+		let arrayOfWeekDayLabels = [getWeekLabel(withText: "S"), getWeekLabel(withText: "M"), getWeekLabel(withText: "T"), getWeekLabel(withText: "W"), getWeekLabel(withText: "T"), getWeekLabel(withText: "F"), getWeekLabel(withText: "S")]
 
 		var listOfConstraintsToAdd = [NSLayoutConstraint]()
 
@@ -83,8 +83,8 @@ class CTTopBarOnCentralView: UIView {
 
 	private func getWeekLabel(withText:String) -> UILabel {
 		let label = UILabel()
-		label.textColor = UIColor.white
-		label.font = CTFont.systemFont(ofSize: 11, weight: .Regular)
+		label.textColor = UIColor(red: 170/255, green: 170/255, blue: 170/255, alpha: 1.0)
+		label.font = CTFont.systemFont(ofSize: 14, weight: .Regular)
 		label.textAlignment = .center
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.text = withText

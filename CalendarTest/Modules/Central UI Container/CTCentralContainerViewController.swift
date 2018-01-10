@@ -36,6 +36,7 @@ class CTCentralContainerViewController: UIViewController {
 
 	private func addAndLayoutViews() {
 		addAndLayoutTopBar()
+		addTopBarAndCalendarViewSeparator()
 		addAndLayoutCalendarView()
 		addCalAndAgendaViewSeparator()
 		self.view.layoutIfNeeded()

@@ -13,7 +13,7 @@ final class CTAppConstants {
 	static let shared = CTAppConstants() //singelton
 	
 	var minMaxDate:(minDate:Date, maxDate:Date) {
-		let minDate = Calendar.current.pastMonth(noOfMonths: 3, date: Date()).startOfDate
+		let minDate = Calendar.current.pastMonth(noOfMonths: 12*7, date: Date()).startOfDate
 		let maxDate = Calendar.current.futureMonth(noOfMonths: 12, date: Date()).startOfDate
 		return (minDate, maxDate)
 	}

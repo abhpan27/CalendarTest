@@ -12,7 +12,7 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 
 	@IBOutlet weak var backgroundHighlighterView: UIView!
 	@IBOutlet weak var dateLabel: UILabel!
-	var cellUIData:CTCellUIData!
+	var cellUIData:CTCalCollectionViewCellUIData!
 
 	override var isSelected: Bool {
 		didSet {
@@ -29,7 +29,7 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 		collectionView.register(UINib(nibName: "CTCalDayViewCellCollectionViewCell", bundle: nil), forCellWithReuseIdentifier:withIdentifier)
 	}
 
-	final func updateCellWithUIData(uiData:CTCellUIData) {
+	final func updateCellWithUIData(uiData:CTCalCollectionViewCellUIData) {
 		self.cellUIData = uiData
 		self.checkSelectionStateAndSetUI()
 	}

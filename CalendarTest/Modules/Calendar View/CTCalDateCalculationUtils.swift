@@ -12,8 +12,8 @@ extension CTCalendarViewController {
 
 	private func indexPathForDate(date:Date) -> IndexPath? {
 		let startOfDate = date.startOfDate.timeIntervalSince1970
-		for rowIndex in 0 ... self.calUIData.count - 1 {
-			let currentRow = self.calUIData[rowIndex]
+		for rowIndex in 0 ... self.calCollectionViewUIData.count - 1 {
+			let currentRow = self.calCollectionViewUIData[rowIndex]
 			if currentRow.first!.dateEpoch <= startOfDate && startOfDate <= currentRow.last!.dateEpoch {
 				for coloumnIndex in 0 ... 7 {
 					if currentRow[coloumnIndex].dateEpoch == startOfDate {
@@ -31,8 +31,8 @@ extension CTCalendarViewController {
 		let coloumn = indexPath.row
 
 		if coloumn < 8 && coloumn >= 0 {
-			if row >= 0 && row < self.calUIData.count {
-				let epoch = self.calUIData[row][coloumn].dateEpoch
+			if row >= 0 && row < self.calCollectionViewUIData.count {
+				let epoch = self.calCollectionViewUIData[row][coloumn].dateEpoch
 				return Date(timeIntervalSince1970: epoch).startOfDate
 			}
 		}

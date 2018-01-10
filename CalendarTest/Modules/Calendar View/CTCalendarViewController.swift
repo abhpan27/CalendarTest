@@ -33,8 +33,10 @@ internal enum CalViewingMode {
 
 final class CTCalendarViewController: UIViewController {
 
+	@IBOutlet weak var monthViewerTableView: UITableView!
 	@IBOutlet weak var calCollectionView: UICollectionView!
-	private(set) var calUIData:[[CTCellUIData]]
+	let calCollectionViewUIData:[[CTCalCollectionViewCellUIData]]
+	let calTableViewUIData:[CTCalTableViewData]
 	weak var delegate:CTCalendarViewControllerDelegate?
 	var pangestureRecognizer:UIPanGestureRecognizer?
 
@@ -48,7 +50,8 @@ final class CTCalendarViewController: UIViewController {
 	}
 	
 	init() {
-		self.calUIData = CTCalDataGenerator().getBasicCalData()
+		self.calCollectionViewUIData = CTCalDataGenerator().getBasicCollectionViewCalData()
+		self.calTableViewUIData = CTCalDataGenerator().getBasicTableViewCalData()
 		super.init(nibName: "CTCalendarViewController", bundle: nil)
 	}
 
@@ -59,11 +62,32 @@ final class CTCalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		CTCalDayViewCellCollectionViewCell.registerCell(collectionView: calCollectionView, withIdentifier: "CTCalDayViewCellCollectionViewCell")
+		setUpBasicUI()
 		//select current date after some delay so that current drawing of cells is completed
 		delayedRun(0.1) {
 			self.selectDate(date: Date(), animated: false)
 		}
     }
+
+	private func setUpBasicUI() {
+		CTCalendarMonthViewerCellTableViewCell.registerCell(inTableView: self.monthViewerTableView, withIdentifier: "CTCalendarMonthViewerCellTableViewCell")
+		self.monthViewerTableView.backgroundColor = UIColor.clear
+		self.monthViewerTableView.layoutIfNeeded()
+		self.monthViewerTableView.isHidden = true
+	}
+
+	fileprivate func hideOrShowMonthTableViewWithAnimation(shouldShow:Bool, animated:Bool) {
+		if animated {
+			UIView.animate(withDuration: 0.2, animations: {
+				self.monthViewerTableView.alpha = shouldShow ? 1 : 0
+			}) { (completed) in
+				self.monthViewerTableView.isHidden = (self.monthViewerTableView.alpha == 0)
+			}
+		}else {
+			self.monthViewerTableView.alpha = shouldShow ? 1 : 0
+			self.monthViewerTableView.isHidden = (self.monthViewerTableView.alpha == 0)
+		}
+	}
 }
 
 extension CTCalendarViewController:UICollectionViewDelegateFlowLayout {
@@ -94,9 +118,33 @@ extension CTCalendarViewController: UIScrollViewDelegate {
 		if self.viewingMode != .fiveRows {
 			self.viewingMode = .fiveRows
 		}
+		if scrollView == self.calCollectionView && scrollView.isDragging {
+			self.monthViewerTableView.contentOffset = scrollView.contentOffset
+			self.hideOrShowMonthTableViewWithAnimation(shouldShow: true, animated: false)
+		}
+	}
+
+	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+		if !decelerate {
+			self.hideOrShowMonthTableViewWithAnimation(shouldShow: false, animated:true)
+		}
+	}
+
+	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+		self.hideOrShowMonthTableViewWithAnimation(shouldShow: false, animated: true)
+	}
+
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		let offset = scrollView.contentOffset
+		if scrollView == self.monthViewerTableView && scrollView.isDragging {
+			self.calCollectionView.contentOffset = offset
+		}else if scrollView == self.calCollectionView && scrollView.isDragging {
+			self.monthViewerTableView.contentOffset = offset
+		}
 	}
 }
 
+//mark:Collection view delegates
 extension  CTCalendarViewController:UICollectionViewDelegate {
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -110,28 +158,51 @@ extension  CTCalendarViewController:UICollectionViewDelegate {
 	}
 
 	func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-		return !self.calUIData[indexPath.section][indexPath.row].isBlankDay
+		return !self.calCollectionViewUIData[indexPath.section][indexPath.row].isBlankDay
 	}
 }
 
 extension CTCalendarViewController:UICollectionViewDataSource {
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return self.calUIData[section].count
+		return self.calCollectionViewUIData[section].count
 	}
 
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
-		return self.calUIData.count
+		return self.calCollectionViewUIData.count
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CTCalDayViewCellCollectionViewCell", for: indexPath) as! CTCalDayViewCellCollectionViewCell
-		cell.updateCellWithUIData(uiData: self.calUIData[indexPath.section][indexPath.row])
+		cell.updateCellWithUIData(uiData: self.calCollectionViewUIData[indexPath.section][indexPath.row])
 		return cell
 	}
 
 	func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-		(cell as! CTCalDayViewCellCollectionViewCell).updateCellWithUIData(uiData: self.calUIData[indexPath.section][indexPath.row])
+		(cell as! CTCalDayViewCellCollectionViewCell).updateCellWithUIData(uiData: self.calCollectionViewUIData[indexPath.section][indexPath.row])
 	}
-	
 }
+
+//mark: TableView delegates
+
+extension CTCalendarViewController:UITableViewDataSource, UITableViewDelegate {
+
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = self.monthViewerTableView.dequeueReusableCell(withIdentifier: "CTCalendarMonthViewerCellTableViewCell") as! CTCalendarMonthViewerCellTableViewCell
+		cell.monthNameLabel.text = self.calTableViewUIData[indexPath.row].monthName
+		return cell
+	}
+
+	func numberOfSections(in tableView: UITableView) -> Int {
+		return 1
+	}
+
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return self.calTableViewUIData.count
+	}
+
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return self.viewingMode.heightNeededForSingleRow * CGFloat(self.calTableViewUIData[indexPath.row].noOfDifferentWeeksInMonth)
+	}
+}
+

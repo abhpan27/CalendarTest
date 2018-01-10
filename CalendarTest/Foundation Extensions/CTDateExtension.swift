@@ -26,14 +26,18 @@ extension Date {
 		return tomorrow!
 	}
 
-	var day: Int {
-		return Calendar.current.component(.day, from: self)
+	var weekDay: Int {
+		return Calendar.current.component(.weekday, from: self)
 	}
 
 	var isInCurrentYear:Bool {
 		let yearComponentOfDate = Calendar.current.component(.year, from: self)
 		let yearComponentOfCurrentDate = Calendar.current.component(.year, from: Date())
 		return yearComponentOfDate == yearComponentOfCurrentDate
+	}
+
+	var numberOfWeeksInCurrentMonth:Int {
+		return Calendar.current.range(of: .weekOfMonth, in: .month, for: self)!.count
 	}
 
 	var isFirstDateOfMonth:Bool {
@@ -45,6 +49,16 @@ extension Date {
 		let monthComponentOfSelf = Calendar.current.component(.month, from: self)
 		let monthComponentOfDate = Calendar.current.component(.month, from: withDate)
 		return monthComponentOfSelf == monthComponentOfDate
+	}
+
+	var monthName:String {
+		let dateFormatter = DateFormatter()
+		if self.isInCurrentYear {
+			dateFormatter.dateFormat = "MMMM"
+		}else {
+			dateFormatter.dateFormat = "MMMM yyyy"
+		}
+		return dateFormatter.string(from: self)
 	}
 
 	var logDate:String {

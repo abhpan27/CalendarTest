@@ -46,16 +46,16 @@ final class CTIntialDummyDataFiller {
 		var arrayOfDummyEvents = [CTEvent]()
 
 		//fill dummy events - every monday - 2 events, every friday and today- 3 events with random title, location, start and end times,
-		var startDate = CTAppConstants.shared.minMaxDate.minDate
-		let maxDate = CTAppConstants.shared.minMaxDate.maxDate
+		var startDate = Calendar.current.pastMonth(noOfMonths: 3, date: Date()).startOfDate
+		let maxDate = Calendar.current.futureMonth(noOfMonths: 12, date: Date()).startOfDate
 
 		while(startDate < maxDate) {
-			if startDate.day == 1 {
+			if startDate.weekDay == 1 {
 				//add two events every monday one with people and one without
 				let dummyEvent1 = self.getDummyEvent(onDate: startDate, isAllDay: false, person: [CTPerson](), calendar: dummyCalendars.first!, inContext: context)
 				let dummyEvent2 = self.getDummyEvent(onDate: startDate, isAllDay: true, person: dummyPersons, calendar: dummyCalendars.last!, inContext: context)
 				arrayOfDummyEvents.append(contentsOf: [dummyEvent1, dummyEvent2])
-			}else if startDate.day == 7 || startDate.isToday {
+			}else if startDate.weekDay == 7 || startDate.isToday {
 				let dummyEvent1 = self.getDummyEvent(onDate: startDate, isAllDay: false, person: [CTPerson](), calendar: dummyCalendars[0], inContext: context)
 				let dummyEvent2 = self.getDummyEvent(onDate: startDate, isAllDay: true, person: dummyPersons, calendar: dummyCalendars[1], inContext: context)
 				let dummyEvent3 = self.getDummyEvent(onDate: startDate, isAllDay: false, person: dummyPersons, calendar: dummyCalendars[2], inContext: context)

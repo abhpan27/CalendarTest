@@ -17,6 +17,7 @@
         <relationship name="calendar" maxCount="1" deletionRule="Nullify" destinationEntity="CTCalendar" inverseName="event" inverseEntity="CTCalendar" syncable="YES"/>
     </entity>
     <entity name="CTPerson" representedClassName="CTPerson" syncable="YES">
+        <attribute name="colorHex" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="emailID" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="uniqueID" attributeType="String" syncable="YES"/>
@@ -24,7 +25,7 @@
     </entity>
     <elements>
         <element name="CTCalendar" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="CTPerson" positionX="-54" positionY="18" width="128" height="105"/>
+        <element name="CTPerson" positionX="-54" positionY="18" width="128" height="120"/>
         <element name="CTEvent" positionX="-36" positionY="45" width="128" height="165"/>
     </elements>
 </model>

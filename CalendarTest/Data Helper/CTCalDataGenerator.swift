@@ -8,72 +8,47 @@
 
 import Foundation
 
-final class CTCellUIData {
+internal enum WeekDayNumber:Int {
+	case sunday = 1, monday, tuesday, wednesday, thursday, friday, saturday
+}
 
-	let shouldDrawInGrey:Bool
-	let dateEpoch:TimeInterval //this will be -1 for blank dates
-	let dateNumberString:String // only date number i.e. 1,2, 30 etc
-	let fullDateString:String // for start of month
+final class CTCalTableViewData {
 
-	var isBlankDay:Bool {
-		return self.fullDateString.isEmpty
-	}
+	let monthName:String
+	let noOfDifferentWeeksInMonth:Int
 
-	init(dateEpoch:TimeInterval, shouldDrawInGrey:Bool) {
-		self.dateEpoch = dateEpoch
-		self.shouldDrawInGrey = shouldDrawInGrey
-
-		//getting all the UI data here so that no need to calculate it at runtime thus smooth scroll will be achived
-		if  dateEpoch != -1 {
-			let date = Date(timeIntervalSince1970: dateEpoch)
-			let dateFormatter = DateFormatter()
-			dateFormatter.dateFormat = "d"
-			dateNumberString = dateFormatter.string(from: date)
-
-			//full date string
-			if date.isFirstDateOfMonth {
-				if date.isInCurrentYear {
-					dateFormatter.dateFormat = "d#MMM"
-				}else {
-					dateFormatter.dateFormat = "MMM#d#yyyy"
-				}
-			}else {
-				dateFormatter.dateFormat = "d"
-			}
-			self.fullDateString = dateFormatter.string(from: date).replacingOccurrences(of: "#", with: "\n")
-		}else {
-			dateNumberString = ""
-			fullDateString = ""
-		}
+	init(monthName:String, noOfDifferentWeeksInMonth:Int) {
+		self.monthName = monthName
+		self.noOfDifferentWeeksInMonth = noOfDifferentWeeksInMonth
 	}
 }
 
 final class CTCalDataGenerator {
 
-	final func getBasicCalData() -> [[CTCellUIData]] {
+	final func getBasicCollectionViewCalData() -> [[CTCalCollectionViewCellUIData]] {
 		let minMaxDateInfo = CTAppConstants.shared.minMaxDate
 		var currentDay = 1
 		var shouldFillGrey = false
 		var currentDateInIteration = minMaxDateInfo.minDate
 		let endDate = minMaxDateInfo.maxDate
-		var currentRowData = [CTCellUIData]()
-		var completeCalUIData = [[CTCellUIData]]()
+		var currentRowData = [CTCalCollectionViewCellUIData]()
+		var completeCalUIData = [[CTCalCollectionViewCellUIData]]()
 
 		//fill first row intial empty days
-		while currentDay < currentDateInIteration.day {
+		while currentDay < currentDateInIteration.weekDay {
 			//Empty date string means blank date
-			let emptyCell = CTCellUIData(dateEpoch: -1, shouldDrawInGrey: false)
+			let emptyCell = CTCalCollectionViewCellUIData(dateEpoch: -1, shouldDrawInGrey: false)
 			currentRowData.append(emptyCell)
 			currentDay += 1
 		}
 
 		//fill all other row and coloums of cal data
 		while currentDateInIteration <= endDate {
-			//row fill -- no of days in week is 7 - 1..8 (1- sunday 8- saturday)
+			//row fill -- no of days in week is 7 - 1..8 (1- sunday 7- saturday)
 			while currentDay < 8 {
 				//next date can be empty cell if last row is in iteration
 
-				let nextCellUIData = currentDateInIteration <= endDate ? CTCellUIData(dateEpoch: currentDateInIteration.timeIntervalSince1970, shouldDrawInGrey: shouldFillGrey) : CTCellUIData(dateEpoch: -1, shouldDrawInGrey: false)
+				let nextCellUIData = currentDateInIteration <= endDate ? CTCalCollectionViewCellUIData(dateEpoch: currentDateInIteration.timeIntervalSince1970, shouldDrawInGrey: shouldFillGrey) : CTCalCollectionViewCellUIData(dateEpoch: -1, shouldDrawInGrey: false)
 				currentRowData.append(nextCellUIData)
 				let nextDate = currentDateInIteration.nextDate.startOfDate
 				if !nextDate.isInSameMonth(withDate: currentDateInIteration) {
@@ -86,10 +61,34 @@ final class CTCalDataGenerator {
 			completeCalUIData.append(currentRowData)
 
 			//next row to be filled now
-			currentRowData = [CTCellUIData]()
+			currentRowData = [CTCalCollectionViewCellUIData]()
 			currentDay = 1
 		}
 
 		return completeCalUIData
+	}
+
+	final func getBasicTableViewCalData() -> [CTCalTableViewData] {
+		var calTableViewData =  [CTCalTableViewData]()
+		let minMaxDateInfo = CTAppConstants.shared.minMaxDate
+		var currentDateInIteration = minMaxDateInfo.minDate
+
+		while(currentDateInIteration <= minMaxDateInfo.maxDate) {
+
+			var noOfWeeksToShowForCurrentMonth = currentDateInIteration.numberOfWeeksInCurrentMonth
+			let lastDayOfMonth = Calendar.current.endOfMonth(currentDateInIteration).weekDay
+
+			//if last day of current month is not on saturday and this is not last month in iteration then we will not inlcude last row for hight calculation in month
+			if (lastDayOfMonth != WeekDayNumber.saturday.rawValue && currentDateInIteration != minMaxDateInfo.maxDate) {
+				noOfWeeksToShowForCurrentMonth -= 1 //remove last week
+			}
+
+			let newCalTableUIData = CTCalTableViewData(monthName: currentDateInIteration.monthName, noOfDifferentWeeksInMonth: noOfWeeksToShowForCurrentMonth)
+			calTableViewData.append(newCalTableUIData)
+
+			//process next month now
+			currentDateInIteration = Calendar.current.nextMonthEndDate(currentDateInIteration)
+		}
+		return calTableViewData
 	}
 }

@@ -20,6 +20,18 @@ extension CTCentralContainerViewController {
 		NSLayoutConstraint.activate([left, right, top, height])
 	}
 
+	func addTopBarAndCalendarViewSeparator() {
+		let separator = UIView()
+		separator.backgroundColor =  UIColor(red: 242/255, green: 244/255, blue: 242/255, alpha: 1.0)
+		separator.translatesAutoresizingMaskIntoConstraints = false
+		self.view.addSubview(separator)
+		let left = NSLayoutConstraint(item: separator, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1.0, constant: 0)
+		let right = NSLayoutConstraint(item: separator, attribute: .right, relatedBy: .equal, toItem: self.view, attribute: .right, multiplier: 1.0, constant: 0)
+		let top = NSLayoutConstraint(item: separator, attribute: .top, relatedBy: .equal, toItem: self.topBar, attribute: .bottom, multiplier: 1.0, constant: 0)
+		let height = NSLayoutConstraint(item: separator, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 1)
+		NSLayoutConstraint.activate([left, right, top, height])
+	}
+
 	func addAndLayoutCalendarView() {
 		self.addChildViewController(calendarViewController)
 		self.view.addSubview(calendarViewController.view)
@@ -28,7 +40,7 @@ extension CTCentralContainerViewController {
 		calendarViewController.view.translatesAutoresizingMaskIntoConstraints = false
 		let left = NSLayoutConstraint(item: calendarViewController.view, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1.0, constant: 0)
 		let right = NSLayoutConstraint(item: calendarViewController.view, attribute: .right, relatedBy: .equal, toItem: self.view, attribute: .right, multiplier: 1.0, constant: 0)
-		let top = NSLayoutConstraint(item: calendarViewController.view, attribute: .top, relatedBy: .equal, toItem: self.topBar, attribute: .bottom, multiplier: 1.0, constant: 0)
+		let top = NSLayoutConstraint(item: calendarViewController.view, attribute: .top, relatedBy: .equal, toItem: self.topBar, attribute: .bottom, multiplier: 1.0, constant: 1)
 		let height = NSLayoutConstraint(item: calendarViewController.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: calendarViewController.viewingMode.totalHeightNeeded)
 		NSLayoutConstraint.activate([left, right, top, height])
 		self.calendarViewHeightConstraint = height
@@ -36,7 +48,7 @@ extension CTCentralContainerViewController {
 
 	func addCalAndAgendaViewSeparator() {
 		let separator = UIView()
-		separator.backgroundColor = UIColor(red: 205/255, green: 205/255, blue: 205/255, alpha: 1.0)
+		separator.backgroundColor = UIColor(red: 242/255, green: 244/255, blue: 242/255, alpha: 1.0)
 		separator.translatesAutoresizingMaskIntoConstraints = false
 		self.view.addSubview(separator)
 		let left = NSLayoutConstraint(item: separator, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1.0, constant: 0)
