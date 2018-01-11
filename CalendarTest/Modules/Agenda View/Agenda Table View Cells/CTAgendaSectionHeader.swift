@@ -11,7 +11,7 @@ import UIKit
 
 class CTAgendaSectionHeader: UITableViewHeaderFooterView {
 
-	var backgroundContainerView:UIView?
+	var customBackgroundView:UIView?
 	var dateLabel:UILabel?
 
 	static func registerHeader(tableView:UITableView, forReuseIdentifier:String) {
@@ -24,19 +24,20 @@ class CTAgendaSectionHeader: UITableViewHeaderFooterView {
 	}
 
 	private func addBackgroundContainer() {
-		let backgroundContainerView = UIView()
-		self.addFittingSubview(subView: backgroundContainerView)
-		backgroundContainerView.backgroundColor = UIColor.red
-		self.backgroundContainerView = backgroundContainerView
+		let customBackgroundView = UIView()
+		self.backgroundView = customBackgroundView
+		self.customBackgroundView = customBackgroundView
 	}
 
 	private func addDateLabel() {
 		let label = UILabel()
 		self.addSubview(label)
+		label.textColor = UIColor(red: 109/255, green: 107/255, blue: 115/255, alpha: 1.0)
+		label.font = CTFont.systemFont(ofSize: 15, weight: .Regular)
 		label.translatesAutoresizingMaskIntoConstraints = false
 
 		let left = NSLayoutConstraint(item: label, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1.0, constant: 15)
-		let top = NSLayoutConstraint(item: label, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 8)
+		let top = NSLayoutConstraint(item: label, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 5)
 		NSLayoutConstraint.activate([left, top])
 
 		self.dateLabel = label

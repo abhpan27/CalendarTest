@@ -53,6 +53,9 @@
 		468B3DA120076C8F00A366F7 /* CTAgendaSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 468B3DA020076C8F00A366F7 /* CTAgendaSectionHeader.xib */; };
 		468B3DA320076CA600A366F7 /* CTAgendaSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B3DA220076CA600A366F7 /* CTAgendaSectionHeader.swift */; };
 		468B3DA520076D8600A366F7 /* CTUIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B3DA420076D8600A366F7 /* CTUIViewExtension.swift */; };
+		468B3DA82007865600A366F7 /* CTAgendaViewNoEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B3DA62007865600A366F7 /* CTAgendaViewNoEventTableViewCell.swift */; };
+		468B3DA92007865600A366F7 /* CTAgendaViewNoEventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 468B3DA72007865600A366F7 /* CTAgendaViewNoEventTableViewCell.xib */; };
+		468B3DAB2007C22600A366F7 /* CTAgendaViewCellCommonUIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B3DAA2007C22600A366F7 /* CTAgendaViewCellCommonUIHelper.swift */; };
 		46C822872003D1020086061F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C822862003D1020086061F /* AppDelegate.swift */; };
 		46C822892003D1020086061F /* CTLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C822882003D1020086061F /* CTLaunchViewController.swift */; };
 		46C8228C2003D1020086061F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46C8228A2003D1020086061F /* Main.storyboard */; };
@@ -121,6 +124,9 @@
 		468B3DA020076C8F00A366F7 /* CTAgendaSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CTAgendaSectionHeader.xib; sourceTree = "<group>"; };
 		468B3DA220076CA600A366F7 /* CTAgendaSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAgendaSectionHeader.swift; sourceTree = "<group>"; };
 		468B3DA420076D8600A366F7 /* CTUIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTUIViewExtension.swift; sourceTree = "<group>"; };
+		468B3DA62007865600A366F7 /* CTAgendaViewNoEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAgendaViewNoEventTableViewCell.swift; sourceTree = "<group>"; };
+		468B3DA72007865600A366F7 /* CTAgendaViewNoEventTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CTAgendaViewNoEventTableViewCell.xib; sourceTree = "<group>"; };
+		468B3DAA2007C22600A366F7 /* CTAgendaViewCellCommonUIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAgendaViewCellCommonUIHelper.swift; sourceTree = "<group>"; };
 		46C822832003D1020086061F /* CalendarTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C822862003D1020086061F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46C822882003D1020086061F /* CTLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTLaunchViewController.swift; sourceTree = "<group>"; };
@@ -269,8 +275,6 @@
 				468B3D7F20072E2500A366F7 /* CTAgendaViewController.swift */,
 				468B3D8020072E2500A366F7 /* CTAgendaViewController.xib */,
 				468B3D8920074A2300A366F7 /* CTAgendaListUIHelper.swift */,
-				468B3DA020076C8F00A366F7 /* CTAgendaSectionHeader.xib */,
-				468B3DA220076CA600A366F7 /* CTAgendaSectionHeader.swift */,
 			);
 			path = "Agenda View";
 			sourceTree = "<group>";
@@ -296,12 +300,17 @@
 		468B3D9B20075BA500A366F7 /* Agenda Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
+				468B3DA220076CA600A366F7 /* CTAgendaSectionHeader.swift */,
+				468B3DA020076C8F00A366F7 /* CTAgendaSectionHeader.xib */,
 				468B3D8B20075B4100A366F7 /* CTTitleOnlyRowTableViewCell.swift */,
 				468B3D8C20075B4100A366F7 /* CTTitleOnlyRowTableViewCell.xib */,
 				468B3D9320075B8400A366F7 /* CTTitleAndLocationTableViewCell.swift */,
 				468B3D9420075B8400A366F7 /* CTTitleAndLocationTableViewCell.xib */,
 				468B3D9720075B9C00A366F7 /* CTCompleteInfoTableViewCell.swift */,
 				468B3D9820075B9C00A366F7 /* CTCompleteInfoTableViewCell.xib */,
+				468B3DA62007865600A366F7 /* CTAgendaViewNoEventTableViewCell.swift */,
+				468B3DA72007865600A366F7 /* CTAgendaViewNoEventTableViewCell.xib */,
+				468B3DAA2007C22600A366F7 /* CTAgendaViewCellCommonUIHelper.swift */,
 			);
 			path = "Agenda Table View Cells";
 			sourceTree = "<group>";
@@ -457,6 +466,7 @@
 				4684684B20047403007F71CF /* CTCalDayViewCellCollectionViewCell.xib in Resources */,
 				465158092005FE3300B0CEC7 /* CTCalendarMonthViewerCellTableViewCell.xib in Resources */,
 				468B3D9A20075B9C00A366F7 /* CTCompleteInfoTableViewCell.xib in Resources */,
+				468B3DA92007865600A366F7 /* CTAgendaViewNoEventTableViewCell.xib in Resources */,
 				4684684520047203007F71CF /* CTCalendarViewController.xib in Resources */,
 				468B3D8220072E2500A366F7 /* CTAgendaViewController.xib in Resources */,
 				46C822912003D1030086061F /* LaunchScreen.storyboard in Resources */,
@@ -506,6 +516,7 @@
 				468B3D8120072E2500A366F7 /* CTAgendaViewController.swift in Sources */,
 				465157FE2005C41600B0CEC7 /* CTEvent+CoreDataClass.swift in Sources */,
 				468B3DA320076CA600A366F7 /* CTAgendaSectionHeader.swift in Sources */,
+				468B3DA82007865600A366F7 /* CTAgendaViewNoEventTableViewCell.swift in Sources */,
 				4684684D200475E2007F71CF /* CTTopBarOnCentralView.swift in Sources */,
 				465157EE20051D6C00B0CEC7 /* CTAppRootViewController.swift in Sources */,
 				4684685620049D73007F71CF /* CTFont.swift in Sources */,
@@ -520,6 +531,7 @@
 				4684684020047019007F71CF /* CTCentralContainerViewController.swift in Sources */,
 				465157F62005391E00B0CEC7 /* CTCalendar+CoreDataProperties.swift in Sources */,
 				4684685120047B76007F71CF /* CTCentralControllerUIHelper.swift in Sources */,
+				468B3DAB2007C22600A366F7 /* CTAgendaViewCellCommonUIHelper.swift in Sources */,
 				4684683820046CEB007F71CF /* CTAppControl.swift in Sources */,
 				465158082005FE3300B0CEC7 /* CTCalendarMonthViewerCellTableViewCell.swift in Sources */,
 				4684684A20047403007F71CF /* CTCalDayViewCellCollectionViewCell.swift in Sources */,

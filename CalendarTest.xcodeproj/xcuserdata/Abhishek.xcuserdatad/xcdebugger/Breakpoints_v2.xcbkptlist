@@ -41,14 +41,24 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CalendarTest/Modules/Agenda View/CTAgendaViewController.swift"
-            timestampString = "537358835.76041"
+            filePath = "CalendarTest/Modules/Agenda View/CTAgendaListUIHelper.swift"
+            timestampString = "537389401.144057"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "tableView(_:heightForHeaderInSection:)"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
+            landmarkName = "cellForRow(indexPath:inTableView:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

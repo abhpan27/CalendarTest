@@ -27,7 +27,7 @@ internal enum CalViewingMode {
 	}
 
 	var heightNeededForSingleRow:CGFloat {
-		return 65
+		return 55
 	}
 }
 
@@ -39,6 +39,7 @@ final class CTCalendarViewController: UIViewController {
 	let calTableViewUIData:[CTCalTableViewData]
 	weak var delegate:CTCalendarViewControllerDelegate?
 	var pangestureRecognizer:UIPanGestureRecognizer?
+	var lastDraggedView:UIView?
 
 	var viewingMode:CalViewingMode = .fiveRows {
 		didSet {
@@ -118,6 +119,7 @@ extension CTCalendarViewController: UIScrollViewDelegate {
 		if self.viewingMode != .fiveRows {
 			self.viewingMode = .fiveRows
 		}
+		self.lastDraggedView = scrollView
 		if scrollView == self.calCollectionView && scrollView.isDragging {
 			self.monthViewerTableView.contentOffset = scrollView.contentOffset
 			self.hideOrShowMonthTableViewWithAnimation(shouldShow: true, animated: false)
@@ -131,7 +133,10 @@ extension CTCalendarViewController: UIScrollViewDelegate {
 	}
 
 	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-		self.hideOrShowMonthTableViewWithAnimation(shouldShow: false, animated: true)
+		if scrollView == lastDraggedView! {
+			self.hideOrShowMonthTableViewWithAnimation(shouldShow: false, animated: true)
+			lastDraggedView = nil
+		}
 	}
 
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {

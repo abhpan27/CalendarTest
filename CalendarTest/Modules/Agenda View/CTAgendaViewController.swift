@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CTAgendaViewControllerProtocol:NSObjectProtocol {
-
+	func didDragAgendaView()
 }
 
 class CTAgendaViewController: UIViewController {
@@ -38,11 +38,14 @@ class CTAgendaViewController: UIViewController {
 
 }
 
-extension CTAgendaViewController:UITableViewDelegate {
+extension CTAgendaViewController:UIScrollViewDelegate {
 
+	func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+		self.delegate?.didDragAgendaView()
+	}
 }
 
-extension CTAgendaViewController:UITableViewDataSource {
+extension CTAgendaViewController:UITableViewDataSource, UITableViewDelegate {
 
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return self.listUIHelper.numberOfSections()

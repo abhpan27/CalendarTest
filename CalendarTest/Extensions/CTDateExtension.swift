@@ -64,7 +64,7 @@ extension Date {
 	}
 
 	var isYesterday:Bool {
-		return Calendar.current.isDateInTomorrow(self)
+		return Calendar.current.isDateInYesterday(self)
 	}
 
 	var displayDateText:String {
@@ -76,16 +76,16 @@ extension Date {
 		}
 
 		let dateString = dateFormatter.string(from: self)
-
+		var extraText = ""
 		if self.isToday {
-			return "Today" + " • " + dateString
+			extraText =  "Today" + " • "
 		}else if self.isTomorrow {
-			return "Tomorrow" + " • " + dateString
+			extraText =  "Tomorrow" + " • "
 		}else if self.isYesterday {
-			return "Yesterday" + " • " + dateString
+			extraText = "Yesterday" + " • "
 		}
 
-		return dateString
+		return extraText + dateString
 	}
 
 	var logDate:String {
@@ -114,6 +114,56 @@ extension Date {
 		let calendar = Calendar.current
 		return calendar.date(bySettingHour: hours, minute: mintues, second: seconds, of: self)!
 	}
-	
+
+	func days(from date: Date) -> Int {
+		return Calendar.current.dateComponents([.day], from: date, to: self).day ?? 0
+	}
+
+	func hourAndMinutes(from date: Date) -> (Int, Int) {
+		let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: date, to: self)
+		let hour =  dateComponent.hour ?? 0
+		let min = dateComponent.minute ?? 0
+		return (hour, min)
+	}
+
+	func hours(from date: Date) -> Int {
+		let dateComponent = Calendar.current.dateComponents([.hour], from: date, to: self)
+		return dateComponent.hour ?? 0
+	}
+
+	func minutes(from date: Date) -> Int {
+		return Calendar.current.dateComponents([.minute], from: date, to: self).minute ?? 0
+	}
+
+	func seconds(from date: Date) -> Int {
+		return Calendar.current.dateComponents([.second], from: date, to: self).second ?? 0
+	}
+
+	func differenceText(from date: Date) -> String {
+		if days(from: date) > 0 {
+			let value = days(from: date)
+			return value > 1 ? "\(value) Days" : "\(value) Day"
+		}
+
+		let (hour, min) = hourAndMinutes(from: date)
+		if hour > 0 {
+			var value = hour > 1 ? "\(hour) Hours" : "\(hour) Hour"
+			if min > 0 {
+				value = value + " " + "\(min) Mins"
+			}
+			return value
+		}
+
+		if minutes(from: date) > 0 {
+			let value = minutes(from: date)
+			return value > 1 ? "\(value) Mins" : "\(value) Min"
+		}
+
+		if seconds(from: date) > 0 {
+			let value = seconds(from: date)
+			return value > 1 ? "\(value) Seconds" : "\(value) Second"
+		}
+		return ""
+	}
 }
 

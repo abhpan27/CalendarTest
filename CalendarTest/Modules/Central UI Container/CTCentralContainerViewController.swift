@@ -21,6 +21,7 @@ class CTCentralContainerViewController: UIViewController {
 		self.agendaViewController = CTAgendaViewController()
 		super.init(nibName: "CTCentralContainerViewController", bundle: nil)
 		self.calendarViewController.delegate = self
+		self.agendaViewController.delegate = self
 	}
 
 	required init?(coder aDecoder: NSCoder) {
@@ -64,6 +65,9 @@ extension CTCentralContainerViewController:CTCalendarViewControllerDelegate {
 
 }
 
-extension CTAgendaViewController:CTAgendaViewControllerProtocol {
-
+extension CTCentralContainerViewController:CTAgendaViewControllerProtocol {
+	
+	func didDragAgendaView() {
+		self.calendarViewController.viewingMode = .twoRows
+	}
 }

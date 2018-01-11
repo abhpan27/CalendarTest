@@ -22,6 +22,7 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 
 	override func awakeFromNib() {
         super.awakeFromNib()
+		self.dateLabel.font = CTFont.systemFont(ofSize: 13, weight: .Regular)
 		self.backgroundHighlighterView.layer.cornerRadius = self.backgroundHighlighterView.frame.height/2 //circle
     }
 

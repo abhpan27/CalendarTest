@@ -98,8 +98,8 @@ final class CTAgendaListUIHelper {
 			
 		case .loadContentOnLaunch:
 			//intially load 30 days data 15 day past and 15 day future
-			let startDate = todayDate.pastDateBefore(days: 15)
-			let endDate = todayDate.nextDateAfter(days: 15)
+			let startDate = todayDate.pastDateBefore(days: 100)//todayDate.pastDateBefore(days: 15)
+			let endDate = todayDate.nextDateAfter(days: 200)//todayDate.nextDateAfter(days: 15)
 			return CTDBQueryContentRequest(fromDate: startDate, endDate: endDate, type: .agendaViewData)
 
 		case .loadFutureContent:
@@ -117,12 +117,15 @@ final class CTAgendaListUIHelper {
 	}
 }
 
-//mark:Table UI delegate info
+//Mark:Table UI delegate info
 extension CTAgendaListUIHelper {
 
 	func registerCells(inTableView:UITableView) {
 		CTTitleOnlyRowTableViewCell.registerCell(inTableView: inTableView, withIdentifier: "CTTitleOnlyRowTableViewCell")
 		CTAgendaSectionHeader.registerHeader(tableView: inTableView, forReuseIdentifier: "CTAgendaSectionHeader")
+		CTAgendaViewNoEventTableViewCell.registerCell(inTableView: inTableView, withIdentifier: "CTAgendaViewNoEventTableViewCell")
+		CTTitleAndLocationTableViewCell.registerCell(inTableView: inTableView, withIdentifier: "CTTitleAndLocationTableViewCell")
+		CTCompleteInfoTableViewCell.registerCell(inTableView: inTableView, withIdentifier: "CTCompleteInfoTableViewCell")
 	}
 
 	final func numberOfSections() -> Int {
@@ -130,28 +133,57 @@ extension CTAgendaListUIHelper {
 	}
 
 	func numberOfRowsInSection(section:Int) -> Int {
-		return self.arrayOfSectionUIData[section].arrayOfEventsRowUIDataOnDay.count
+		let numberOfEventsOnDay = self.arrayOfSectionUIData[section].arrayOfEventsRowUIDataOnDay.count
+		return numberOfEventsOnDay > 0 ? numberOfEventsOnDay : 1
 	}
 
 	func cellForRow(indexPath:IndexPath, inTableView:UITableView) -> UITableViewCell {
+
 		let sectionData = self.arrayOfSectionUIData[indexPath.section]
+
+		//no event on day show no event row
+		if sectionData.arrayOfEventsRowUIDataOnDay.count == 0 {
+			let noEventRow = inTableView.dequeueReusableCell(withIdentifier: "CTAgendaViewNoEventTableViewCell") as! CTAgendaViewNoEventTableViewCell
+			return noEventRow
+		}
+
 		let rowData = sectionData.arrayOfEventsRowUIDataOnDay[indexPath.row]
-		let cell = inTableView.dequeueReusableCell(withIdentifier: "CTTitleOnlyRowTableViewCell") as! CTTitleOnlyRowTableViewCell
-		cell.titleLabel?.text = rowData.eventTitle
-		return cell
+
+		switch rowData.typeOfRow {
+		case .onlytitle:
+			let titleOnlyCell = inTableView.dequeueReusableCell(withIdentifier: "CTTitleOnlyRowTableViewCell") as! CTTitleOnlyRowTableViewCell
+			titleOnlyCell.updateWithUIData(uiData: rowData)
+			return titleOnlyCell
+		case .titleAndPeople:
+			let titleAndPeopleRow = inTableView.dequeueReusableCell(withIdentifier: "CTCompleteInfoTableViewCell") as! CTCompleteInfoTableViewCell
+			titleAndPeopleRow.updateWithUIData(uiData: rowData)
+			return titleAndPeopleRow
+		case .titleAndLocation:
+			let titleAndLocationRow = inTableView.dequeueReusableCell(withIdentifier: "CTTitleAndLocationTableViewCell") as! CTTitleAndLocationTableViewCell
+			titleAndLocationRow.updateWithUIData(uiData: rowData)
+			return titleAndLocationRow
+		case .fullInfo:
+			let fullInfoCell = inTableView.dequeueReusableCell(withIdentifier: "CTCompleteInfoTableViewCell") as! CTCompleteInfoTableViewCell
+			fullInfoCell.updateWithUIData(uiData: rowData)
+			return fullInfoCell
+		}
 	}
 
 	func sectionHeaderFor(forSection:Int, inTabelView:UITableView) -> UIView {
 		let sectionHeader = inTabelView.dequeueReusableHeaderFooterView(withIdentifier: "CTAgendaSectionHeader") as! CTAgendaSectionHeader
 		let sectionData = self.arrayOfSectionUIData[forSection]
 		sectionHeader.dateLabel?.text = sectionData.dateOfSection.displayDateText
+		sectionHeader.customBackgroundView?.backgroundColor = sectionData.backgroundColor
 		return sectionHeader
 	}
 
 	func heightForRow(atIndexPath:IndexPath) -> CGFloat {
-		return 40
 		let sectionData = self.arrayOfSectionUIData[atIndexPath.section]
-		let rowData = sectionData.arrayOfEventsRowUIDataOnDay[atIndexPath.row]
-		return rowData.heightNeededForRow
+		if sectionData.arrayOfEventsRowUIDataOnDay.count == 0 {
+			return 40
+		}else {
+			let rowData = sectionData.arrayOfEventsRowUIDataOnDay[atIndexPath.row]
+			return rowData.heightNeededForRow
+		}
 	}
 }

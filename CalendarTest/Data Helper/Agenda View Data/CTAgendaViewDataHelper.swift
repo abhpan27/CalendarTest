@@ -88,8 +88,9 @@ final class CTAgendaViewDataHelper {
 		let listOfAttendees = getArrayOfAttendeeDataForEvent(dbEvent: dbEvent)
 		let startDateTime = Date(timeIntervalSince1970: TimeInterval(dbEvent.startTime))
 		let endDateTime = Date(timeIntervalSince1970: TimeInterval(dbEvent.endTime))
+		let calColor = UIColor(hex: dbEvent.calendar.colorHex) ?? UIColor.gray
 
-		return CTAgendaViewRowUIData(uniqueID: dbEvent.uniqueID, eventTitle: dbEvent.title, eventStartTime: startDateTime, eventEndTime: endDateTime, isAllDay: dbEvent.isAllDay, attendeesInfo: listOfAttendees, locationString: dbEvent.loactionString ?? "")
+		return CTAgendaViewRowUIData(uniqueID: dbEvent.uniqueID, eventTitle: dbEvent.title, eventStartTime: startDateTime, eventEndTime: endDateTime, isAllDay: dbEvent.isAllDay, attendeesInfo: listOfAttendees, locationString: dbEvent.loactionString ?? "", calColor: calColor)
 
 	}
 

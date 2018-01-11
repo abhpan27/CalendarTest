@@ -10,15 +10,37 @@ import UIKit
 
 class CTTitleAndLocationTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+	var startTimeLabel:UILabel!
+	var eventDurationLabel:UILabel!
+	var circleView:UIView!
+	var titleLabel:UILabel!
+	var locationLabel:UILabel!
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+	static func registerCell(inTableView:UITableView, withIdentifier:String) {
+		inTableView.register(UINib(nibName: "CTTitleAndLocationTableViewCell", bundle: nil), forCellReuseIdentifier: withIdentifier)
+	}
 
-        // Configure the view for the selected state
-    }
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		self.selectionStyle = .none
+		addUIElements()
+	}
+
+	private func addUIElements() {
+		let uiLayoutHelper = CTAgendaViewCellCommonUIHelper()
+		self.startTimeLabel = uiLayoutHelper.addStartTimeLable(inCell: self)
+		self.eventDurationLabel = uiLayoutHelper.addEventDurationLabel(inCell: self, below: startTimeLabel!, leftAlignedTo: startTimeLabel!)
+		self.circleView = uiLayoutHelper.addCalColorCircleView(inCell: self, centerAlignedWith: self.startTimeLabel!)
+		self.titleLabel = uiLayoutHelper.addTitleLabel(inCell: self, centerAlignedWith: circleView!, leftAlignWith: circleView!)
+		self.locationLabel = uiLayoutHelper.addLocationLabel(inCell: self, alignLeftTo: self.titleLabel, below: self.titleLabel)
+	}
+
+	final func updateWithUIData(uiData:CTAgendaViewRowUIData) {
+		self.startTimeLabel.text = uiData.startTimeText
+		self.eventDurationLabel.text = uiData.timeRangeText
+		self.circleView.backgroundColor = uiData.calColor
+		self.titleLabel.text = uiData.eventTitle
+		self.locationLabel.text = "⚲ " + uiData.locationString
+	}
     
 }
