@@ -24,5 +24,6 @@ extension CTPerson {
     @NSManaged public var uniqueID: String
     @NSManaged public var name: String
     @NSManaged public var emailID: String
+	@NSManaged public var colorHex: String
 
 }

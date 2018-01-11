@@ -23,7 +23,7 @@ final class CTCalTableViewData {
 	}
 }
 
-final class CTCalDataGenerator {
+final class CTCalViewDataHelper {
 
 	final func getBasicCollectionViewCalData() -> [[CTCalCollectionViewCellUIData]] {
 		let minMaxDateInfo = CTAppConstants.shared.minMaxDate
@@ -80,7 +80,7 @@ final class CTCalDataGenerator {
 
 			//if last day of current month is not on saturday and this is not last month in iteration then we will not inlcude last row for hight calculation in month
 			if (lastDayOfMonth != WeekDayNumber.saturday.rawValue && currentDateInIteration != minMaxDateInfo.maxDate) {
-				noOfWeeksToShowForCurrentMonth -= 1 //remove last week
+				noOfWeeksToShowForCurrentMonth -= 1 //remove last week row as it is shared by next month in UI
 			}
 
 			let newCalTableUIData = CTCalTableViewData(monthName: currentDateInIteration.monthName, noOfDifferentWeeksInMonth: noOfWeeksToShowForCurrentMonth)

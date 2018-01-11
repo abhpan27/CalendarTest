@@ -45,12 +45,6 @@ extension Date {
 		return self.startOfDate == firstMonthDay.startOfDate
 	}
 
-	func isInSameMonth(withDate:Date) -> Bool {
-		let monthComponentOfSelf = Calendar.current.component(.month, from: self)
-		let monthComponentOfDate = Calendar.current.component(.month, from: withDate)
-		return monthComponentOfSelf == monthComponentOfDate
-	}
-
 	var monthName:String {
 		let dateFormatter = DateFormatter()
 		if self.isInCurrentYear {
@@ -61,14 +55,59 @@ extension Date {
 		return dateFormatter.string(from: self)
 	}
 
+	var isTomorrow:Bool {
+		return Calendar.current.isDateInTomorrow(self)
+	}
+
+	var isToday:Bool {
+		return Calendar.current.isDateInToday(self)
+	}
+
+	var isYesterday:Bool {
+		return Calendar.current.isDateInTomorrow(self)
+	}
+
+	var displayDateText:String {
+		let dateFormatter = DateFormatter()
+		if self.isInCurrentYear {
+			dateFormatter.dateFormat = "EEEE, MMM d"
+		}else {
+			dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+		}
+
+		let dateString = dateFormatter.string(from: self)
+
+		if self.isToday {
+			return "Today" + " • " + dateString
+		}else if self.isTomorrow {
+			return "Tomorrow" + " • " + dateString
+		}else if self.isYesterday {
+			return "Yesterday" + " • " + dateString
+		}
+
+		return dateString
+	}
+
 	var logDate:String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "EEEE, MMM d, yyyy HH:mm"
 		return dateFormatter.string(from: self)
 	}
 
-	var isToday:Bool {
-		return Calendar.current.isDateInToday(self)
+	func pastDateBefore(days:Int) -> Date {
+		let pastDayAfetrDate = Calendar.current.date(byAdding: .day, value: -days, to: self)
+		return pastDayAfetrDate!
+	}
+
+	func nextDateAfter(days:Int) -> Date {
+		let nextDayAfetrDate = Calendar.current.date(byAdding: .day, value: days, to: self)
+		return nextDayAfetrDate!
+	}
+
+	func isInSameMonth(withDate:Date) -> Bool {
+		let monthComponentOfSelf = Calendar.current.component(.month, from: self)
+		let monthComponentOfDate = Calendar.current.component(.month, from: withDate)
+		return monthComponentOfSelf == monthComponentOfDate
 	}
 
 	func setHourMinuteAndSec(hours:Int, mintues:Int, seconds:Int) -> Date {

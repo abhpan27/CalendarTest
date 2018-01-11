@@ -12,11 +12,13 @@ class CTCentralContainerViewController: UIViewController {
 
 	let topBar:CTTopBarOnCentralView
 	let calendarViewController:CTCalendarViewController
+	let agendaViewController:CTAgendaViewController
 	var calendarViewHeightConstraint:NSLayoutConstraint!
 
 	init() {
 		self.topBar = CTTopBarOnCentralView.loadTopBarView()
 		self.calendarViewController = CTCalendarViewController()
+		self.agendaViewController = CTAgendaViewController()
 		super.init(nibName: "CTCentralContainerViewController", bundle: nil)
 		self.calendarViewController.delegate = self
 	}
@@ -39,6 +41,7 @@ class CTCentralContainerViewController: UIViewController {
 		addTopBarAndCalendarViewSeparator()
 		addAndLayoutCalendarView()
 		addCalAndAgendaViewSeparator()
+		addAgendaView()
 		self.view.layoutIfNeeded()
 	}
 
@@ -58,5 +61,9 @@ extension CTCentralContainerViewController:CTCalendarViewControllerDelegate {
 		//update other parts of app
 		self.topBar.updateMonthLabel(date: date)
 	}
+
+}
+
+extension CTAgendaViewController:CTAgendaViewControllerProtocol {
 
 }

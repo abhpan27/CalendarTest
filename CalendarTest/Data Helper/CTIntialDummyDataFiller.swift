@@ -99,26 +99,31 @@ final class CTIntialDummyDataFiller {
 		personObj1.name = "Newton"
 		personObj1.emailID = "newton@royalsociety.com"
 		personObj1.uniqueID = UUID().uuidString
+		personObj1.colorHex = "##9B51E0"
 
 		let personObj2 = NSEntityDescription.insertNewObject(forEntityName: CTPerson.entityName, into: inContext) as! CTPerson
 		personObj2.name = "Tesla"
 		personObj2.emailID = "tesla@royalsociety.com"
 		personObj2.uniqueID = UUID().uuidString
+		personObj1.colorHex = "#219653"
 
 		let personObj3 = NSEntityDescription.insertNewObject(forEntityName: CTPerson.entityName, into: inContext) as! CTPerson
 		personObj3.name = "Einstein"
 		personObj3.emailID = "einstein@royalsociety.com"
 		personObj3.uniqueID = UUID().uuidString
+		personObj3.colorHex = "#9B51E0"
 
 		let personObj4 = NSEntityDescription.insertNewObject(forEntityName: CTPerson.entityName, into: inContext) as! CTPerson
 		personObj4.name = "Raman"
 		personObj4.emailID = "raman@royalsociety.com"
 		personObj4.uniqueID = UUID().uuidString
+		personObj4.colorHex = "#EB5757"
 
 		let personObj5 = NSEntityDescription.insertNewObject(forEntityName: CTPerson.entityName, into: inContext) as! CTPerson
 		personObj5.name = "Ramanujam"
 		personObj5.emailID = "ramanujam@royalsociety.com"
 		personObj5.uniqueID = UUID().uuidString
+		personObj5.colorHex = "#BB6BD9"
 
 		return [personObj1, personObj2, personObj3, personObj4, personObj5]
 	}

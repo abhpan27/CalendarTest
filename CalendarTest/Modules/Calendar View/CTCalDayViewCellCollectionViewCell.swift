@@ -22,7 +22,7 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 
 	override func awakeFromNib() {
         super.awakeFromNib()
-		self.backgroundHighlighterView.layer.cornerRadius = self.backgroundHighlighterView.frame.height/2 //rounded corners
+		self.backgroundHighlighterView.layer.cornerRadius = self.backgroundHighlighterView.frame.height/2 //circle
     }
 
 	static func registerCell(collectionView:UICollectionView, withIdentifier:String) {

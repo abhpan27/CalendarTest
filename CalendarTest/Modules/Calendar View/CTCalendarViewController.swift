@@ -50,8 +50,8 @@ final class CTCalendarViewController: UIViewController {
 	}
 	
 	init() {
-		self.calCollectionViewUIData = CTCalDataGenerator().getBasicCollectionViewCalData()
-		self.calTableViewUIData = CTCalDataGenerator().getBasicTableViewCalData()
+		self.calCollectionViewUIData = CTCalViewDataHelper().getBasicCollectionViewCalData()
+		self.calTableViewUIData = CTCalViewDataHelper().getBasicTableViewCalData()
 		super.init(nibName: "CTCalendarViewController", bundle: nil)
 	}
 
