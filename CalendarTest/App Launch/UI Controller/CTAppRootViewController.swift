@@ -63,7 +63,7 @@ class CTAppRootViewController: UIViewController {
 	private func changeAppUIState() {
 		switch self.appDataState {
 		case .creatingDummyData:
-			showMessage(message: "Just a sec.\n Creating dummy app data...")
+			showMessage(message: "Just a sec.\n Creating static app data...")
 		case .finishedDummyDataCreation:
 			showCenterContainer()
 		case .creatingDummyAppDataFailed:

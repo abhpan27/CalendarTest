@@ -22,7 +22,6 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 
 	override func awakeFromNib() {
         super.awakeFromNib()
-		self.dateLabel.font = CTFont.systemFont(ofSize: 13, weight: .Regular)
 		self.backgroundHighlighterView.layer.cornerRadius = self.backgroundHighlighterView.frame.height/2 //circle
     }
 
@@ -44,27 +43,49 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 	}
 
 	private func updateFontAndColorForNonSelectedCell() {
-		guard let uiData = self.cellUIData else { return }
+		guard let uiData = self.cellUIData
+			else {
+				return
+		}
+
 		self.backgroundHighlighterView.backgroundColor = UIColor.clear
 		self.dateLabel.text = uiData.fullDateString
 		self.dateLabel.textColor = UIColor(red: 67/255, green: 75/255, blue: 82/255, alpha: 1.0)
 		setBackgroundColor()
+		setFontForDateLabel()
 	}
 
 	private func updateUIForSelectedCell() {
-		guard let uiData = self.cellUIData else { return }
+		guard let uiData = self.cellUIData
+			else {
+				return
+		}
+
 		self.backgroundHighlighterView.backgroundColor = UIColor(red: 41/255, green: 127/255, blue: 246/255, alpha: 1.0)
 		self.dateLabel.textColor = UIColor.white
 		self.dateLabel.text = uiData.dateNumberString
 		setBackgroundColor()
+		setFontForDateLabel()
 	}
 
 	private func setBackgroundColor() {
-		guard let uiData = self.cellUIData else { return }
+		guard let uiData = self.cellUIData
+			else {
+				return
+		}
+
 		if uiData.shouldDrawInGrey {
 			self.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0)
 		}else {
 			self.backgroundColor = UIColor.white
+		}
+	}
+
+	private func setFontForDateLabel() {
+		if Date(timeIntervalSince1970: self.cellUIData.dateEpoch).isToday {
+			self.dateLabel.font = CTFont.systemFont(ofSize: 15, weight: .Bold)
+		}else {
+			self.dateLabel.font = CTFont.systemFont(ofSize: 13, weight: .Regular)
 		}
 	}
 

@@ -174,8 +174,9 @@ final class CTIntialDummyDataFiller {
 	}
 
 	private func getRandomizedArrayOfPeople(originalArrayOfPeople:[CTPerson]) -> NSSet {
-		let randomPersonIndex = randomNumber(inRange: 0 ... originalArrayOfPeople.count - 1)
-		return NSSet(array: Array(originalArrayOfPeople[0...randomPersonIndex]))
+		let randomPersonIndex = randomNumber(inRange: 0 ... originalArrayOfPeople.count)
+		let setOfPeople = randomPersonIndex < originalArrayOfPeople.count ?  NSSet(array: Array(originalArrayOfPeople[0...randomPersonIndex])) : NSSet()
+		return setOfPeople
 	}
 
 	private func getRandomizedStartEndTime(onDate:Date, isAllDay:Bool) -> (startTime:Date, endTime:Date) {
