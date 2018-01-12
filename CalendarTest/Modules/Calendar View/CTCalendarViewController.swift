@@ -45,6 +45,9 @@ final class CTCalendarViewController: UIViewController {
 		didSet {
 			if oldValue != viewingMode {
 				//this will reduce/increase calendar container size
+				if viewingMode == .twoRows {
+					stopScrolling()
+				}
 				self.delegate?.viewingModeDidChange(viewingMode: viewingMode)
 			}
 		}
@@ -88,6 +91,13 @@ final class CTCalendarViewController: UIViewController {
 			self.monthViewerTableView.alpha = shouldShow ? 1 : 0
 			self.monthViewerTableView.isHidden = (self.monthViewerTableView.alpha == 0)
 		}
+	}
+
+	func stopScrolling() {
+		let collectionContentOffset = self.calCollectionView.contentOffset
+		self.calCollectionView.setContentOffset(collectionContentOffset, animated: false)
+		self.monthViewerTableView.setContentOffset(collectionContentOffset, animated: false)
+		self.monthViewerTableView.isHidden = true
 	}
 }
 
@@ -158,7 +168,7 @@ extension  CTCalendarViewController:UICollectionViewDelegate {
 				Swift.print("Can't find date for index path, this should not happen")
 				return
 		}
-
+		self.viewingMode = .fiveRows
 		self.delegate?.didSelectedDate(date: dateForIndexPath)
 	}
 

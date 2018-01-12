@@ -61,6 +61,7 @@ extension CTCentralContainerViewController:CTCalendarViewControllerDelegate {
 		Swift.print("Date selected in calendar view :\(date.logDate)")
 		//update other parts of app
 		self.topBar.updateMonthLabel(date: date)
+		self.agendaViewController.scrollToDate(date: date, animated: false)
 	}
 
 }
@@ -73,6 +74,8 @@ extension CTCentralContainerViewController:CTAgendaViewControllerProtocol {
 
 	func agendaViewScrolledToDate(date:Date) {
 		self.topBar.updateMonthLabel(date: date)
-		self.calendarViewController.selectDate(date: date, animated: false)
+		if calendarViewController.viewingMode == .twoRows {
+			self.calendarViewController.selectDate(date: date, animated: false)
+		}
 	}
 }

@@ -19,7 +19,7 @@ extension CTCalendarViewController {
 
 		let numberOfWeeks = date.numberOfWeeks(fromDate: firstDateInfo.date)
 		let rowOfDate = date.weekDay - 1
-		let sectionOfDate = numberOfWeeks + 1
+		let sectionOfDate = date.weekDay != WeekDayNumber.saturday.rawValue ? numberOfWeeks + 1 : numberOfWeeks
 		Swift.print("index path calculated row :\(rowOfDate), section of date :\(sectionOfDate)")
 		return IndexPath(row: rowOfDate, section: sectionOfDate)
 
@@ -71,7 +71,7 @@ extension CTCalendarViewController {
 				Swift.print("Date \(date.logDate) is not in calendar")
 				return
 		}
-		
+		self.stopScrolling()
 		mainQueueAsync {
 			self.calCollectionView.selectItem(at: indexPathForDate, animated: animated, scrollPosition: .top)
 		}

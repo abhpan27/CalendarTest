@@ -15,6 +15,24 @@ internal enum DummyDataFillerErrors:Error {
 
 final class CTIntialDummyDataFiller {
 
+	let arrayOfDummyTitles =  ["Physics lecture on photoelectric effect",
+							   "Brainstorming how edison cheated tesla",
+							   "Interview with AK Media",
+							   "Discussion on gravity, newton vs edison",
+							   "Fixing water leakage from rooftop",
+							   "Date with Maria",
+							   "Lecture on relativity theory",
+							   "Car service visit",
+							   "Dental checkup",
+							   "Meetup with Arthur",
+							   "Mathamatics student summit"]
+
+	let arrayOfDummyLocations = ["Brew beer cafe, 14th Main, london",
+								 "Cofee cafe, MG road, london",
+								 "Oxford central hall, London",
+								 "Opposite queen palace, London , UK"]
+
+
 	final func fillDummyData(completion:@escaping (_ error:Error?) -> ()) {
 		CTAppControl.current!.coreDataController.coreDataContainer.performBackgroundTask {
 			[weak self]
@@ -46,11 +64,11 @@ final class CTIntialDummyDataFiller {
 		var arrayOfDummyEvents = [CTEvent]()
 
 		//fill dummy events - every monday - 2 events, every friday and today- 3 events with random title, location, start and end times,
-		var startDate = Calendar.current.pastMonth(noOfMonths: 3, date: Date()).startOfDate
+		var startDate = Calendar.current.pastMonth(noOfMonths: 12, date: Date()).startOfDate
 		let maxDate = Calendar.current.futureMonth(noOfMonths: 12, date: Date()).startOfDate
 
 		while(startDate < maxDate) {
-			if startDate.weekDay == 1 {
+			if startDate.weekDay == 3 {
 				//add two events every monday one with people and one without
 				let dummyEvent1 = self.getDummyEvent(onDate: startDate, isAllDay: false, person: dummyPersons, calendar: dummyCalendars.first!, inContext: context)
 				let dummyEvent2 = self.getDummyEvent(onDate: startDate, isAllDay: true, person: dummyPersons, calendar: dummyCalendars.last!, inContext: context)
@@ -129,6 +147,38 @@ final class CTIntialDummyDataFiller {
 	}
 
 	private func getDummyEvent(onDate:Date, isAllDay:Bool, person:[CTPerson], calendar:CTCalendar, inContext:NSManagedObjectContext) -> CTEvent {
+
+		let dummyEvent = NSEntityDescription.insertNewObject(forEntityName: CTEvent.entityName, into: inContext) as! CTEvent
+		let randomizedStartEndTime = getRandomizedStartEndTime(onDate: onDate, isAllDay: isAllDay)
+		dummyEvent.uniqueID = UUID().uuidString
+		dummyEvent.startTime = randomizedStartEndTime.startTime.timeIntervalSince1970
+		dummyEvent.endTime = randomizedStartEndTime.endTime.timeIntervalSince1970
+		dummyEvent.isAllDay = isAllDay
+		dummyEvent.loactionString = getRandomizedDummyLocation()
+		dummyEvent.attendees = getRandomizedArrayOfPeople(originalArrayOfPeople: person)
+		dummyEvent.title = getRandomizedDummyTitle()
+		dummyEvent.calendar = calendar
+		return dummyEvent
+	}
+
+	private func getRandomizedDummyTitle() -> String {
+		let randomIndex = randomNumber(inRange: 0 ... self.arrayOfDummyTitles.count - 1)
+		let title = arrayOfDummyTitles[randomIndex]
+		return title
+	}
+
+	private func getRandomizedDummyLocation() -> String? {
+		let randomIndex = randomNumber(inRange: 0 ... self.arrayOfDummyLocations.count)
+		let location:String? = randomIndex < self.arrayOfDummyLocations.count ?  arrayOfDummyLocations[randomIndex] : nil
+		return location
+	}
+
+	private func getRandomizedArrayOfPeople(originalArrayOfPeople:[CTPerson]) -> NSSet {
+		let randomPersonIndex = randomNumber(inRange: 0 ... originalArrayOfPeople.count - 1)
+		return NSSet(array: Array(originalArrayOfPeople[0...randomPersonIndex]))
+	}
+
+	private func getRandomizedStartEndTime(onDate:Date, isAllDay:Bool) -> (startTime:Date, endTime:Date) {
 		var startTime = onDate.startOfDate
 		var endTime = onDate.endOfDate
 		if !isAllDay {
@@ -137,37 +187,6 @@ final class CTIntialDummyDataFiller {
 			endTime = startTime.setHourMinuteAndSec(hours: randomHrValue+1, mintues: 0, seconds: 0)
 		}
 
-		let titleLocationInfo = getRandomEventTitleAndLocation()
-		let dummyEvent = NSEntityDescription.insertNewObject(forEntityName: CTEvent.entityName, into: inContext) as! CTEvent
-		dummyEvent.title = titleLocationInfo.title
-		dummyEvent.uniqueID = UUID().uuidString
-		dummyEvent.startTime = startTime.timeIntervalSince1970
-		dummyEvent.endTime = endTime.timeIntervalSince1970
-		dummyEvent.isAllDay = isAllDay
-		dummyEvent.loactionString = titleLocationInfo.location
-		let randomPersonIndex = randomNumber(inRange: 0...4)
-		dummyEvent.attendees = NSSet(array: Array(person[0...randomPersonIndex]))
-		dummyEvent.calendar = calendar
-		return dummyEvent
-	}
-
-	private func getRandomEventTitleAndLocation() -> (title:String, location:String?) {
-		var arrayOfTitles = ["Brainstorming on Membeship",
-							 "Meeting with UK queen",
-							 "e=mc2 Brainstorming",
-							 "Brainstorming on blackholes",
-							 "Brainstorming with students",
-							 "Brainstorming on gravity newton vs Einstein"
-							]
-
-		var arrayOfLocations = ["Brew beer cafe, 14th Main, london",
-								"Cofee cafe, MG road, london",
-								"Oxford central hall, London",
-								"Opposite queen palace, London , UK"
-							   ]
-		let randomIndex = randomNumber(inRange: 1...5)
-		let title = arrayOfTitles[randomIndex]
-		let location:String? = randomIndex <= 3 ? arrayOfLocations[randomIndex] : nil
-		return (title, location)
+		return (startTime, endTime)
 	}
 }

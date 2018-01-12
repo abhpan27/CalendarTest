@@ -16,6 +16,7 @@ protocol CTAgendaViewControllerProtocol:NSObjectProtocol {
 class CTAgendaViewController: UIViewController {
 
 	@IBOutlet weak var agendaTableView: UITableView!
+	var scrollToTodayButton:UIButton!
 	weak var delegate:CTAgendaViewControllerProtocol?
 	let listUIHelper = CTAgendaListUIHelper()
 	var isUserScrollingUP:Bool = false
