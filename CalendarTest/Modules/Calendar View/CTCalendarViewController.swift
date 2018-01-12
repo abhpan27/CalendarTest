@@ -65,7 +65,7 @@ final class CTCalendarViewController: UIViewController {
 		CTCalDayViewCellCollectionViewCell.registerCell(collectionView: calCollectionView, withIdentifier: "CTCalDayViewCellCollectionViewCell")
 		setUpBasicUI()
 		//select current date after some delay so that current drawing of cells is completed
-		delayedRun(0.1) {
+		delayedRunInMainQueue(0.1) {
 			self.selectDate(date: Date(), animated: false)
 		}
     }

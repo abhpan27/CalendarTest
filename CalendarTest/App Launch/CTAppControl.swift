@@ -42,7 +42,7 @@ final class CTAppControl {
 			if !UserDefaults.standard.bool(forKey: userDefaultKeys.has_filled_dummy_data.rawValue) {
 				self.uiController.rootViewController.appDataState = .creatingDummyData
 				self.dummyDatafiller.fillDummyData(completion: { (error) in
-					runInMainQueue {
+					mainQueueAsync {
 						guard error == nil
 							else{
 								self.uiController.rootViewController.appDataState = .creatingDummyAppDataFailed

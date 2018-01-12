@@ -26,7 +26,7 @@ final class CTCoreDataController {
 					return
 			}
 			Swift.print("persitent store created at:\(storeDescription.url!.absoluteString)")
-			runInMainQueue {
+			mainQueueAsync {
 				self.uiContext = self.coreDataContainer.viewContext
 				self.uiContext.automaticallyMergesChangesFromParent = true
 				completion(nil)

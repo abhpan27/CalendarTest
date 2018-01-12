@@ -11,18 +11,43 @@ import Foundation
 extension CTCalendarViewController {
 
 	private func indexPathForDate(date:Date) -> IndexPath? {
+		let firstDateInfo = self.getFirstDateInfo()!
+		if date.isInSameWeek(withDate: firstDateInfo.date) {
+			let daysBetween = date.days(from: firstDateInfo.date)
+			return IndexPath(row: firstDateInfo.indexPath.row + daysBetween, section: 0)
+		}
+
+		let numberOfWeeks = date.numberOfWeeks(fromDate: firstDateInfo.date)
+		let rowOfDate = date.weekDay - 1
+		let sectionOfDate = numberOfWeeks + 1
+		Swift.print("index path calculated row :\(rowOfDate), section of date :\(sectionOfDate)")
+		return IndexPath(row: rowOfDate, section: sectionOfDate)
+
 		let startOfDate = date.startOfDate.timeIntervalSince1970
 		for rowIndex in 0 ... self.calCollectionViewUIData.count - 1 {
 			let currentRow = self.calCollectionViewUIData[rowIndex]
 			if currentRow.first!.dateEpoch <= startOfDate && startOfDate <= currentRow.last!.dateEpoch {
 				for coloumnIndex in 0 ... 7 {
 					if currentRow[coloumnIndex].dateEpoch == startOfDate {
+						Swift.print("index path actual row :\(coloumnIndex), section of date :\(rowIndex)")
 						return IndexPath(row: coloumnIndex, section: rowIndex)
 					}
 				}
 			}
 		}
 
+		return nil
+	}
+
+	private func getFirstDateInfo() -> (date:Date, indexPath:IndexPath)? {
+		let firstRow = self.calCollectionViewUIData[0]
+		for index in 0 ... 7 {
+			if firstRow[index].dateEpoch != -1 {
+				let indexPath = IndexPath(row: index, section: 0)
+				let date = Date(timeIntervalSince1970: firstRow[index].dateEpoch)
+				return (date, indexPath)
+			}
+		}
 		return nil
 	}
 
@@ -47,7 +72,7 @@ extension CTCalendarViewController {
 				return
 		}
 		
-		runInMainQueue {
+		mainQueueAsync {
 			self.calCollectionView.selectItem(at: indexPathForDate, animated: animated, scrollPosition: .top)
 		}
 	}

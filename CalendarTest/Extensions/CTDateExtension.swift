@@ -105,9 +105,27 @@ extension Date {
 	}
 
 	func isInSameMonth(withDate:Date) -> Bool {
+		let yearComponentOfSelf = Calendar.current.component(.year, from: self)
+		let yearComponentOfDate = Calendar.current.component(.year, from: withDate)
 		let monthComponentOfSelf = Calendar.current.component(.month, from: self)
 		let monthComponentOfDate = Calendar.current.component(.month, from: withDate)
-		return monthComponentOfSelf == monthComponentOfDate
+		return (yearComponentOfSelf == yearComponentOfDate && monthComponentOfSelf == monthComponentOfDate)
+	}
+
+	func isInSameWeek(withDate:Date) -> Bool {
+		let yearOfSelf = Calendar.current.component(.year, from: self)
+		let monthOfSelf = Calendar.current.component(.month, from: self)
+		let weekOfSelf = Calendar.current.component(.weekOfMonth, from: self)
+
+		let yearOfDate = Calendar.current.component(.year, from: withDate)
+		let monthOfDate = Calendar.current.component(.month, from: withDate)
+		let weekOfDate = Calendar.current.component(.weekOfMonth, from: withDate)
+
+		return (yearOfDate == yearOfSelf && monthOfDate == monthOfSelf && weekOfDate == weekOfSelf)
+	}
+
+	func numberOfWeeks(fromDate:Date) -> Int {
+		 return Calendar.current.dateComponents([.weekOfYear], from: fromDate, to: self).weekOfYear ?? 0
 	}
 
 	func setHourMinuteAndSec(hours:Int, mintues:Int, seconds:Int) -> Date {

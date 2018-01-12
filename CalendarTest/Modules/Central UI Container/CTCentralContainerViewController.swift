@@ -67,7 +67,12 @@ extension CTCentralContainerViewController:CTCalendarViewControllerDelegate {
 
 extension CTCentralContainerViewController:CTAgendaViewControllerProtocol {
 	
-	func didDragAgendaView() {
+	func didDragAgendaView(agendaView:UITableView) {
 		self.calendarViewController.viewingMode = .twoRows
+	}
+
+	func agendaViewScrolledToDate(date:Date) {
+		self.topBar.updateMonthLabel(date: date)
+		self.calendarViewController.selectDate(date: date, animated: false)
 	}
 }

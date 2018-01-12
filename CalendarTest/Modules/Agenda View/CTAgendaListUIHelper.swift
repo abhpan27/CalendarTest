@@ -98,8 +98,8 @@ final class CTAgendaListUIHelper {
 			
 		case .loadContentOnLaunch:
 			//intially load 30 days data 15 day past and 15 day future
-			let startDate = todayDate.pastDateBefore(days: 100)//todayDate.pastDateBefore(days: 15)
-			let endDate = todayDate.nextDateAfter(days: 200)//todayDate.nextDateAfter(days: 15)
+			let startDate = todayDate.pastDateBefore(days: 15)
+			let endDate = todayDate.nextDateAfter(days: 15)
 			return CTDBQueryContentRequest(fromDate: startDate, endDate: endDate, type: .agendaViewData)
 
 		case .loadFutureContent:
@@ -114,6 +114,26 @@ final class CTAgendaListUIHelper {
 			let startDate = endDate.pastDateBefore(days: 30)
 			return CTDBQueryContentRequest(fromDate: startDate, endDate: endDate, type: .agendaViewData)
 		}
+	}
+
+	//linear search
+	final func indexPathForDate(date:Date) -> IndexPath? {
+		for index in stride(from: 0, to: self.arrayOfSectionUIData.count, by: 1) {
+			if self.arrayOfSectionUIData[index].dateOfSection == date.startOfDate {
+				return IndexPath(row: 0, section: index)
+			}
+		}
+		return nil
+	}
+
+	final func dateForIndexPath(indexPath:IndexPath) -> Date? {
+		let section = indexPath.section
+		guard section >= 0 && section < self.arrayOfSectionUIData.count
+			else {
+				return nil
+		}
+
+		return self.arrayOfSectionUIData[section].dateOfSection
 	}
 }
 

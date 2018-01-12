@@ -14,14 +14,21 @@ final class CTAgendaViewDataHelper {
 
 	enum dbQueryErrorForAgendaView:Error {
 		case failedToFetchEvents
+		case inValidContentRequest
 	}
 
 	typealias agendaViewDBQueryCompletionHandlerType = (_ list:[CTAgendaViewSectionUIData]?, _ error:Error?) -> ()
 
 	func arrayOfAgendaSectionUIData(forContentRequest:CTDBQueryContentRequest, completion:@escaping agendaViewDBQueryCompletionHandlerType) {
+
+		guard forContentRequest.toDate > forContentRequest.fromDate else {
+			completion(nil, dbQueryErrorForAgendaView.inValidContentRequest)
+			return
+		}
+
 		let uiContext = CTAppControl.current!.coreDataController.uiContext!
 		guard let listOfEvents = try? self.getAllEventsFromDB(forContentRequest: forContentRequest, inContext: uiContext)
-			else{
+			else {
 				completion(nil, dbQueryErrorForAgendaView.failedToFetchEvents)
 				return
 		}
