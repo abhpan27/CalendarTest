@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 internal enum agendaViewContentLoadState {
-	case loadPastContent, loadFutureContent, loadContentOnLaunch
+	case loadPastContent, loadFutureContent, loadContentOnLaunch, loadContentForDateSelectionInCalendar(date:Date)
 }
 
 final class CTAgendaListUIHelper {
@@ -91,6 +91,39 @@ final class CTAgendaListUIHelper {
 		}
 	}
 
+	final func loadDataForDateSelectionInCalendar(selectedDateInCalendar:Date, completion: @escaping (_ error: Error?, _ selectedDate:Date) -> ()) {
+
+		let contentRequest = self.contentRequest(contentLoadState: .loadContentForDateSelectionInCalendar(date: selectedDateInCalendar))
+
+		agendaViewDataHelper.arrayOfAgendaSectionUIData(forContentRequest: contentRequest) {
+			[weak self]
+			(sectionUIDataList, error)
+			in
+
+			guard let blockSelf = self else {
+				completion(nil, selectedDateInCalendar)
+				return
+			}
+
+			guard error == nil else {
+				completion(error, selectedDateInCalendar)
+				return
+			}
+
+			let isPastDateSelected =  sectionUIDataList!.first!.dateOfSection < blockSelf.arrayOfSectionUIData.first!.dateOfSection
+
+			if var calSelectionData = sectionUIDataList {
+				if isPastDateSelected{
+					calSelectionData.append(contentsOf: blockSelf.arrayOfSectionUIData)
+					blockSelf.arrayOfSectionUIData = calSelectionData
+				}else {
+					blockSelf.arrayOfSectionUIData.append(contentsOf: calSelectionData)
+				}
+				completion(nil, selectedDateInCalendar)
+			}
+		}
+	}
+
 	private func contentRequest(contentLoadState:agendaViewContentLoadState) -> CTDBQueryContentRequest {
 		let todayDate = Date().startOfDate
 
@@ -113,6 +146,24 @@ final class CTAgendaListUIHelper {
 			let endDate = self.arrayOfSectionUIData.first!.dateOfSection.pastDateBefore(days: 1)
 			let startDate = endDate.pastDateBefore(days: 30)
 			return CTDBQueryContentRequest(fromDate: startDate, endDate: endDate, type: .agendaViewData)
+
+		case .loadContentForDateSelectionInCalendar(let dateSelectedInCal):
+			//there should be minimum 15 days back and 15 days future events in list from dateSelectedInCal
+			let minDateLoadedCurrently = self.arrayOfSectionUIData.first!.dateOfSection
+			let maxDateLoadedCurrently = self.arrayOfSectionUIData.last!.dateOfSection
+			let minNumberOfDayBeforeAndAfter = 15
+			var startDateForContentRequest = dateSelectedInCal
+			var endDateForContentRequest = dateSelectedInCal
+
+			if dateSelectedInCal < minDateLoadedCurrently || (minDateLoadedCurrently < dateSelectedInCal && dateSelectedInCal.days(from: minDateLoadedCurrently) <= minNumberOfDayBeforeAndAfter) {
+				startDateForContentRequest = dateSelectedInCal.pastDateBefore(days: minNumberOfDayBeforeAndAfter)
+				endDateForContentRequest = self.arrayOfSectionUIData.first!.dateOfSection.pastDateBefore(days: 1)
+			}else if dateSelectedInCal > maxDateLoadedCurrently || (dateSelectedInCal < maxDateLoadedCurrently && maxDateLoadedCurrently.days(from: dateSelectedInCal) <= minNumberOfDayBeforeAndAfter) {
+				startDateForContentRequest = self.arrayOfSectionUIData.last!.dateOfSection.nextDate
+				endDateForContentRequest = dateSelectedInCal.nextDateAfter(days: minNumberOfDayBeforeAndAfter)
+			}
+
+			return CTDBQueryContentRequest(fromDate: startDateForContentRequest, endDate: endDateForContentRequest, type: .agendaViewData)
 		}
 	}
 
