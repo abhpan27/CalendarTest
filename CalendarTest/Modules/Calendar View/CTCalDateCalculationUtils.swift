@@ -20,23 +20,26 @@ extension CTCalendarViewController {
 		let numberOfWeeks = date.numberOfWeeks(fromDate: firstDateInfo.date)
 		let rowOfDate = date.weekDay - 1
 		let sectionOfDate = date.weekDay != WeekDayNumber.saturday.rawValue ? numberOfWeeks + 1 : numberOfWeeks
-		Swift.print("index path calculated row :\(rowOfDate), section of date :\(sectionOfDate)")
-		return IndexPath(row: rowOfDate, section: sectionOfDate)
 
-		let startOfDate = date.startOfDate.timeIntervalSince1970
-		for rowIndex in 0 ... self.calCollectionViewUIData.count - 1 {
-			let currentRow = self.calCollectionViewUIData[rowIndex]
-			if currentRow.first!.dateEpoch <= startOfDate && startOfDate <= currentRow.last!.dateEpoch {
-				for coloumnIndex in 0 ... 7 {
-					if currentRow[coloumnIndex].dateEpoch == startOfDate {
-						Swift.print("index path actual row :\(coloumnIndex), section of date :\(rowIndex)")
-						return IndexPath(row: coloumnIndex, section: rowIndex)
-					}
-				}
-			}
+		guard sectionOfDate < self.calCollectionViewUIData.count && rowOfDate < 8
+			else {
+				return nil
 		}
 
-		return nil
+		return IndexPath(row: rowOfDate, section: sectionOfDate)
+
+//		let startOfDate = date.startOfDate.timeIntervalSince1970
+//		for rowIndex in 0 ... self.calCollectionViewUIData.count - 1 {
+//			let currentRow = self.calCollectionViewUIData[rowIndex]
+//			if currentRow.first!.dateEpoch <= startOfDate && startOfDate <= currentRow.last!.dateEpoch {
+//				for coloumnIndex in 0 ... 7 {
+//					if currentRow[coloumnIndex].dateEpoch == startOfDate {
+//						Swift.print("index path actual row :\(coloumnIndex), section of date :\(rowIndex)")
+//						return IndexPath(row: coloumnIndex, section: rowIndex)
+//					}
+//				}
+//			}
+//		}
 	}
 
 	private func getFirstDateInfo() -> (date:Date, indexPath:IndexPath)? {

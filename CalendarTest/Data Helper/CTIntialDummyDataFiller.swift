@@ -20,7 +20,7 @@ final class CTIntialDummyDataFiller {
 							   "Interview with AK Media",
 							   "Discussion on gravity, newton vs edison",
 							   "Fixing water leakage from rooftop",
-							   "Date with Maria",
+							   "Discussion with students on blackholes",
 							   "Lecture on relativity theory",
 							   "Car service visit",
 							   "Dental checkup",
@@ -32,6 +32,22 @@ final class CTIntialDummyDataFiller {
 								 "Oxford central hall, London",
 								 "Opposite queen palace, London , UK"]
 
+	let arrayOfDummyPeopleNameEmailPair = [["Newton","newton@royalsociety.com"],
+										   ["Tesla", "tesla@royalsociety.com"],
+										   ["Eienstine", "einstine@royalsociety.com"],
+										   ["Ramanumjam", "ramanumjam@royalcociety.com"],
+										   ["Galileo", "galileo@romangov.com"],
+										   ["C.V. Raman", "raman@iisc.coom"]]
+
+	let arrayOfDummyColors = 	["#2F80ED",
+								  "#EB5757",
+								  "#9B51E0",
+								  "#219653",
+								  "#BB6BD9"]
+
+	let arrayOfCalNames = ["Work",
+						   "Personnal",
+						   "University"]
 
 	final func fillDummyData(completion:@escaping (_ error:Error?) -> ()) {
 		CTAppControl.current!.coreDataController.coreDataContainer.performBackgroundTask {
@@ -94,56 +110,30 @@ final class CTIntialDummyDataFiller {
 	}
 
 	private func getDummyCalendars(inContext:NSManagedObjectContext) -> [CTCalendar] {
-		let calObj1 = NSEntityDescription.insertNewObject(forEntityName: CTCalendar.entityName, into: inContext) as! CTCalendar
-		calObj1.name = "Work"
-		calObj1.uniqueID = UUID().uuidString
-		calObj1.colorHex = "#2F80ED"
-
-		let calObj2 = NSEntityDescription.insertNewObject(forEntityName: CTCalendar.entityName, into: inContext) as! CTCalendar
-		calObj2.name = "Personal"
-		calObj2.uniqueID = UUID().uuidString
-		calObj2.colorHex = "#EB5757"
-
-		let calObj3 = NSEntityDescription.insertNewObject(forEntityName: CTCalendar.entityName, into: inContext) as! CTCalendar
-		calObj3.name = "Random"
-		calObj3.uniqueID = UUID().uuidString
-		calObj3.colorHex = "#9B51E0"
-
-		return [calObj1, calObj2, calObj3]
+		var listOfDummyCals = [CTCalendar]()
+		for index in 0 ... self.arrayOfCalNames.count - 1 {
+			let calObj = NSEntityDescription.insertNewObject(forEntityName: CTCalendar.entityName, into: inContext) as! CTCalendar
+			calObj.uniqueID = UUID().uuidString
+			calObj.name = self.arrayOfCalNames[index]
+			calObj.colorHex = self.randomizedCalColorHexString()
+			listOfDummyCals.append(calObj)
+		}
+		return listOfDummyCals
 	}
 
 	private func getDummyPersons(inContext:NSManagedObjectContext) -> [CTPerson] {
-		let personObj1 = NSEntityDescription.insertNewObject(forEntityName: CTPerson.entityName, into: inContext) as! CTPerson
-		personObj1.name = "Newton"
-		personObj1.emailID = "newton@royalsociety.com"
-		personObj1.uniqueID = UUID().uuidString
-		personObj1.colorHex = "##9B51E0"
 
-		let personObj2 = NSEntityDescription.insertNewObject(forEntityName: CTPerson.entityName, into: inContext) as! CTPerson
-		personObj2.name = "Tesla"
-		personObj2.emailID = "tesla@royalsociety.com"
-		personObj2.uniqueID = UUID().uuidString
-		personObj1.colorHex = "#219653"
+		var listOfDummyPeople = [CTPerson]()
+		for index in 0 ... self.arrayOfDummyPeopleNameEmailPair.count - 1 {
+			let personObj = NSEntityDescription.insertNewObject(forEntityName: CTPerson.entityName, into: inContext) as! CTPerson
+			personObj.name = self.arrayOfDummyPeopleNameEmailPair[index][0]
+			personObj.emailID = self.arrayOfDummyPeopleNameEmailPair[index][0]
+			personObj.uniqueID = UUID().uuidString
+			personObj.colorHex = self.randomizedCalColorHexString()
+			listOfDummyPeople.append(personObj)
+		}
 
-		let personObj3 = NSEntityDescription.insertNewObject(forEntityName: CTPerson.entityName, into: inContext) as! CTPerson
-		personObj3.name = "Einstein"
-		personObj3.emailID = "einstein@royalsociety.com"
-		personObj3.uniqueID = UUID().uuidString
-		personObj3.colorHex = "#9B51E0"
-
-		let personObj4 = NSEntityDescription.insertNewObject(forEntityName: CTPerson.entityName, into: inContext) as! CTPerson
-		personObj4.name = "Raman"
-		personObj4.emailID = "raman@royalsociety.com"
-		personObj4.uniqueID = UUID().uuidString
-		personObj4.colorHex = "#EB5757"
-
-		let personObj5 = NSEntityDescription.insertNewObject(forEntityName: CTPerson.entityName, into: inContext) as! CTPerson
-		personObj5.name = "Ramanujam"
-		personObj5.emailID = "ramanujam@royalsociety.com"
-		personObj5.uniqueID = UUID().uuidString
-		personObj5.colorHex = "#BB6BD9"
-
-		return [personObj1, personObj2, personObj3, personObj4, personObj5]
+		return listOfDummyPeople
 	}
 
 	private func getDummyEvent(onDate:Date, isAllDay:Bool, person:[CTPerson], calendar:CTCalendar, inContext:NSManagedObjectContext) -> CTEvent {
@@ -189,5 +179,10 @@ final class CTIntialDummyDataFiller {
 		}
 
 		return (startTime, endTime)
+	}
+
+	private func randomizedCalColorHexString() -> String {
+		let randomIndex = randomNumber(inRange: 0 ... self.arrayOfDummyColors.count - 1)
+		return self.arrayOfDummyColors[randomIndex]
 	}
 }

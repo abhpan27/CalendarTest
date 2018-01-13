@@ -22,6 +22,7 @@ class CTCentralContainerViewController: UIViewController {
 		super.init(nibName: "CTCentralContainerViewController", bundle: nil)
 		self.calendarViewController.delegate = self
 		self.agendaViewController.delegate = self
+		self.topBar.delegate = self
 	}
 
 	required init?(coder aDecoder: NSCoder) {
@@ -78,4 +79,13 @@ extension CTCentralContainerViewController:CTAgendaViewControllerProtocol {
 			self.calendarViewController.selectDate(date: date, animated: false)
 		}
 	}
+}
+
+extension CTCentralContainerViewController:CTTopBarDelegate {
+
+	func didSelectedWeatherInfoButton() {
+		let weatherInfoController = CTWeatherInfoViewController()
+		self.present(weatherInfoController, animated: true, completion: nil)
+	}
+
 }
