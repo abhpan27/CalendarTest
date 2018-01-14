@@ -74,7 +74,13 @@ extension CTCalendarViewController {
 				Swift.print("Date \(date.logDate) is not in calendar")
 				return
 		}
+
 		self.stopScrolling()
+
+		if indexPathForDate == self.calCollectionView.indexPathsForSelectedItems?.first {
+			return
+		}
+		
 		mainQueueAsync {
 			self.calCollectionView.selectItem(at: indexPathForDate, animated: animated, scrollPosition: .top)
 		}

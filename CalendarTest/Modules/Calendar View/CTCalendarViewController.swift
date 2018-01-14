@@ -39,7 +39,6 @@ final class CTCalendarViewController: UIViewController {
 	let calTableViewUIData:[CTCalTableViewData]
 	weak var delegate:CTCalendarViewControllerDelegate?
 	var pangestureRecognizer:UIPanGestureRecognizer?
-	var lastDraggedView:UIView?
 
 	var viewingMode:CalViewingMode = .fiveRows {
 		didSet {
@@ -129,7 +128,6 @@ extension CTCalendarViewController: UIScrollViewDelegate {
 		if self.viewingMode != .fiveRows {
 			self.viewingMode = .fiveRows
 		}
-		self.lastDraggedView = scrollView
 		if scrollView == self.calCollectionView && scrollView.isDragging {
 			self.monthViewerTableView.contentOffset = scrollView.contentOffset
 			self.hideOrShowMonthTableViewWithAnimation(shouldShow: true, animated: false)
@@ -143,10 +141,11 @@ extension CTCalendarViewController: UIScrollViewDelegate {
 	}
 
 	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-		if scrollView == lastDraggedView! {
-			self.hideOrShowMonthTableViewWithAnimation(shouldShow: false, animated: true)
-			lastDraggedView = nil
+		if self.monthViewerTableView.isDecelerating || self.calCollectionView.isDecelerating {
+			return
 		}
+
+		self.hideOrShowMonthTableViewWithAnimation(shouldShow: false, animated: true)
 	}
 
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -156,6 +155,10 @@ extension CTCalendarViewController: UIScrollViewDelegate {
 		}else if scrollView == self.calCollectionView && scrollView.isDragging {
 			self.monthViewerTableView.contentOffset = offset
 		}
+	}
+
+	func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+		return false
 	}
 }
 
@@ -168,7 +171,7 @@ extension  CTCalendarViewController:UICollectionViewDelegate {
 				Swift.print("Can't find date for index path, this should not happen")
 				return
 		}
-		self.viewingMode = .fiveRows
+//		self.viewingMode = .fiveRows
 		self.delegate?.didSelectedDate(date: dateForIndexPath)
 	}
 
