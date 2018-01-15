@@ -20,11 +20,19 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ick-Di-tWA">
-                        <rect key="frame" x="88.5" y="72.5" width="40" height="40"/>
+                        <rect key="frame" x="88" y="72" width="40" height="40"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="9IN-ja-w3i"/>
                             <constraint firstAttribute="height" constant="40" id="VbK-6s-6UL"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOR-gt-9A3">
+                        <rect key="frame" x="106" y="103" width="5" height="5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="5" id="eoR-hs-u4Z"/>
+                            <constraint firstAttribute="height" constant="5" id="jBS-ml-JW3"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYP-Tc-kMh">
@@ -36,16 +44,19 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="BOR-gt-9A3" firstAttribute="top" secondItem="lYP-Tc-kMh" secondAttribute="bottom" id="MYW-PU-Rwc"/>
                 <constraint firstItem="lYP-Tc-kMh" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="RLv-96-Lt0"/>
                 <constraint firstItem="lYP-Tc-kMh" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="cg9-uj-CU8"/>
                 <constraint firstItem="ick-Di-tWA" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="gAU-f6-Xj3"/>
                 <constraint firstItem="ick-Di-tWA" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="pgP-U8-SOy"/>
+                <constraint firstItem="BOR-gt-9A3" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="r1H-BO-hId"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="D8M-Ch-Jl6"/>
             <size key="customSize" width="217" height="185"/>
             <connections>
                 <outlet property="backgroundHighlighterView" destination="ick-Di-tWA" id="geQ-zB-zR6"/>
                 <outlet property="dateLabel" destination="lYP-Tc-kMh" id="Sjw-O3-tFi"/>
+                <outlet property="eventAvailabiltyDot" destination="BOR-gt-9A3" id="c8Z-gu-2u2"/>
             </connections>
             <point key="canvasLocation" x="117.5" y="168.5"/>
         </collectionViewCell>

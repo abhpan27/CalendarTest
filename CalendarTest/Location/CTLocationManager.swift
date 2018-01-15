@@ -44,24 +44,30 @@ class  CTLocationManager:NSObject, CLLocationManagerDelegate {
 	final func getCurrentLocation(withCompletion:@escaping (_ error:Error?, _ currentLocation:CLLocation?) -> Void) {
 		self.currentCompletion = withCompletion
 		self.locationHelper.requestWhenInUseAuthorization()
-		if !CLLocationManager.locationServicesEnabled() {
-			currentCompletion!(locationError.locationServiceDisabled, nil)
-			return
-		}
-		if CLLocationManager.authorizationStatus() == .denied {
-			currentCompletion!(locationError.permissionDenied, nil)
-			return
-		}
-
 		locationHelper.delegate = self
 		locationHelper.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
 		locationHelper.startUpdatingLocation()
+	}
+
+	private func checkForLocationAuthorization() {
+		if !CLLocationManager.locationServicesEnabled() {
+			currentCompletion!(locationError.locationServiceDisabled, nil)
+			currentCompletion = nil
+			return
+		}
+
+		if CLLocationManager.authorizationStatus() == .denied {
+			currentCompletion!(locationError.permissionDenied, nil)
+			currentCompletion = nil
+			return
+		}
 	}
 
 
 	//MARK: Location manager delegate
 	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
 		self.locationHelper.stopUpdatingLocation()
+		checkForLocationAuthorization()
 		self.locationHelper.delegate = nil
 		self.currentCompletion?(error, nil)
 	}
@@ -69,7 +75,6 @@ class  CTLocationManager:NSObject, CLLocationManagerDelegate {
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		self.locationHelper.stopUpdatingLocation()
 		self.locationHelper.delegate = nil
-		Swift.print("Got location")
 		self.currentCompletion?(nil, manager.location!)
 	}
 }

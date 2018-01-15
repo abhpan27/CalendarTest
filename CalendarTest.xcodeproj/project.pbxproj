@@ -28,7 +28,7 @@
 		46689CB6200B53A60033354E /* CTCalendarViewDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46689CB5200B53A60033354E /* CTCalendarViewDataTest.swift */; };
 		4684683820046CEB007F71CF /* CTAppControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683720046CEB007F71CF /* CTAppControl.swift */; };
 		4684683A20046DE2007F71CF /* CTUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683920046DE2007F71CF /* CTUIController.swift */; };
-		4684683C20046E48007F71CF /* CTAgendaViewDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683B20046E48007F71CF /* CTAgendaViewDataHelper.swift */; };
+		4684683C20046E48007F71CF /* CTDBQueryDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683B20046E48007F71CF /* CTDBQueryDataHelper.swift */; };
 		4684684020047019007F71CF /* CTCentralContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683E20047019007F71CF /* CTCentralContainerViewController.swift */; };
 		4684684120047019007F71CF /* CTCentralContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4684683F20047019007F71CF /* CTCentralContainerViewController.xib */; };
 		4684684420047203007F71CF /* CTCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684684220047203007F71CF /* CTCalendarViewController.swift */; };
@@ -108,7 +108,7 @@
 		46689CB5200B53A60033354E /* CTCalendarViewDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCalendarViewDataTest.swift; sourceTree = "<group>"; };
 		4684683720046CEB007F71CF /* CTAppControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAppControl.swift; sourceTree = "<group>"; };
 		4684683920046DE2007F71CF /* CTUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTUIController.swift; sourceTree = "<group>"; };
-		4684683B20046E48007F71CF /* CTAgendaViewDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAgendaViewDataHelper.swift; sourceTree = "<group>"; };
+		4684683B20046E48007F71CF /* CTDBQueryDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTDBQueryDataHelper.swift; sourceTree = "<group>"; };
 		4684683E20047019007F71CF /* CTCentralContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCentralContainerViewController.swift; sourceTree = "<group>"; };
 		4684683F20047019007F71CF /* CTCentralContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CTCentralContainerViewController.xib; sourceTree = "<group>"; };
 		4684684220047203007F71CF /* CTCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCalendarViewController.swift; sourceTree = "<group>"; };
@@ -258,13 +258,12 @@
 		4684684720047274007F71CF /* Calendar View */ = {
 			isa = PBXGroup;
 			children = (
+				468B3D87200745D100A366F7 /* Calendar View Data */,
+				46CD7B35200C9CE000ED131D /* Table view cell */,
+				46CD7B34200C9CB500ED131D /* Collection view cell */,
 				465157E32004C02800B0CEC7 /* CTCalDateCalculationUtils.swift */,
 				4684684220047203007F71CF /* CTCalendarViewController.swift */,
 				4684684320047203007F71CF /* CTCalendarViewController.xib */,
-				4684684820047403007F71CF /* CTCalDayViewCellCollectionViewCell.swift */,
-				4684684920047403007F71CF /* CTCalDayViewCellCollectionViewCell.xib */,
-				465158062005FE3300B0CEC7 /* CTCalendarMonthViewerCellTableViewCell.swift */,
-				465158072005FE3300B0CEC7 /* CTCalendarMonthViewerCellTableViewCell.xib */,
 			);
 			path = "Calendar View";
 			sourceTree = "<group>";
@@ -289,10 +288,10 @@
 		468B3D7E20072E0000A366F7 /* Agenda View */ = {
 			isa = PBXGroup;
 			children = (
+				468B3D88200745EA00A366F7 /* Agenda View Data */,
 				468B3D9B20075BA500A366F7 /* Agenda Table View Cells */,
 				468B3D7F20072E2500A366F7 /* CTAgendaViewController.swift */,
 				468B3D8020072E2500A366F7 /* CTAgendaViewController.xib */,
-				468B3D8920074A2300A366F7 /* CTAgendaListUIHelper.swift */,
 			);
 			path = "Agenda View";
 			sourceTree = "<group>";
@@ -309,7 +308,7 @@
 		468B3D88200745EA00A366F7 /* Agenda View Data */ = {
 			isa = PBXGroup;
 			children = (
-				4684683B20046E48007F71CF /* CTAgendaViewDataHelper.swift */,
+				468B3D8920074A2300A366F7 /* CTAgendaListUIHelper.swift */,
 				468B3D852007455000A366F7 /* CTAgendaViewSectionUIData.swift */,
 			);
 			path = "Agenda View Data";
@@ -380,11 +379,9 @@
 		46C822A62003D1C40086061F /* Data Helper */ = {
 			isa = PBXGroup;
 			children = (
+				46CD7B36200C9D0700ED131D /* DB Query helper */,
 				465157E52005192B00B0CEC7 /* Core Data */,
-				468B3D87200745D100A366F7 /* Calendar View Data */,
-				468B3D88200745EA00A366F7 /* Agenda View Data */,
 				465157F0200521E800B0CEC7 /* CTIntialDummyDataFiller.swift */,
-				468B3D8320072F7400A366F7 /* CTDBQueryContentRequest.swift */,
 			);
 			path = "Data Helper";
 			sourceTree = "<group>";
@@ -402,6 +399,60 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		46CD7B31200C9C1C00ED131D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				46EA466A200A033A00825E9A /* CTWeatherInfoViewController.swift */,
+				46EA466B200A033A00825E9A /* CTWeatherInfoViewController.xib */,
+				46EA4672200A40B700825E9A /* CTWeatherInfoUILayoutExtension.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		46CD7B32200C9C3D00ED131D /* Table view cells */ = {
+			isa = PBXGroup;
+			children = (
+				46EA466E200A0D7900825E9A /* CTWeatherInfoTableViewCell.swift */,
+				46EA466F200A0D7900825E9A /* CTWeatherInfoTableViewCell.xib */,
+			);
+			path = "Table view cells";
+			sourceTree = "<group>";
+		};
+		46CD7B33200C9C6000ED131D /* Api Helper */ = {
+			isa = PBXGroup;
+			children = (
+				46EA46672009C0C500825E9A /* CTWeatherApiHelper.swift */,
+			);
+			path = "Api Helper";
+			sourceTree = "<group>";
+		};
+		46CD7B34200C9CB500ED131D /* Collection view cell */ = {
+			isa = PBXGroup;
+			children = (
+				4684684820047403007F71CF /* CTCalDayViewCellCollectionViewCell.swift */,
+				4684684920047403007F71CF /* CTCalDayViewCellCollectionViewCell.xib */,
+			);
+			path = "Collection view cell";
+			sourceTree = "<group>";
+		};
+		46CD7B35200C9CE000ED131D /* Table view cell */ = {
+			isa = PBXGroup;
+			children = (
+				465158062005FE3300B0CEC7 /* CTCalendarMonthViewerCellTableViewCell.swift */,
+				465158072005FE3300B0CEC7 /* CTCalendarMonthViewerCellTableViewCell.xib */,
+			);
+			path = "Table view cell";
+			sourceTree = "<group>";
+		};
+		46CD7B36200C9D0700ED131D /* DB Query helper */ = {
+			isa = PBXGroup;
+			children = (
+				4684683B20046E48007F71CF /* CTDBQueryDataHelper.swift */,
+				468B3D8320072F7400A366F7 /* CTDBQueryContentRequest.swift */,
+			);
+			path = "DB Query helper";
+			sourceTree = "<group>";
+		};
 		46EA46632009BF7B00825E9A /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -413,8 +464,9 @@
 		46EA46662009C09B00825E9A /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				46CD7B31200C9C1C00ED131D /* Controller */,
 				46EA4669200A02E000825E9A /* UI */,
-				46EA46672009C0C500825E9A /* CTWeatherApiHelper.swift */,
+				46CD7B33200C9C6000ED131D /* Api Helper */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -422,11 +474,7 @@
 		46EA4669200A02E000825E9A /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				46EA466A200A033A00825E9A /* CTWeatherInfoViewController.swift */,
-				46EA466B200A033A00825E9A /* CTWeatherInfoViewController.xib */,
-				46EA466E200A0D7900825E9A /* CTWeatherInfoTableViewCell.swift */,
-				46EA466F200A0D7900825E9A /* CTWeatherInfoTableViewCell.xib */,
-				46EA4672200A40B700825E9A /* CTWeatherInfoUILayoutExtension.swift */,
+				46CD7B32200C9C3D00ED131D /* Table view cells */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -566,7 +614,7 @@
 				468B3D8A20074A2300A366F7 /* CTAgendaListUIHelper.swift in Sources */,
 				46C822AB2003D33C0086061F /* CTDateExtension.swift in Sources */,
 				468B3D862007455000A366F7 /* CTAgendaViewSectionUIData.swift in Sources */,
-				4684683C20046E48007F71CF /* CTAgendaViewDataHelper.swift in Sources */,
+				4684683C20046E48007F71CF /* CTDBQueryDataHelper.swift in Sources */,
 				468B3D8120072E2500A366F7 /* CTAgendaViewController.swift in Sources */,
 				465157FE2005C41600B0CEC7 /* CTEvent+CoreDataClass.swift in Sources */,
 				468B3DA320076CA600A366F7 /* CTAgendaSectionHeader.swift in Sources */,

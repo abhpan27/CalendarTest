@@ -1,5 +1,5 @@
 //
-//  CTAgendaDataHelper.swift
+//  CTDBQueryDataHelper.swift
 //  CalendarTest
 //
 //  Created by Abhishek on 09/01/18.
@@ -10,31 +10,60 @@ import Foundation
 import CoreData
 import UIKit
 
-final class CTAgendaViewDataHelper {
+final class CTDBQueryDataHelper {
 
-	enum dbQueryErrorForAgendaView:Error {
+	enum dbQueryError:Error {
 		case failedToFetchEvents
 		case inValidContentRequest
 	}
 
 	typealias agendaViewDBQueryCompletionHandlerType = (_ list:[CTAgendaViewSectionUIData]?, _ error:Error?) -> ()
+	typealias calViewDBQueryCompletionHandlerType = (_ dictionary:[Date:Int]?, _ error:Error?) -> ()
 
 	func arrayOfAgendaSectionUIData(forContentRequest:CTDBQueryContentRequest, completion:@escaping agendaViewDBQueryCompletionHandlerType) {
 
 		guard forContentRequest.toDate > forContentRequest.fromDate else {
-			completion(nil, dbQueryErrorForAgendaView.inValidContentRequest)
+			completion(nil, dbQueryError.inValidContentRequest)
 			return
 		}
 
 		let uiContext = CTAppControl.current!.coreDataController.uiContext!
 		guard let listOfEvents = try? self.getAllEventsFromDB(forContentRequest: forContentRequest, inContext: uiContext)
 			else {
-				completion(nil, dbQueryErrorForAgendaView.failedToFetchEvents)
+				completion(nil, dbQueryError.failedToFetchEvents)
 				return
 		}
 
 		let arrayOfSectionUIDataForRequest = self.convertListOfDBEventObjectIntoSectionUIData(dbEventList: listOfEvents, forContentRequest: forContentRequest)
 		completion(arrayOfSectionUIDataForRequest, nil)
+	}
+
+	func dictionaryOfEventAvalabilty(forContentRequest:CTDBQueryContentRequest, completion:@escaping calViewDBQueryCompletionHandlerType) {
+
+		guard forContentRequest.toDate > forContentRequest.fromDate else {
+			completion(nil, dbQueryError.inValidContentRequest)
+			return
+		}
+
+		CTAppControl.current!.coreDataController.coreDataContainer.performBackgroundTask {
+			[weak self]
+			(backgroundContext)
+			in
+			guard let blockSelf = self
+				else {
+					completion(nil, dbQueryError.failedToFetchEvents)
+					return
+			}
+
+			guard let listOfEvents = try? blockSelf.getAllEventsFromDB(forContentRequest: forContentRequest, inContext: backgroundContext)
+				else {
+					completion(nil, dbQueryError.failedToFetchEvents)
+					return
+			}
+
+			let availabilityDictonary = blockSelf.covertListOfDBEventObjectsIntoCalEventAvailability(dbEventList: listOfEvents)
+			completion(availabilityDictonary, nil)
+		}
 	}
 
 	private func getAllEventsFromDB(forContentRequest:CTDBQueryContentRequest, inContext:NSManagedObjectContext) throws -> [CTEvent] {
@@ -51,8 +80,24 @@ final class CTAgendaViewDataHelper {
 			let eventList = try inContext.fetch(fetchRequest)
 			return eventList
 		}catch {
-			throw dbQueryErrorForAgendaView.failedToFetchEvents
+			throw dbQueryError.failedToFetchEvents
 		}
+	}
+
+	private func covertListOfDBEventObjectsIntoCalEventAvailability(dbEventList:[CTEvent]) -> [Date:Int] {
+
+		var eventAvailability = [Date:Int]()
+
+		for event in dbEventList {
+			let startDateOfEvent = Date(timeIntervalSince1970: TimeInterval(event.startTime)).startOfDate
+			if eventAvailability[startDateOfEvent] ==  nil {
+				eventAvailability[startDateOfEvent] = 1
+			}else {
+				eventAvailability[startDateOfEvent]! += 1
+			}
+		}
+
+		return eventAvailability
 	}
 
 	private func convertListOfDBEventObjectIntoSectionUIData(dbEventList:[CTEvent], forContentRequest:CTDBQueryContentRequest) -> [CTAgendaViewSectionUIData] {

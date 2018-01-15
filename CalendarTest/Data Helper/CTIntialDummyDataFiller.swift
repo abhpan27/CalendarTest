@@ -84,16 +84,28 @@ final class CTIntialDummyDataFiller {
 		let maxDate = Calendar.current.futureMonth(noOfMonths: 12, date: Date()).startOfDate
 
 		while(startDate < maxDate) {
-			if startDate.weekDay == 3 {
-				//add two events every monday one with people and one without
-				let dummyEvent1 = self.getDummyEvent(onDate: startDate, isAllDay: false, person: dummyPersons, calendar: dummyCalendars.first!, inContext: context)
-				let dummyEvent2 = self.getDummyEvent(onDate: startDate, isAllDay: true, person: dummyPersons, calendar: dummyCalendars.last!, inContext: context)
-				arrayOfDummyEvents.append(contentsOf: [dummyEvent1, dummyEvent2])
-			}else if startDate.weekDay == 7 || startDate.isToday {
-				let dummyEvent1 = self.getDummyEvent(onDate: startDate, isAllDay: false, person: dummyPersons, calendar: dummyCalendars[0], inContext: context)
-				let dummyEvent2 = self.getDummyEvent(onDate: startDate, isAllDay: true, person: dummyPersons, calendar: dummyCalendars[1], inContext: context)
-				let dummyEvent3 = self.getDummyEvent(onDate: startDate, isAllDay: false, person: dummyPersons, calendar: dummyCalendars[2], inContext: context)
-				arrayOfDummyEvents.append(contentsOf: [dummyEvent1, dummyEvent2, dummyEvent3])
+
+			let randomValue = randomNumber(inRange: 0 ... 3)
+			//for 0 there is no event
+
+			//just one all day
+			if randomValue == 1 {
+				let allDayDummy = self.getDummyEvent(onDate: startDate, isAllDay: true, person: dummyPersons, calendar: dummyCalendars.last!, inContext: context)
+				arrayOfDummyEvents.append(contentsOf: [allDayDummy])
+			}
+
+			//one all day two timed events
+			if randomValue == 2 {
+				let allDayDummy = self.getDummyEvent(onDate: startDate, isAllDay: true, person: dummyPersons, calendar: dummyCalendars.last!, inContext: context)
+				let timedDummy = self.getDummyEvent(onDate: startDate, isAllDay: false, person: dummyPersons, calendar: dummyCalendars.first!, inContext: context)
+				arrayOfDummyEvents.append(contentsOf: [allDayDummy, timedDummy])
+			}
+
+			if randomValue == 3 {
+				let allDayDummy = self.getDummyEvent(onDate: startDate, isAllDay: true, person: dummyPersons, calendar: dummyCalendars[1], inContext: context)
+				let timedDummy1 = self.getDummyEvent(onDate: startDate, isAllDay: false, person: dummyPersons, calendar: dummyCalendars[0], inContext: context)
+				let timedDummy2 = self.getDummyEvent(onDate: startDate, isAllDay: false, person: dummyPersons, calendar: dummyCalendars[2], inContext: context)
+				arrayOfDummyEvents.append(contentsOf: [allDayDummy, timedDummy1, timedDummy2])
 			}
 
 			startDate = startDate.nextDate.startOfDate

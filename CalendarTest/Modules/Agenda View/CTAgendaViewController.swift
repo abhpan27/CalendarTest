@@ -55,7 +55,6 @@ class CTAgendaViewController: UIViewController {
 	}
 
 	private func loadPastEventsInAgendaView() {
-		Swift.print("load past content")
 		guard !isLoadingEventsInAgendaView
 			else {
 				return
@@ -98,7 +97,6 @@ class CTAgendaViewController: UIViewController {
 	}
 
 	private func loadFutureEventsInAgendaView() {
-		Swift.print("load future content")
 		guard !isLoadingEventsInAgendaView
 			else {
 				return
@@ -120,7 +118,6 @@ class CTAgendaViewController: UIViewController {
 	}
 
 	final func loadEventsForSelectionInCalendar(selectedDate:Date) {
-		Swift.print("load for date selection in calendar")
 		self.isLoadingEventsInAgendaView = true
 		self.listUIHelper.loadDataForDateSelectionInCalendar(selectedDateInCalendar: selectedDate) {
 			(error, datePassedInLastCall)

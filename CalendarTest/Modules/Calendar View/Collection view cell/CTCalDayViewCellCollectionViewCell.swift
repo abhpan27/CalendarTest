@@ -10,6 +10,7 @@ import UIKit
 
 class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 
+	@IBOutlet weak var eventAvailabiltyDot: UIView!
 	@IBOutlet weak var backgroundHighlighterView: UIView!
 	@IBOutlet weak var dateLabel: UILabel!
 	var cellUIData:CTCalCollectionViewCellUIData!
@@ -22,7 +23,9 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 
 	override func awakeFromNib() {
         super.awakeFromNib()
-		self.backgroundHighlighterView.layer.cornerRadius = self.backgroundHighlighterView.frame.height/2 //circle
+		self.backgroundHighlighterView.layer.cornerRadius = self.backgroundHighlighterView.frame.height/2
+		self.eventAvailabiltyDot.layer.cornerRadius = self.eventAvailabiltyDot.frame.height / 2
+		self.eventAvailabiltyDot.backgroundColor = UIColor.clear
     }
 
 	static func registerCell(collectionView:UICollectionView, withIdentifier:String) {
@@ -40,6 +43,9 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 		}else {
 			updateFontAndColorForNonSelectedCell()
 		}
+		setBackgroundColor()
+		setFontForDateLabel()
+		setEventAvailabiltyDotColor()
 	}
 
 	private func updateFontAndColorForNonSelectedCell() {
@@ -51,8 +57,6 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 		self.backgroundHighlighterView.backgroundColor = UIColor.clear
 		self.dateLabel.text = uiData.fullDateString
 		self.dateLabel.textColor = UIColor(red: 67/255, green: 75/255, blue: 82/255, alpha: 1.0)
-		setBackgroundColor()
-		setFontForDateLabel()
 	}
 
 	private func updateUIForSelectedCell() {
@@ -64,8 +68,6 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 		self.backgroundHighlighterView.backgroundColor = UIColor(red: 41/255, green: 127/255, blue: 246/255, alpha: 1.0)
 		self.dateLabel.textColor = UIColor.white
 		self.dateLabel.text = uiData.dateNumberString
-		setBackgroundColor()
-		setFontForDateLabel()
 	}
 
 	private func setBackgroundColor() {
@@ -82,11 +84,29 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 	}
 
 	private func setFontForDateLabel() {
-		if Date(timeIntervalSince1970: self.cellUIData.dateEpoch).isToday {
+		guard let uiData = self.cellUIData
+			else {
+				return
+		}
+
+		if Date(timeIntervalSince1970: uiData.dateEpoch).isToday {
 			self.dateLabel.font = CTFont.systemFont(ofSize: 15, weight: .Bold)
 		}else {
 			self.dateLabel.font = CTFont.systemFont(ofSize: 13, weight: .Regular)
 		}
+	}
+
+	private func setEventAvailabiltyDotColor() {
+		guard let uiData = self.cellUIData
+			else {
+				return
+		}
+
+		if self.isSelected {
+			self.eventAvailabiltyDot.backgroundColor = UIColor.clear
+			return
+		}
+		self.eventAvailabiltyDot.backgroundColor = CalendarViewCellEventAvailablityColor(rawValue: uiData.eventAvailabilityColor)!.color
 	}
 
 }

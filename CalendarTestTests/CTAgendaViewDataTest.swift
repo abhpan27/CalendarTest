@@ -14,14 +14,14 @@ class CTAgendaViewDataTest: XCTestCase {
 	var minDateToShowInAgenda:Date!
 	var maxDateToShowInAgenda:Date!
 	var uiContentLoaderForAgendaView:CTAgendaListUIHelper!
-	var dbQueryHelper:CTAgendaViewDataHelper!
+	var dbQueryHelper:CTDBQueryDataHelper!
 
     override func setUp() {
 		let minMaxDateInfo = CTAppConstants.shared.minMaxDate
 		self.minDateToShowInAgenda = minMaxDateInfo.minDate
 		self.maxDateToShowInAgenda = minMaxDateInfo.maxDate
 		self.uiContentLoaderForAgendaView = CTAgendaListUIHelper()
-		self.dbQueryHelper = CTAgendaViewDataHelper()
+		self.dbQueryHelper = CTDBQueryDataHelper()
         super.setUp()
     }
     

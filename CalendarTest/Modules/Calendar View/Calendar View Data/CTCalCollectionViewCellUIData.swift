@@ -8,12 +8,30 @@
 
 import UIKit
 
+internal enum CalendarViewCellEventAvailablityColor:Int8 {
+	case clear = 1, lightGrey, mediumGrey, darkGrey
+
+	var color:UIColor {
+		switch self {
+		case .clear:
+			return UIColor.clear
+		case .mediumGrey:
+			return UIColor.gray.withAlphaComponent(0.5)
+		case .lightGrey:
+			return UIColor.gray.withAlphaComponent(0.2)
+		case .darkGrey:
+			return UIColor.gray
+		}
+	}
+}
+
 final class CTCalCollectionViewCellUIData {
 
 	let shouldDrawInGrey:Bool
 	let dateEpoch:TimeInterval //this will be -1 for blank dates
 	let dateNumberString:String // only date number i.e. 1,2, 30 etc
 	let fullDateString:String // for start of month
+	var eventAvailabilityColor:Int8 = CalendarViewCellEventAvailablityColor.clear.rawValue
 
 	var isBlankDay:Bool {
 		return self.fullDateString.isEmpty

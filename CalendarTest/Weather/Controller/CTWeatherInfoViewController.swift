@@ -21,7 +21,6 @@ class CTWeatherInfoViewController: UIViewController {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
-		Swift.print("view did locad")
 		addAndLayoutViews()
 		CTWeatherInfoTableViewCell.registerCell(inTableView: weatherInfoTableView!, withIdentifier: "CTWeatherInfoTableViewCell")
 		loadWeatherInfo()

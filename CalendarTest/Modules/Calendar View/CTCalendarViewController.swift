@@ -35,10 +35,9 @@ final class CTCalendarViewController: UIViewController {
 
 	@IBOutlet weak var monthViewerTableView: UITableView!
 	@IBOutlet weak var calCollectionView: UICollectionView!
-	let calCollectionViewUIData:[[CTCalCollectionViewCellUIData]]
-	let calTableViewUIData:[CTCalTableViewData]
 	weak var delegate:CTCalendarViewControllerDelegate?
 	var pangestureRecognizer:UIPanGestureRecognizer?
+	let calendarViewUIDataHelper:CTCalViewDataHelper
 
 	var viewingMode:CalViewingMode = .fiveRows {
 		didSet {
@@ -53,8 +52,7 @@ final class CTCalendarViewController: UIViewController {
 	}
 	
 	init() {
-		self.calCollectionViewUIData = CTCalViewDataHelper().getBasicCollectionViewCalData()
-		self.calTableViewUIData = CTCalViewDataHelper().getBasicTableViewCalData()
+		self.calendarViewUIDataHelper = CTCalViewDataHelper()
 		super.init(nibName: "CTCalendarViewController", bundle: nil)
 	}
 
@@ -64,13 +62,27 @@ final class CTCalendarViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		self.calendarViewUIDataHelper.loadBaicUIdata()
 		CTCalDayViewCellCollectionViewCell.registerCell(collectionView: calCollectionView, withIdentifier: "CTCalDayViewCellCollectionViewCell")
 		setUpBasicUI()
 		//select current date after some delay so that current drawing of cells is completed
 		delayedRunInMainQueue(0.1) {
 			self.selectDate(date: Date(), animated: false)
+			self.loadEventAvailabilityInBgThread()
 		}
     }
+
+	private func loadEventAvailabilityInBgThread() {
+		self.calendarViewUIDataHelper.loadEventAvailabiltyForShowingDots {
+			[weak self]
+			in
+			guard let blockSelf = self
+				else {
+					return
+			}
+			blockSelf.reloadCollectionViewKeepingSelection()
+		}
+	}
 
 	private func setUpBasicUI() {
 		CTCalendarMonthViewerCellTableViewCell.registerCell(inTableView: self.monthViewerTableView, withIdentifier: "CTCalendarMonthViewerCellTableViewCell")
@@ -166,48 +178,46 @@ extension CTCalendarViewController: UIScrollViewDelegate {
 extension  CTCalendarViewController:UICollectionViewDelegate {
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		guard let dateForIndexPath = self.dateForIndexPath(indexPath: indexPath)
+		guard let dateForIndexPath = self.calendarViewUIDataHelper.dateForIndexPath(indexPath: indexPath)
 			else {
 				Swift.print("Can't find date for index path, this should not happen")
 				return
 		}
-//		self.viewingMode = .fiveRows
 		self.delegate?.didSelectedDate(date: dateForIndexPath)
 	}
 
 	func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-		return !self.calCollectionViewUIData[indexPath.section][indexPath.row].isBlankDay
+		return !self.calendarViewUIDataHelper.calCollectionViewUIData[indexPath.section][indexPath.row].isBlankDay
 	}
 }
 
 extension CTCalendarViewController:UICollectionViewDataSource {
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return self.calCollectionViewUIData[section].count
+		return self.calendarViewUIDataHelper.calCollectionViewUIData[section].count
 	}
 
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
-		return self.calCollectionViewUIData.count
+		return self.calendarViewUIDataHelper.calCollectionViewUIData.count
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CTCalDayViewCellCollectionViewCell", for: indexPath) as! CTCalDayViewCellCollectionViewCell
-		cell.updateCellWithUIData(uiData: self.calCollectionViewUIData[indexPath.section][indexPath.row])
+		cell.updateCellWithUIData(uiData: self.calendarViewUIDataHelper.calCollectionViewUIData[indexPath.section][indexPath.row])
 		return cell
 	}
 
 	func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-		(cell as! CTCalDayViewCellCollectionViewCell).updateCellWithUIData(uiData: self.calCollectionViewUIData[indexPath.section][indexPath.row])
+		(cell as! CTCalDayViewCellCollectionViewCell).updateCellWithUIData(uiData: self.calendarViewUIDataHelper.calCollectionViewUIData[indexPath.section][indexPath.row])
 	}
 }
 
 //mark: TableView delegates
-
 extension CTCalendarViewController:UITableViewDataSource, UITableViewDelegate {
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = self.monthViewerTableView.dequeueReusableCell(withIdentifier: "CTCalendarMonthViewerCellTableViewCell") as! CTCalendarMonthViewerCellTableViewCell
-		cell.monthNameLabel.text = self.calTableViewUIData[indexPath.row].monthName
+		cell.monthNameLabel.text = self.calendarViewUIDataHelper.calTableViewUIData[indexPath.row].monthName
 		return cell
 	}
 
@@ -216,11 +226,10 @@ extension CTCalendarViewController:UITableViewDataSource, UITableViewDelegate {
 	}
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.calTableViewUIData.count
+		return self.calendarViewUIDataHelper.calTableViewUIData.count
 	}
 
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return self.viewingMode.heightNeededForSingleRow * CGFloat(self.calTableViewUIData[indexPath.row].noOfDifferentWeeksInMonth)
+		return self.viewingMode.heightNeededForSingleRow * CGFloat(self.calendarViewUIDataHelper.calTableViewUIData[indexPath.row].noOfDifferentWeeksInMonth)
 	}
 }
-

@@ -16,11 +16,11 @@ internal enum agendaViewContentLoadState {
 final class CTAgendaListUIHelper {
 
 	var arrayOfSectionUIData = [CTAgendaViewSectionUIData]()
-	private let agendaViewDataHelper = CTAgendaViewDataHelper()
+	private let dbQueryHelper = CTDBQueryDataHelper()
 
 	final func loadOnFirstLaunch(completion: @escaping (_ error: Error?) -> ()) {
 		let contentRequestForDB = self.contentRequest(contentLoadState: .loadContentOnLaunch)
-		agendaViewDataHelper.arrayOfAgendaSectionUIData(forContentRequest: contentRequestForDB) {
+		dbQueryHelper.arrayOfAgendaSectionUIData(forContentRequest: contentRequestForDB) {
 			[weak self]
 			(sectionUIDataList, error)
 			in
@@ -44,7 +44,7 @@ final class CTAgendaListUIHelper {
 
 	final func loadFutureUIData(completion: @escaping (_ error: Error?) -> ()) {
 		let contentRequestForDB = self.contentRequest(contentLoadState: .loadFutureContent)
-		agendaViewDataHelper.arrayOfAgendaSectionUIData(forContentRequest: contentRequestForDB) {
+		dbQueryHelper.arrayOfAgendaSectionUIData(forContentRequest: contentRequestForDB) {
 			[weak self]
 			(sectionUIDataList, error)
 			in
@@ -68,7 +68,7 @@ final class CTAgendaListUIHelper {
 
 	final func loadPastUIData(completion: @escaping (_ error: Error?) -> ()) {
 		let contentRequest = self.contentRequest(contentLoadState: .loadPastContent)
-		agendaViewDataHelper.arrayOfAgendaSectionUIData(forContentRequest: contentRequest) {
+		dbQueryHelper.arrayOfAgendaSectionUIData(forContentRequest: contentRequest) {
 			[weak self]
 			(sectionUIDataList, error)
 			in
@@ -95,7 +95,7 @@ final class CTAgendaListUIHelper {
 
 		let contentRequest = self.contentRequest(contentLoadState: .loadContentForDateSelectionInCalendar(date: selectedDateInCalendar))
 
-		agendaViewDataHelper.arrayOfAgendaSectionUIData(forContentRequest: contentRequest) {
+		dbQueryHelper.arrayOfAgendaSectionUIData(forContentRequest: contentRequest) {
 			[weak self]
 			(sectionUIDataList, error)
 			in

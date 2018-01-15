@@ -59,7 +59,6 @@ extension CTCentralContainerViewController:CTCalendarViewControllerDelegate {
 	}
 
 	func didSelectedDate(date:Date) {
-		Swift.print("Date selected in calendar view :\(date.logDate)")
 		//update other parts of app
 		self.topBar.updateMonthLabel(date: date)
 		self.agendaViewController.loadEventsForSelectionInCalendar(selectedDate: date)
