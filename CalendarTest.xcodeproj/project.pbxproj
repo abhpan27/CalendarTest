@@ -67,6 +67,7 @@
 		46C822AB2003D33C0086061F /* CTDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C822AA2003D33C0086061F /* CTDateExtension.swift */; };
 		46C822AD2003D4F60086061F /* CTCalendarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C822AC2003D4F60086061F /* CTCalendarExtension.swift */; };
 		46CD7B2C200C62C700ED131D /* CTAgendaViewDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CD7B2B200C62C700ED131D /* CTAgendaViewDataTest.swift */; };
+		46CD7B39200D2D8600ED131D /* CTAgendaListUIHelperExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CD7B38200D2D8600ED131D /* CTAgendaListUIHelperExtension.swift */; };
 		46EA46652009BF8F00825E9A /* CTLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EA46642009BF8F00825E9A /* CTLocationManager.swift */; };
 		46EA46682009C0C500825E9A /* CTWeatherApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EA46672009C0C500825E9A /* CTWeatherApiHelper.swift */; };
 		46EA466C200A033A00825E9A /* CTWeatherInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EA466A200A033A00825E9A /* CTWeatherInfoViewController.swift */; };
@@ -151,6 +152,7 @@
 		46C822AA2003D33C0086061F /* CTDateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTDateExtension.swift; sourceTree = "<group>"; };
 		46C822AC2003D4F60086061F /* CTCalendarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCalendarExtension.swift; sourceTree = "<group>"; };
 		46CD7B2B200C62C700ED131D /* CTAgendaViewDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAgendaViewDataTest.swift; sourceTree = "<group>"; };
+		46CD7B38200D2D8600ED131D /* CTAgendaListUIHelperExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAgendaListUIHelperExtension.swift; sourceTree = "<group>"; };
 		46EA46642009BF8F00825E9A /* CTLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTLocationManager.swift; sourceTree = "<group>"; };
 		46EA46672009C0C500825E9A /* CTWeatherApiHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTWeatherApiHelper.swift; sourceTree = "<group>"; };
 		46EA466A200A033A00825E9A /* CTWeatherInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTWeatherInfoViewController.swift; sourceTree = "<group>"; };
@@ -296,8 +298,9 @@
 		468B3D88200745EA00A366F7 /* Agenda View Data */ = {
 			isa = PBXGroup;
 			children = (
-				468B3D8920074A2300A366F7 /* CTAgendaListUIHelper.swift */,
 				468B3D852007455000A366F7 /* CTAgendaViewSectionUIData.swift */,
+				468B3D8920074A2300A366F7 /* CTAgendaListUIHelper.swift */,
+				46CD7B38200D2D8600ED131D /* CTAgendaListUIHelperExtension.swift */,
 			);
 			path = "Agenda View Data";
 			sourceTree = "<group>";
@@ -529,7 +532,7 @@
 				TargetAttributes = {
 					46C822822003D1020086061F = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					46C822962003D1030086061F = {
 						CreatedOnToolsVersion = 9.2;
@@ -624,6 +627,7 @@
 				465157EE20051D6C00B0CEC7 /* CTAppRootViewController.swift in Sources */,
 				46EA46682009C0C500825E9A /* CTWeatherApiHelper.swift in Sources */,
 				4684685620049D73007F71CF /* CTFont.swift in Sources */,
+				46CD7B39200D2D8600ED131D /* CTAgendaListUIHelperExtension.swift in Sources */,
 				465157EA2005196300B0CEC7 /* CTEventModel.xcdatamodeld in Sources */,
 				465158052005F6D300B0CEC7 /* CTCalCollectionViewCellUIData.swift in Sources */,
 				465157E42004C02800B0CEC7 /* CTCalDateCalculationUtils.swift in Sources */,
@@ -798,8 +802,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M7TCNS5383;
 				INFOPLIST_FILE = CalendarTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Abhishek.CalendarTest;
@@ -816,8 +820,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M7TCNS5383;
 				INFOPLIST_FILE = CalendarTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Abhishek.CalendarTest;

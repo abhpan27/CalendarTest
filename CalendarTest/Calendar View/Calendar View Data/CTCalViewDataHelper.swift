@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 internal enum WeekDayNumber:Int {
 	case sunday = 1, monday, tuesday, wednesday, thursday, friday, saturday
 }
