@@ -12,12 +12,12 @@ extension CTCalendarViewController {
 
 	private func indexPathForDate(date:Date) -> IndexPath? {
 		let firstDateInfo = self.getFirstDateInfo()!
-		if date.isInSameWeek(withDate: firstDateInfo.date) {
+		if date.isInSameWeek(with: firstDateInfo.date) {
 			let daysBetween = date.days(from: firstDateInfo.date)
 			return IndexPath(row: firstDateInfo.indexPath.row + daysBetween, section: 0)
 		}
 
-		let numberOfWeeks = date.numberOfWeeks(fromDate: firstDateInfo.date)
+		let numberOfWeeks = date.numberOfWeeks(from: firstDateInfo.date)
 		let rowOfDate = date.weekDay - 1
 		let sectionOfDate = date.weekDay != WeekDayNumber.saturday.rawValue ? numberOfWeeks + 1 : numberOfWeeks
 
@@ -78,7 +78,7 @@ extension CTCalendarViewController {
 		self.stopScrolling()
 
 		if indexPathForDate == self.calCollectionView.indexPathsForSelectedItems?.first {
-			return
+			self.calCollectionView.scrollToItem(at: indexPathForDate, at: .top, animated: animated)
 		}
 		
 		mainQueueAsync {

@@ -121,7 +121,7 @@ final class CTWeatherApiHelper {
 					}else {
 						completion(weatherInfoErrors.invalideApiResponse, nil)
 					}
-				} catch  {
+				}catch  {
 					completion(weatherInfoErrors.invalideApiResponse, nil)
 				}
 			}
@@ -186,7 +186,6 @@ final class CTWeatherApiHelper {
 		}
 
 		//future forcast
-
 		guard let futureForcasts = weatherInfoItem["forecast"] as? [[String:AnyObject]]
 			else {
 				return weatherInfoObjects

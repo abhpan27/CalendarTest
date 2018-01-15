@@ -79,8 +79,8 @@ extension CTWeatherInfoViewController {
 
 	func addCloseButton(above:UIView) {
 		let closeButton = UIButton()
-		closeButton.setTitle("X", for: .normal)
-		closeButton.titleLabel?.font = CTFont.systemFont(ofSize: 18, weight: .SemiBold)
+		closeButton.setTitle("×", for: .normal)
+		closeButton.titleLabel?.font = CTFont.systemFont(ofSize: 28, weight: .SemiBold)
 		closeButton.setTitleColor(UIColor(red: 41/255, green: 127/255, blue: 246/255, alpha: 1.0), for: .normal)
 		self.view.addSubview(closeButton)
 		closeButton.translatesAutoresizingMaskIntoConstraints = false

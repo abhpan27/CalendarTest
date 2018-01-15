@@ -51,7 +51,7 @@ final class CTCalViewDataHelper {
 				let nextCellUIData = currentDateInIteration <= endDate ? CTCalCollectionViewCellUIData(dateEpoch: currentDateInIteration.timeIntervalSince1970, shouldDrawInGrey: shouldFillGrey) : CTCalCollectionViewCellUIData(dateEpoch: -1, shouldDrawInGrey: false)
 				currentRowData.append(nextCellUIData)
 				let nextDate = currentDateInIteration.nextDate.startOfDate
-				if !nextDate.isInSameMonth(withDate: currentDateInIteration) {
+				if !nextDate.isInSameMonth(with: currentDateInIteration) {
 					shouldFillGrey = !shouldFillGrey
 				}
 				currentDateInIteration = nextDate

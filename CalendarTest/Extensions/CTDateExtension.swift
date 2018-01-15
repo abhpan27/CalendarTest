@@ -31,9 +31,7 @@ extension Date {
 	}
 
 	var isInCurrentYear:Bool {
-		let yearComponentOfDate = Calendar.current.component(.year, from: self)
-		let yearComponentOfCurrentDate = Calendar.current.component(.year, from: Date())
-		return yearComponentOfDate == yearComponentOfCurrentDate
+		return self.isInSameYear(with: Date())
 	}
 
 	var numberOfWeeksInCurrentMonth:Int {
@@ -104,28 +102,34 @@ extension Date {
 		return nextDayAfetrDate!
 	}
 
-	func isInSameMonth(withDate:Date) -> Bool {
+	func isInSameYear(with date:Date) -> Bool {
 		let yearComponentOfSelf = Calendar.current.component(.year, from: self)
-		let yearComponentOfDate = Calendar.current.component(.year, from: withDate)
+		let yearComponentOfDate = Calendar.current.component(.year, from: date)
+		return (yearComponentOfSelf == yearComponentOfDate)
+	}
+
+	func isInSameMonth(with date:Date) -> Bool {
+		let yearComponentOfSelf = Calendar.current.component(.year, from: self)
+		let yearComponentOfDate = Calendar.current.component(.year, from: date)
 		let monthComponentOfSelf = Calendar.current.component(.month, from: self)
-		let monthComponentOfDate = Calendar.current.component(.month, from: withDate)
+		let monthComponentOfDate = Calendar.current.component(.month, from: date)
 		return (yearComponentOfSelf == yearComponentOfDate && monthComponentOfSelf == monthComponentOfDate)
 	}
 
-	func isInSameWeek(withDate:Date) -> Bool {
+	func isInSameWeek(with date:Date) -> Bool {
 		let yearOfSelf = Calendar.current.component(.year, from: self)
 		let monthOfSelf = Calendar.current.component(.month, from: self)
 		let weekOfSelf = Calendar.current.component(.weekOfMonth, from: self)
 
-		let yearOfDate = Calendar.current.component(.year, from: withDate)
-		let monthOfDate = Calendar.current.component(.month, from: withDate)
-		let weekOfDate = Calendar.current.component(.weekOfMonth, from: withDate)
+		let yearOfDate = Calendar.current.component(.year, from: date)
+		let monthOfDate = Calendar.current.component(.month, from: date)
+		let weekOfDate = Calendar.current.component(.weekOfMonth, from: date)
 
 		return (yearOfDate == yearOfSelf && monthOfDate == monthOfSelf && weekOfDate == weekOfSelf)
 	}
 
-	func numberOfWeeks(fromDate:Date) -> Int {
-		 return Calendar.current.dateComponents([.weekOfYear], from: fromDate, to: self).weekOfYear ?? 0
+	func numberOfWeeks(from date:Date) -> Int {
+		 return Calendar.current.dateComponents([.weekOfYear], from: date, to: self).weekOfYear ?? 0
 	}
 
 	func setHourMinuteAndSec(hours:Int, mintues:Int, seconds:Int) -> Date {
@@ -155,6 +159,10 @@ extension Date {
 
 	func seconds(from date: Date) -> Int {
 		return Calendar.current.dateComponents([.second], from: date, to: self).second ?? 0
+	}
+
+	func months(from date:Date) -> Int {
+		return Calendar.current.dateComponents([.month], from: date, to: self).month ?? 0
 	}
 
 	func differenceText(from date: Date) -> String {

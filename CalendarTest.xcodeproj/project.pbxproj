@@ -24,6 +24,8 @@
 		465158052005F6D300B0CEC7 /* CTCalCollectionViewCellUIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465158042005F6D300B0CEC7 /* CTCalCollectionViewCellUIData.swift */; };
 		465158082005FE3300B0CEC7 /* CTCalendarMonthViewerCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465158062005FE3300B0CEC7 /* CTCalendarMonthViewerCellTableViewCell.swift */; };
 		465158092005FE3300B0CEC7 /* CTCalendarMonthViewerCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 465158072005FE3300B0CEC7 /* CTCalendarMonthViewerCellTableViewCell.xib */; };
+		46689CB4200B435F0033354E /* CTDateUtilityTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46689CB3200B435F0033354E /* CTDateUtilityTest.swift */; };
+		46689CB6200B53A60033354E /* CTCalendarViewDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46689CB5200B53A60033354E /* CTCalendarViewDataTest.swift */; };
 		4684683820046CEB007F71CF /* CTAppControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683720046CEB007F71CF /* CTAppControl.swift */; };
 		4684683A20046DE2007F71CF /* CTUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683920046DE2007F71CF /* CTUIController.swift */; };
 		4684683C20046E48007F71CF /* CTAgendaViewDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684683B20046E48007F71CF /* CTAgendaViewDataHelper.swift */; };
@@ -61,10 +63,10 @@
 		46C8228C2003D1020086061F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46C8228A2003D1020086061F /* Main.storyboard */; };
 		46C8228E2003D1030086061F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C8228D2003D1030086061F /* Assets.xcassets */; };
 		46C822912003D1030086061F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46C8228F2003D1030086061F /* LaunchScreen.storyboard */; };
-		46C8229C2003D1030086061F /* CalendarTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C8229B2003D1030086061F /* CalendarTestTests.swift */; };
 		46C822A82003D2030086061F /* CTCalViewDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C822A72003D2030086061F /* CTCalViewDataHelper.swift */; };
 		46C822AB2003D33C0086061F /* CTDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C822AA2003D33C0086061F /* CTDateExtension.swift */; };
 		46C822AD2003D4F60086061F /* CTCalendarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C822AC2003D4F60086061F /* CTCalendarExtension.swift */; };
+		46CD7B2C200C62C700ED131D /* CTAgendaViewDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CD7B2B200C62C700ED131D /* CTAgendaViewDataTest.swift */; };
 		46EA46652009BF8F00825E9A /* CTLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EA46642009BF8F00825E9A /* CTLocationManager.swift */; };
 		46EA46682009C0C500825E9A /* CTWeatherApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EA46672009C0C500825E9A /* CTWeatherApiHelper.swift */; };
 		46EA466C200A033A00825E9A /* CTWeatherInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EA466A200A033A00825E9A /* CTWeatherInfoViewController.swift */; };
@@ -102,6 +104,8 @@
 		465158042005F6D300B0CEC7 /* CTCalCollectionViewCellUIData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCalCollectionViewCellUIData.swift; sourceTree = "<group>"; };
 		465158062005FE3300B0CEC7 /* CTCalendarMonthViewerCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCalendarMonthViewerCellTableViewCell.swift; sourceTree = "<group>"; };
 		465158072005FE3300B0CEC7 /* CTCalendarMonthViewerCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CTCalendarMonthViewerCellTableViewCell.xib; sourceTree = "<group>"; };
+		46689CB3200B435F0033354E /* CTDateUtilityTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTDateUtilityTest.swift; sourceTree = "<group>"; };
+		46689CB5200B53A60033354E /* CTCalendarViewDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCalendarViewDataTest.swift; sourceTree = "<group>"; };
 		4684683720046CEB007F71CF /* CTAppControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAppControl.swift; sourceTree = "<group>"; };
 		4684683920046DE2007F71CF /* CTUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTUIController.swift; sourceTree = "<group>"; };
 		4684683B20046E48007F71CF /* CTAgendaViewDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAgendaViewDataHelper.swift; sourceTree = "<group>"; };
@@ -142,11 +146,11 @@
 		46C822902003D1030086061F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		46C822922003D1030086061F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46C822972003D1030086061F /* CalendarTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalendarTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		46C8229B2003D1030086061F /* CalendarTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTestTests.swift; sourceTree = "<group>"; };
 		46C8229D2003D1030086061F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46C822A72003D2030086061F /* CTCalViewDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCalViewDataHelper.swift; sourceTree = "<group>"; };
 		46C822AA2003D33C0086061F /* CTDateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTDateExtension.swift; sourceTree = "<group>"; };
 		46C822AC2003D4F60086061F /* CTCalendarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCalendarExtension.swift; sourceTree = "<group>"; };
+		46CD7B2B200C62C700ED131D /* CTAgendaViewDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAgendaViewDataTest.swift; sourceTree = "<group>"; };
 		46EA46642009BF8F00825E9A /* CTLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTLocationManager.swift; sourceTree = "<group>"; };
 		46EA46672009C0C500825E9A /* CTWeatherApiHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTWeatherApiHelper.swift; sourceTree = "<group>"; };
 		46EA466A200A033A00825E9A /* CTWeatherInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTWeatherInfoViewController.swift; sourceTree = "<group>"; };
@@ -365,7 +369,9 @@
 		46C8229A2003D1030086061F /* CalendarTestTests */ = {
 			isa = PBXGroup;
 			children = (
-				46C8229B2003D1030086061F /* CalendarTestTests.swift */,
+				46CD7B2B200C62C700ED131D /* CTAgendaViewDataTest.swift */,
+				46689CB5200B53A60033354E /* CTCalendarViewDataTest.swift */,
+				46689CB3200B435F0033354E /* CTDateUtilityTest.swift */,
 				46C8229D2003D1030086061F /* Info.plist */,
 			);
 			path = CalendarTestTests;
@@ -596,7 +602,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46C8229C2003D1030086061F /* CalendarTestTests.swift in Sources */,
+				46CD7B2C200C62C700ED131D /* CTAgendaViewDataTest.swift in Sources */,
+				46689CB4200B435F0033354E /* CTDateUtilityTest.swift in Sources */,
+				46689CB6200B53A60033354E /* CTCalendarViewDataTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
