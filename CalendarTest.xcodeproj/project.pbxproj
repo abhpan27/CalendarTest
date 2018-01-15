@@ -178,14 +178,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		465157E52005192B00B0CEC7 /* Core Data */ = {
+		465157E52005192B00B0CEC7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				465157F2200538FD00B0CEC7 /* Managed Subclasses */,
 				465157E82005196300B0CEC7 /* CTEventModel.xcdatamodeld */,
-				465157E62005194700B0CEC7 /* CTCoreDataController.swift */,
 			);
-			path = "Core Data";
+			path = Models;
 			sourceTree = "<group>";
 		};
 		465157EB20051D4D00B0CEC7 /* UI Controller */ = {
@@ -229,20 +228,9 @@
 			children = (
 				465157EB20051D4D00B0CEC7 /* UI Controller */,
 				4684683720046CEB007F71CF /* CTAppControl.swift */,
+				465157F0200521E800B0CEC7 /* CTIntialDummyDataFiller.swift */,
 			);
 			path = "App Launch";
-			sourceTree = "<group>";
-		};
-		4684683D20046FF7007F71CF /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				4684685420049D5E007F71CF /* Utilities */,
-				4684684620047264007F71CF /* Central UI Container */,
-				468B3D7E20072E0000A366F7 /* Agenda View */,
-				4684684720047274007F71CF /* Calendar View */,
-				4684685B2004A773007F71CF /* Top bar */,
-			);
-			path = Modules;
 			sourceTree = "<group>";
 		};
 		4684684620047264007F71CF /* Central UI Container */ = {
@@ -317,17 +305,8 @@
 		468B3D9B20075BA500A366F7 /* Agenda Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
-				468B3DA220076CA600A366F7 /* CTAgendaSectionHeader.swift */,
-				468B3DA020076C8F00A366F7 /* CTAgendaSectionHeader.xib */,
-				468B3D8B20075B4100A366F7 /* CTTitleOnlyRowTableViewCell.swift */,
-				468B3D8C20075B4100A366F7 /* CTTitleOnlyRowTableViewCell.xib */,
-				468B3D9320075B8400A366F7 /* CTTitleAndLocationTableViewCell.swift */,
-				468B3D9420075B8400A366F7 /* CTTitleAndLocationTableViewCell.xib */,
-				468B3D9720075B9C00A366F7 /* CTCompleteInfoTableViewCell.swift */,
-				468B3D9820075B9C00A366F7 /* CTCompleteInfoTableViewCell.xib */,
-				468B3DA62007865600A366F7 /* CTAgendaViewNoEventTableViewCell.swift */,
-				468B3DA72007865600A366F7 /* CTAgendaViewNoEventTableViewCell.xib */,
 				468B3DAA2007C22600A366F7 /* CTAgendaViewCellCommonUIHelper.swift */,
+				46CD7B37200CCB1400ED131D /* Table cells */,
 			);
 			path = "Agenda Table View Cells";
 			sourceTree = "<group>";
@@ -354,13 +333,17 @@
 			isa = PBXGroup;
 			children = (
 				46C822922003D1030086061F /* Info.plist */,
+				4684683620046CC8007F71CF /* App Launch */,
+				4684684620047264007F71CF /* Central UI Container */,
+				468B3D7E20072E0000A366F7 /* Agenda View */,
+				4684684720047274007F71CF /* Calendar View */,
+				4684685B2004A773007F71CF /* Top bar */,
+				4684685420049D5E007F71CF /* Utilities */,
 				46EA46662009C09B00825E9A /* Weather */,
 				46EA46632009BF7B00825E9A /* Location */,
 				465157F7200539B000B0CEC7 /* Supporting files */,
-				4684683D20046FF7007F71CF /* Modules */,
-				4684683620046CC8007F71CF /* App Launch */,
 				46C822A92003D3280086061F /* Extensions */,
-				46C822A62003D1C40086061F /* Data Helper */,
+				46C822A62003D1C40086061F /* Core Data Helper */,
 			);
 			path = CalendarTest;
 			sourceTree = "<group>";
@@ -376,14 +359,14 @@
 			path = CalendarTestTests;
 			sourceTree = "<group>";
 		};
-		46C822A62003D1C40086061F /* Data Helper */ = {
+		46C822A62003D1C40086061F /* Core Data Helper */ = {
 			isa = PBXGroup;
 			children = (
+				465157E52005192B00B0CEC7 /* Models */,
 				46CD7B36200C9D0700ED131D /* DB Query helper */,
-				465157E52005192B00B0CEC7 /* Core Data */,
-				465157F0200521E800B0CEC7 /* CTIntialDummyDataFiller.swift */,
+				465157E62005194700B0CEC7 /* CTCoreDataController.swift */,
 			);
-			path = "Data Helper";
+			path = "Core Data Helper";
 			sourceTree = "<group>";
 		};
 		46C822A92003D3280086061F /* Extensions */ = {
@@ -451,6 +434,23 @@
 				468B3D8320072F7400A366F7 /* CTDBQueryContentRequest.swift */,
 			);
 			path = "DB Query helper";
+			sourceTree = "<group>";
+		};
+		46CD7B37200CCB1400ED131D /* Table cells */ = {
+			isa = PBXGroup;
+			children = (
+				468B3DA220076CA600A366F7 /* CTAgendaSectionHeader.swift */,
+				468B3DA020076C8F00A366F7 /* CTAgendaSectionHeader.xib */,
+				468B3D8B20075B4100A366F7 /* CTTitleOnlyRowTableViewCell.swift */,
+				468B3D8C20075B4100A366F7 /* CTTitleOnlyRowTableViewCell.xib */,
+				468B3D9320075B8400A366F7 /* CTTitleAndLocationTableViewCell.swift */,
+				468B3D9420075B8400A366F7 /* CTTitleAndLocationTableViewCell.xib */,
+				468B3D9720075B9C00A366F7 /* CTCompleteInfoTableViewCell.swift */,
+				468B3D9820075B9C00A366F7 /* CTCompleteInfoTableViewCell.xib */,
+				468B3DA62007865600A366F7 /* CTAgendaViewNoEventTableViewCell.swift */,
+				468B3DA72007865600A366F7 /* CTAgendaViewNoEventTableViewCell.xib */,
+			);
+			path = "Table cells";
 			sourceTree = "<group>";
 		};
 		46EA46632009BF7B00825E9A /* Location */ = {

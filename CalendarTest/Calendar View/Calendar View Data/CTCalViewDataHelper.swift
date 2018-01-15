@@ -185,7 +185,7 @@ final class CTCalViewDataHelper {
 
 	final func getFirstDateInfo() -> (date:Date, indexPath:IndexPath)? {
 		let firstRow = self.calCollectionViewUIData[0]
-		for index in 0 ... 7 {
+		for index in 0 ... 6 {
 			if firstRow[index].dateEpoch != -1 {
 				let indexPath = IndexPath(row: index, section: 0)
 				let date = Date(timeIntervalSince1970: firstRow[index].dateEpoch)
@@ -199,7 +199,7 @@ final class CTCalViewDataHelper {
 		let row = indexPath.section
 		let coloumn = indexPath.row
 
-		if coloumn < 8 && coloumn >= 0 {
+		if coloumn < 7 && coloumn >= 0 {
 			if row >= 0 && row < self.calCollectionViewUIData.count {
 				let epoch = self.calCollectionViewUIData[row][coloumn].dateEpoch
 				return Date(timeIntervalSince1970: epoch).startOfDate
