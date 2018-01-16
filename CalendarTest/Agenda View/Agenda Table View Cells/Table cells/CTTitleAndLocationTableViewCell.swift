@@ -31,7 +31,7 @@ class CTTitleAndLocationTableViewCell: UITableViewCell {
 		self.startTimeLabel = uiLayoutHelper.addStartTimeLable(inCell: self)
 		self.eventDurationLabel = uiLayoutHelper.addEventDurationLabel(inCell: self, below: startTimeLabel!, leftAlignedTo: startTimeLabel!)
 		self.circleView = uiLayoutHelper.addCalColorCircleView(inCell: self, centerAlignedWith: self.startTimeLabel!)
-		self.titleLabel = uiLayoutHelper.addTitleLabel(inCell: self, centerAlignedWith: circleView!, leftAlignWith: circleView!)
+		self.titleLabel = uiLayoutHelper.addTitleLabel(inCell: self, centerAlignedWith: circleView!, inRightOf: circleView!)
 		self.locationLabel = uiLayoutHelper.addLocationLabel(inCell: self, alignLeftTo: self.titleLabel, below: self.titleLabel)
 	}
 

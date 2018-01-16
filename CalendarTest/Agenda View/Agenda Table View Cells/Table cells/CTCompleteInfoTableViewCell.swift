@@ -35,7 +35,7 @@ class CTCompleteInfoTableViewCell: UITableViewCell {
 		self.startTimeLabel = uiLayoutHelper.addStartTimeLable(inCell: self)
 		self.eventDurationLabel = uiLayoutHelper.addEventDurationLabel(inCell: self, below: startTimeLabel!, leftAlignedTo: startTimeLabel!)
 		self.circleView = uiLayoutHelper.addCalColorCircleView(inCell: self, centerAlignedWith: self.startTimeLabel!)
-		self.titleLabel = uiLayoutHelper.addTitleLabel(inCell: self, centerAlignedWith: circleView!, leftAlignWith: circleView!)
+		self.titleLabel = uiLayoutHelper.addTitleLabel(inCell: self, centerAlignedWith: circleView!, inRightOf: circleView!)
 		let attendeeInfoViews = uiLayoutHelper.addAttendeesLabels(inCell: self, alignLeftTo: self.titleLabel, below: self.titleLabel)
 		self.firstAttendeeLabel = attendeeInfoViews.first
 		self.secondAttendeeLabel = attendeeInfoViews.second

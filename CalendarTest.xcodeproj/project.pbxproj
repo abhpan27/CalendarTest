@@ -68,6 +68,7 @@
 		46C822AD2003D4F60086061F /* CTCalendarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C822AC2003D4F60086061F /* CTCalendarExtension.swift */; };
 		46CD7B2C200C62C700ED131D /* CTAgendaViewDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CD7B2B200C62C700ED131D /* CTAgendaViewDataTest.swift */; };
 		46CD7B39200D2D8600ED131D /* CTAgendaListUIHelperExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CD7B38200D2D8600ED131D /* CTAgendaListUIHelperExtension.swift */; };
+		46CD7B3B200DAA4E00ED131D /* CTAgendaViewRowUIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CD7B3A200DAA4E00ED131D /* CTAgendaViewRowUIData.swift */; };
 		46EA46652009BF8F00825E9A /* CTLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EA46642009BF8F00825E9A /* CTLocationManager.swift */; };
 		46EA46682009C0C500825E9A /* CTWeatherApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EA46672009C0C500825E9A /* CTWeatherApiHelper.swift */; };
 		46EA466C200A033A00825E9A /* CTWeatherInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EA466A200A033A00825E9A /* CTWeatherInfoViewController.swift */; };
@@ -153,6 +154,7 @@
 		46C822AC2003D4F60086061F /* CTCalendarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCalendarExtension.swift; sourceTree = "<group>"; };
 		46CD7B2B200C62C700ED131D /* CTAgendaViewDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAgendaViewDataTest.swift; sourceTree = "<group>"; };
 		46CD7B38200D2D8600ED131D /* CTAgendaListUIHelperExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAgendaListUIHelperExtension.swift; sourceTree = "<group>"; };
+		46CD7B3A200DAA4E00ED131D /* CTAgendaViewRowUIData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAgendaViewRowUIData.swift; sourceTree = "<group>"; };
 		46EA46642009BF8F00825E9A /* CTLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTLocationManager.swift; sourceTree = "<group>"; };
 		46EA46672009C0C500825E9A /* CTWeatherApiHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTWeatherApiHelper.swift; sourceTree = "<group>"; };
 		46EA466A200A033A00825E9A /* CTWeatherInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTWeatherInfoViewController.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				468B3D852007455000A366F7 /* CTAgendaViewSectionUIData.swift */,
+				46CD7B3A200DAA4E00ED131D /* CTAgendaViewRowUIData.swift */,
 				468B3D8920074A2300A366F7 /* CTAgendaListUIHelper.swift */,
 				46CD7B38200D2D8600ED131D /* CTAgendaListUIHelperExtension.swift */,
 			);
@@ -606,6 +609,7 @@
 				468B3D9520075B8400A366F7 /* CTTitleAndLocationTableViewCell.swift in Sources */,
 				4684685320048588007F71CF /* CTGeneralExtension.swift in Sources */,
 				46EA4670200A0D7900825E9A /* CTWeatherInfoTableViewCell.swift in Sources */,
+				46CD7B3B200DAA4E00ED131D /* CTAgendaViewRowUIData.swift in Sources */,
 				465157F1200521E800B0CEC7 /* CTIntialDummyDataFiller.swift in Sources */,
 				468B3D8D20075B4100A366F7 /* CTTitleOnlyRowTableViewCell.swift in Sources */,
 				468B3D8420072F7400A366F7 /* CTDBQueryContentRequest.swift in Sources */,

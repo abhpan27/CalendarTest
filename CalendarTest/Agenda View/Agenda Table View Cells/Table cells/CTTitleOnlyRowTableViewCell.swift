@@ -28,7 +28,7 @@ class CTTitleOnlyRowTableViewCell: UITableViewCell {
 		let uiLayoutHelper = CTAgendaViewCellCommonUIHelper()
 		self.startTimeLabel = uiLayoutHelper.addStartTimeLable(inCell: self)
 		self.circleView = uiLayoutHelper.addCalColorCircleView(inCell: self, centerAlignedWith: self.startTimeLabel!)
-		self.titleLabel = uiLayoutHelper.addTitleLabel(inCell: self, centerAlignedWith: circleView!, leftAlignWith: circleView!)
+		self.titleLabel = uiLayoutHelper.addTitleLabel(inCell: self, centerAlignedWith: circleView!, inRightOf: circleView!)
 	}
 
 	final func updateWithUIData(uiData:CTAgendaViewRowUIData) {
