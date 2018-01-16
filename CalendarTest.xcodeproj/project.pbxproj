@@ -253,9 +253,9 @@
 				468B3D87200745D100A366F7 /* Calendar View Data */,
 				46CD7B35200C9CE000ED131D /* Table view cell */,
 				46CD7B34200C9CB500ED131D /* Collection view cell */,
-				465157E32004C02800B0CEC7 /* CTCalDateCalculationUtils.swift */,
 				4684684220047203007F71CF /* CTCalendarViewController.swift */,
 				4684684320047203007F71CF /* CTCalendarViewController.xib */,
+				465157E32004C02800B0CEC7 /* CTCalDateCalculationUtils.swift */,
 			);
 			path = "Calendar View";
 			sourceTree = "<group>";

@@ -8,14 +8,38 @@
 
 import UIKit
 
+/**
+Protocol methods for Calendar view controller
+*/
 protocol CTCalendarViewControllerDelegate:NSObjectProtocol {
+
+	/**
+	This method is called when viewing mode of calendar view is changes.
+
+	- Parameter viewingMode: Enum represnting current viewing mode.
+	*/
 	func viewingModeDidChange(viewingMode:CalViewingMode)
+
+	/**
+	This method is called when any date is selected in calendar view.
+
+	- Parameter date: Selected date in Calendar view.
+	*/
 	func didSelectedDate(date:Date)
 }
 
+/**
+This Enum represents number of rows used by calendar view.
+*/
 internal enum CalViewingMode {
-	case twoRows, fiveRows
 
+	///Calendar view is drawn in two row height
+	case twoRows
+
+	///Calendar view is drawn in five row height
+	case fiveRows
+
+	///Total height that will be needed by calendar view for viewing mode
 	var totalHeightNeeded:CGFloat {
 		let singleRowHeight = self.heightNeededForSingleRow
 		switch self {
@@ -26,26 +50,46 @@ internal enum CalViewingMode {
 		}
 	}
 
+	///Height of single row of calendar view.
 	var heightNeededForSingleRow:CGFloat {
 		return 55
 	}
 }
 
+
+/**
+This is Calendar view controller.
+It has two subviews - One collection view and one Tableview
+Table view is semi transparent which becomes visible only when user is scrolling calendar view.
+Collection view is top, bottom, right, left aligned with view of this controller.
+Table view is also top, bottom, right, left aligned with view of this controller.
+Table view is added above collection view. It's semi transparency gives overlay kind of effect.
+See CTCalendarViewController.XIB
+*/
 final class CTCalendarViewController: UIViewController {
 
+	///Outlet to semi transparent overlay table view above collection view.
 	@IBOutlet weak var monthViewerTableView: UITableView!
+
+	///Outlet to Collection view. Each cell represents one date. Each row is one section.
 	@IBOutlet weak var calCollectionView: UICollectionView!
-	weak var delegate:CTCalendarViewControllerDelegate?
-	var pangestureRecognizer:UIPanGestureRecognizer?
+
+	///Data helper class to get Minimal UI data and also event availabilty status from core data.
 	let calendarViewUIDataHelper:CTCalViewDataHelper
 
+	///Delegate used to inform about events in calendar view
+	weak var delegate:CTCalendarViewControllerDelegate?
+
+
+	///viewingMode to show number of rows used by calendar view currently.
 	var viewingMode:CalViewingMode = .fiveRows {
 		didSet {
 			if oldValue != viewingMode {
-				//this will reduce/increase calendar container size
 				if viewingMode == .twoRows {
+					//stop scrolling animation to avoid jerk.
 					stopScrolling()
 				}
+				//inform delegate about viewing mode change
 				self.delegate?.viewingModeDidChange(viewingMode: viewingMode)
 			}
 		}
@@ -62,16 +106,22 @@ final class CTCalendarViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		//load minimal UI data neede for drawing collection view and table view.
 		self.calendarViewUIDataHelper.loadBaicUIdata()
 		CTCalDayViewCellCollectionViewCell.registerCell(collectionView: calCollectionView, withIdentifier: "CTCalDayViewCellCollectionViewCell")
-		setUpBasicUI()
+		setUpBasicTableUI()
 		//select current date after some delay so that current drawing of cells is completed
 		delayedRunInMainQueue(0.1) {
 			self.selectDate(date: Date(), animated: false)
+			//once basic UI is visible, it's time to query core data and load event availabilty dots of cells
 			self.loadEventAvailabilityInBgThread()
 		}
     }
 
+
+	/**
+	This method starts loading of event availability for each cell. It takes help from calendarViewUIDataHelper
+	*/
 	private func loadEventAvailabilityInBgThread() {
 		self.calendarViewUIDataHelper.loadEventAvailabiltyForShowingDots {
 			[weak self]
@@ -80,17 +130,27 @@ final class CTCalendarViewController: UIViewController {
 				else {
 					return
 			}
+			//Event availability data loaded from core data, reload collection view to show dots in cell.
 			blockSelf.reloadCollectionViewKeepingSelection()
 		}
 	}
 
-	private func setUpBasicUI() {
+	/**
+	This method sets up basic UI of semi transparent overlay table view added above collection view.
+	*/
+	private func setUpBasicTableUI() {
 		CTCalendarMonthViewerCellTableViewCell.registerCell(inTableView: self.monthViewerTableView, withIdentifier: "CTCalendarMonthViewerCellTableViewCell")
 		self.monthViewerTableView.backgroundColor = UIColor.clear
 		self.monthViewerTableView.layoutIfNeeded()
 		self.monthViewerTableView.isHidden = true
 	}
 
+	/**
+	This method is used to hide or show semi transparent overlay table view added above collection view.
+
+	- Parameter shouldShow: Bool used to show or hide table view.
+	- Parameter animated: Bool used to check if showing hiding of table view should be animated.
+	*/
 	fileprivate func hideOrShowMonthTableViewWithAnimation(shouldShow:Bool, animated:Bool) {
 		if animated {
 			UIView.animate(withDuration: 0.2, animations: {
@@ -104,14 +164,22 @@ final class CTCalendarViewController: UIViewController {
 		}
 	}
 
+	/**
+	This method is used to kill scroll animation of table view and collection view.
+	*/
 	func stopScrolling() {
 		let collectionContentOffset = self.calCollectionView.contentOffset
+		//This is a trick to kill scroll animation, just set current offset without animation
 		self.calCollectionView.setContentOffset(collectionContentOffset, animated: false)
 		self.monthViewerTableView.setContentOffset(collectionContentOffset, animated: false)
 		self.monthViewerTableView.isHidden = true
 	}
 }
 
+//MARK:Flow layout delegate,
+/**
+width, height of cells, gap between cells and rows etc are set here
+*/
 extension CTCalendarViewController:UICollectionViewDelegateFlowLayout {
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -134,12 +202,18 @@ extension CTCalendarViewController:UICollectionViewDelegateFlowLayout {
 
 }
 
+//MARK:Scroll view delegate
+/**
+This is scroll delegate of both collection view and table view.
+*/
 extension CTCalendarViewController: UIScrollViewDelegate {
 
 	func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+		//as soon as user starts dragging, change to five row mode
 		if self.viewingMode != .fiveRows {
 			self.viewingMode = .fiveRows
 		}
+		//if user is dragging collection view then it's time to show overlay table view
 		if scrollView == self.calCollectionView && scrollView.isDragging {
 			self.monthViewerTableView.contentOffset = scrollView.contentOffset
 			self.hideOrShowMonthTableViewWithAnimation(shouldShow: true, animated: false)
@@ -148,6 +222,7 @@ extension CTCalendarViewController: UIScrollViewDelegate {
 
 	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
 		if !decelerate {
+			//very short scroll, just hide overlay table view
 			self.hideOrShowMonthTableViewWithAnimation(shouldShow: false, animated:true)
 		}
 	}
@@ -156,11 +231,12 @@ extension CTCalendarViewController: UIScrollViewDelegate {
 		if self.monthViewerTableView.isDecelerating || self.calCollectionView.isDecelerating {
 			return
 		}
-
+		//if both overlay table view and collection view have stopped scrolling then hide overlay table view.
 		self.hideOrShowMonthTableViewWithAnimation(shouldShow: false, animated: true)
 	}
 
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		//sync scroll of collection view and overlay tableview. This is called in same animation context of scroll so there will not be any jerk.
 		let offset = scrollView.contentOffset
 		if scrollView == self.monthViewerTableView && scrollView.isDragging {
 			self.calCollectionView.contentOffset = offset
@@ -174,7 +250,7 @@ extension CTCalendarViewController: UIScrollViewDelegate {
 	}
 }
 
-//mark:Collection view delegates
+//MARK:Collection view delegates
 extension  CTCalendarViewController:UICollectionViewDelegate {
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -191,6 +267,7 @@ extension  CTCalendarViewController:UICollectionViewDelegate {
 	}
 }
 
+//MARK:Collection view data source
 extension CTCalendarViewController:UICollectionViewDataSource {
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -212,7 +289,7 @@ extension CTCalendarViewController:UICollectionViewDataSource {
 	}
 }
 
-//mark: TableView delegates
+//MARK: Table view data source and delegate
 extension CTCalendarViewController:UITableViewDataSource, UITableViewDelegate {
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -230,6 +307,7 @@ extension CTCalendarViewController:UITableViewDataSource, UITableViewDelegate {
 	}
 
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		//it will be number of weeks in a month * height of single row of collection view.
 		return self.viewingMode.heightNeededForSingleRow * CGFloat(self.calendarViewUIDataHelper.calTableViewUIData[indexPath.row].noOfDifferentWeeksInMonth)
 	}
 }

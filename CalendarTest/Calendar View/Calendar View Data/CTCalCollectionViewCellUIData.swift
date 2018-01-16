@@ -8,6 +8,9 @@
 
 import UIKit
 
+/**
+Enum for color of dots shown in each cell of collection view in calendar view
+*/
 internal enum CalendarViewCellEventAvailablityColor:Int8 {
 	case clear = 1, lightGrey, mediumGrey, darkGrey
 
@@ -25,16 +28,33 @@ internal enum CalendarViewCellEventAvailablityColor:Int8 {
 	}
 }
 
+/**
+For each cell of collection view one object of this class is created.
+Effort is made to reduce memory requirement for objects of this class
+Even if one object is loaded for each date in 10 year range then memory requirement will be -
+10(year) * 12(months) * 4(weeks) * 7(days) * ( 1 Bool + 1 Double + 2 strings with 2 characters on avarage + 1 Int8) = 10 * 12 * 4 * 7 * (1 + 64 + 82 + 8 + some overhead ~= 200 bits) = 82.031KB, which is acceptable ammount of data to keep in memory.
+So on intial launch of calendar view one object of this class is created for each date shown in collection view.
+*/
 final class CTCalCollectionViewCellUIData {
 
+	///used in drawing alternet months in different colors. One month white - next month grey...so on
 	let shouldDrawInGrey:Bool
-	let dateEpoch:TimeInterval //this will be -1 for blank dates
-	let dateNumberString:String // only date number i.e. 1,2, 30 etc
-	let fullDateString:String // for start of month
+
+	///Unix epcoh for date shown in current cell
+	let dateEpoch:TimeInterval
+
+	///Date only in number, used when date is selected
+	let dateNumberString:String
+
+	///Full date string, this is same as dateNumberString except for month start date
+	let fullDateString:String
+
+	///Color for dot shown in each cell, intially it is clear, later it is changed after querying core data
 	var eventAvailabilityColor:Int8 = CalendarViewCellEventAvailablityColor.clear.rawValue
 
+	///Is current object is for blank cell
 	var isBlankDay:Bool {
-		return self.fullDateString.isEmpty
+		return dateEpoch == -1
 	}
 
 	init(dateEpoch:TimeInterval, shouldDrawInGrey:Bool) {
@@ -60,6 +80,7 @@ final class CTCalCollectionViewCellUIData {
 			}
 			self.fullDateString = dateFormatter.string(from: date).replacingOccurrences(of: "#", with: "\n")
 		}else {
+			//for blank cell both strings are empty
 			dateNumberString = ""
 			fullDateString = ""
 		}

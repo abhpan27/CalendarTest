@@ -89,7 +89,7 @@ class CTCalendarViewDataTest: XCTestCase {
 		XCTAssert((noMonthsBetweenMinAndMaxDates + 1) == calTableMonthDataIndex, "Mismatch bewtween no of months to show in collection view and data generated for overlay table view")
 	}
 
-	func testEventAvailabilityForCalCollectionView() {
+	func testEventAvailabilityDataForCalCollectionView() {
 		calUIDataHelper.loadBaicUIdata()
 
 		let expectation = self.expectation(description: "Async DB fetch for event availability")
@@ -100,7 +100,7 @@ class CTCalendarViewDataTest: XCTestCase {
 			(expectedEventAvailabiltyDict, error)
 			in
 			guard let blockSelf = self
-				else{
+				else {
 					return
 			}
 			
@@ -140,6 +140,8 @@ class CTCalendarViewDataTest: XCTestCase {
 
 				let dateForCurrCell = Date(timeIntervalSince1970: currCellData.dateEpoch)
 				if let expectedAvailabilty = withExpectedAvailability[dateForCurrCell]  {
+					XCTAssert(expectedAvailabilty >= 1, "expected availabilty should not be less then zero, it should be either nil or more than 0")
+
 					if expectedAvailabilty == 1 {
 						XCTAssert(currCellData.eventAvailabilityColor == CalendarViewCellEventAvailablityColor.lightGrey.rawValue, "For only one event on day event availability dot color should be light grey")
 					}
@@ -157,5 +159,4 @@ class CTCalendarViewDataTest: XCTestCase {
 			}
 		}
 	}
-
 }

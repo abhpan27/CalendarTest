@@ -129,7 +129,8 @@ extension Date {
 	}
 
 	func numberOfWeeks(from date:Date) -> Int {
-		 return Calendar.current.dateComponents([.weekOfYear], from: date, to: self).weekOfYear ?? 0
+		let weekYears =  Calendar.current.dateComponents([.weekOfYear], from: date, to: self).weekOfYear ?? 0
+		return self.weekDay < date.weekDay ? weekYears + 1 : weekYears
 	}
 
 	func setHourMinuteAndSec(hours:Int, mintues:Int, seconds:Int) -> Date {

@@ -8,10 +8,19 @@
 
 import UIKit
 
+/**
+This is UITableViewCell used for Semi Transparent overlay table view above collection view
+*/
 class CTCalendarMonthViewerCellTableViewCell: UITableViewCell {
 
+	///Outlet to label used to show month name
 	@IBOutlet weak var monthNameLabel: UILabel!
 
+	/**
+	This is static method used to register cell for reusablity in tableview.
+	-Parameter inTableView: Table view in which this cell should be registered.
+	-Parameter withIdentifier: Identifier which should be used in registering this cell for reusability.
+	*/
 	static func registerCell(inTableView:UITableView, withIdentifier:String) {
 		inTableView.register(UINib(nibName: "CTCalendarMonthViewerCellTableViewCell", bundle: nil), forCellReuseIdentifier: withIdentifier)
 	}
@@ -23,5 +32,4 @@ class CTCalendarMonthViewerCellTableViewCell: UITableViewCell {
 		self.monthNameLabel.font = CTFont.systemFont(ofSize: 18, weight: .Bold)
 		self.monthNameLabel.textColor = UIColor(red: 48/255, green: 48/255, blue: 48/255, alpha: 1.0)
     }
-
 }

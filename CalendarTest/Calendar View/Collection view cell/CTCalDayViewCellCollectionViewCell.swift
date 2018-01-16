@@ -8,11 +8,21 @@
 
 import UIKit
 
+/**
+This is UICollectionViewCell subclass used in collection view of calendar view
+*/
 class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 
+	///Circuler dot added below date label to show event availabilty on date
 	@IBOutlet weak var eventAvailabiltyDot: UIView!
+
+	///UIView added around date label to draw blue circle around date on selection of cell
 	@IBOutlet weak var backgroundHighlighterView: UIView!
+
+	///Label added in center of cell. Used to date in cell.
 	@IBOutlet weak var dateLabel: UILabel!
+
+	///UI data object, which is used to customize UI of this cell
 	var cellUIData:CTCalCollectionViewCellUIData!
 
 	override var isSelected: Bool {
@@ -28,26 +38,42 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 		self.eventAvailabiltyDot.backgroundColor = UIColor.clear
     }
 
+	/**
+	This is static method used to register cell for reusablity in collection view.
+	-Parameter collectionView: collectionView view in which this cell should be registered.
+	-Parameter withIdentifier: Identifier which should be used in registering this cell for reusability.
+	*/
 	static func registerCell(collectionView:UICollectionView, withIdentifier:String) {
 		collectionView.register(UINib(nibName: "CTCalDayViewCellCollectionViewCell", bundle: nil), forCellWithReuseIdentifier:withIdentifier)
 	}
 
+	/**
+	This is method is used to customize this cell's UI based on uiData.
+	-Parameter uiData: CTCalCollectionViewCellUIData object.
+	*/
 	final func updateCellWithUIData(uiData:CTCalCollectionViewCellUIData) {
 		self.cellUIData = uiData
 		self.checkSelectionStateAndSetUI()
 	}
 
+	/**
+	This is method is used to check current selection state and update UI accordingly
+	*/
 	private func checkSelectionStateAndSetUI() {
 		if self.isSelected {
 			updateUIForSelectedCell()
 		}else {
 			updateFontAndColorForNonSelectedCell()
 		}
+		///common operation needs to be done irrespective of selection state
 		setBackgroundColor()
 		setFontForDateLabel()
 		setEventAvailabiltyDotColor()
 	}
 
+	/**
+	This is method is used to update cell's UI is cell is not selected
+	*/
 	private func updateFontAndColorForNonSelectedCell() {
 		guard let uiData = self.cellUIData
 			else {
@@ -59,6 +85,9 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 		self.dateLabel.textColor = UIColor(red: 67/255, green: 75/255, blue: 82/255, alpha: 1.0)
 	}
 
+	/**
+	This is method is used to update cell's UI is cell is selected
+	*/
 	private func updateUIForSelectedCell() {
 		guard let uiData = self.cellUIData
 			else {
@@ -70,6 +99,9 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 		self.dateLabel.text = uiData.dateNumberString
 	}
 
+	/**
+	This is method is used to set background color of cell
+	*/
 	private func setBackgroundColor() {
 		guard let uiData = self.cellUIData
 			else {
@@ -83,6 +115,9 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 		}
 	}
 
+	/**
+	This is method is used to set font and color for date label
+	*/
 	private func setFontForDateLabel() {
 		guard let uiData = self.cellUIData
 			else {
@@ -96,6 +131,9 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 		}
 	}
 
+	/**
+	This is method is used to set color of event availability dot
+	*/
 	private func setEventAvailabiltyDotColor() {
 		guard let uiData = self.cellUIData
 			else {
@@ -108,5 +146,4 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 		}
 		self.eventAvailabiltyDot.backgroundColor = CalendarViewCellEventAvailablityColor(rawValue: uiData.eventAvailabilityColor)!.color
 	}
-
 }
