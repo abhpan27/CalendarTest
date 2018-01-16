@@ -8,14 +8,32 @@
 
 import UIKit
 
+/**
+This cell is used to show event which has title and location only. No attendees.
+*/
 class CTTitleAndLocationTableViewCell: UITableViewCell {
 
+	/// label used to show start time of event
 	var startTimeLabel:UILabel!
+
+	///lable used to show duration of event
 	var eventDurationLabel:UILabel!
+
+	///circuler view used show calendar of color to which this event belongs
 	var circleView:UIView!
+
+	///Label used to show title of event
 	var titleLabel:UILabel!
+
+	///label used to show location of event
 	var locationLabel:UILabel!
 
+
+	/**
+	This is static method used to register cell for reusablity in tableview.
+	-Parameter inTableView: Table view in which this cell should be registered.
+	-Parameter withIdentifier: Identifier which should be used in registering this cell for reusability.
+	*/
 	static func registerCell(inTableView:UITableView, withIdentifier:String) {
 		inTableView.register(UINib(nibName: "CTTitleAndLocationTableViewCell", bundle: nil), forCellReuseIdentifier: withIdentifier)
 	}
@@ -26,6 +44,9 @@ class CTTitleAndLocationTableViewCell: UITableViewCell {
 		addUIElements()
 	}
 
+	/**
+	This method adds and layout subviews in this cell. It takes help from CTAgendaViewCellCommonUIHelper
+	*/
 	private func addUIElements() {
 		let uiLayoutHelper = CTAgendaViewCellCommonUIHelper()
 		self.startTimeLabel = uiLayoutHelper.addStartTimeLable(inCell: self)
@@ -35,6 +56,10 @@ class CTTitleAndLocationTableViewCell: UITableViewCell {
 		self.locationLabel = uiLayoutHelper.addLocationLabel(inCell: self, alignLeftTo: self.titleLabel, below: self.titleLabel)
 	}
 
+	/**
+	This method customizes reusable cell with UI Data for this cell.
+	- Parameter uiData: Row UI data object, which contains UI related information for each cell.
+	*/
 	final func updateWithUIData(uiData:CTAgendaViewRowUIData) {
 		self.startTimeLabel.text = uiData.startTimeText
 		self.eventDurationLabel.text = uiData.timeRangeText

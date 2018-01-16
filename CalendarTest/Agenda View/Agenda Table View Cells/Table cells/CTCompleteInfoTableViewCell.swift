@@ -8,18 +8,43 @@
 
 import UIKit
 
+/**
+This cell is used when all information (title, location and attendees) are present for event. This can also be used when title and attendees are present but location is not present by clipping it's bottom.
+*/
 class CTCompleteInfoTableViewCell: UITableViewCell {
 
+	///Lable to show start time of event
 	var startTimeLabel:UILabel!
+
+	///Lable to show duration of event
 	var eventDurationLabel:UILabel!
+
+	///Label to show color of calendar to which this event belongs.
 	var circleView:UIView!
+
+	///Label to show title of event
 	var titleLabel:UILabel!
+
+	///Label to show location of event
 	var locationLabel:UILabel!
+
+	///first attendee label
 	var firstAttendeeLabel:UILabel!
+
+	///second attendee lable
 	var secondAttendeeLabel:UILabel!
+
+	///Third attendee label
 	var thirdAttendeeLabel:UILabel!
+
+	///Remaining count attendee label. This is used when there are more than 3 attendees.
 	var remaingAttendeeCountLabel:UILabel!
 
+	/**
+	This is static method used to register cell for reusablity in tableview.
+	-Parameter inTableView: Table view in which this cell should be registered.
+	-Parameter withIdentifier: Identifier which should be used in registering this cell for reusability.
+	*/
 	static func registerCell(inTableView:UITableView, withIdentifier:String) {
 		inTableView.register(UINib(nibName: "CTCompleteInfoTableViewCell", bundle: nil), forCellReuseIdentifier: withIdentifier)
 	}
@@ -30,6 +55,9 @@ class CTCompleteInfoTableViewCell: UITableViewCell {
 		addUIElements()
 	}
 
+	/**
+	This method adds and layout subviews in this cell. It takes help from CTAgendaViewCellCommonUIHelper
+	*/
 	private func addUIElements() {
 		let uiLayoutHelper = CTAgendaViewCellCommonUIHelper()
 		self.startTimeLabel = uiLayoutHelper.addStartTimeLable(inCell: self)
@@ -44,6 +72,11 @@ class CTCompleteInfoTableViewCell: UITableViewCell {
 		self.locationLabel = uiLayoutHelper.addLocationLabel(inCell: self, alignLeftTo: self.titleLabel, below: self.firstAttendeeLabel)
 	}
 
+
+	/**
+	This method customizes reusable cell with UI Data for this cell.
+	- Parameter uiData: Row UI data object, which contains UI related information for each cell.
+	*/
 	final func updateWithUIData(uiData:CTAgendaViewRowUIData) {
 		self.startTimeLabel.text = uiData.startTimeText
 		self.eventDurationLabel.text = uiData.timeRangeText
@@ -51,7 +84,8 @@ class CTCompleteInfoTableViewCell: UITableViewCell {
 		self.titleLabel.text = uiData.eventTitle
 		self.locationLabel.text = !uiData.locationString.isEmpty ? "⚲ " + uiData.locationString : ""
 
-		//hide first because cell is getting reused
+		//Logic for showing attendee first name and color
+		//first hide all labels
 		firstAttendeeLabel.isHidden = true
 		secondAttendeeLabel.isHidden = true
 		thirdAttendeeLabel.isHidden = true
@@ -59,12 +93,16 @@ class CTCompleteInfoTableViewCell: UITableViewCell {
 
 		var attendees = uiData.attendeesInfo
 
+		//There will always be atleast one attendee, other wise this cell will not be used
+		//get first attendee and show
 		let firstAttendee = attendees[0]
 		firstAttendeeLabel.isHidden = false
 		firstAttendeeLabel.text = firstAttendee.name.first!.description
 		firstAttendeeLabel.backgroundColor = firstAttendee.color
+		///remove first attendee from list
 		attendees.remove(at: 0)
 
+		//check and show second attendee, remove after showing
 		if attendees.count > 0 {
 			let secondAttendee = attendees[0]
 			secondAttendeeLabel.isHidden = false
@@ -73,6 +111,7 @@ class CTCompleteInfoTableViewCell: UITableViewCell {
 			attendees.remove(at: 0)
 		}
 
+		//check and show third attendee, remove after showing
 		if attendees.count > 0 {
 			let thirdAttendee = attendees[0]
 			thirdAttendeeLabel.isHidden = false
@@ -81,11 +120,10 @@ class CTCompleteInfoTableViewCell: UITableViewCell {
 			attendees.remove(at: 0)
 		}
 
+		//Still more attendees left then show remaining count label
 		if attendees.count > 0 {
 			remaingAttendeeCountLabel.isHidden = false
 			remaingAttendeeCountLabel.text = "+" + "\(attendees.count)"
 		}
-
 	}
-    
 }
