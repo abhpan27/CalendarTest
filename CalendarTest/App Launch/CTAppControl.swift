@@ -53,7 +53,7 @@ final class CTAppControl {
 	///Used to fill dummy app data on first launch of app. It is used only once for each app installation.
 	lazy var dummyDatafiller = CTIntialDummyDataFiller()
 
-	///reference to singelton of app control.
+	///reference to current object of app control. There will one only one such object
 	static weak var current: CTAppControl?
 
 	init() {

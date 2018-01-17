@@ -8,8 +8,15 @@
 
 import UIKit
 
+/**
+This is UIColor extension
+*/
 extension UIColor {
 
+	/**
+	Convienient intializer for color string in Hex.
+	 - Parameter hex: Color string in Hex.
+	*/
 	convenience init?(hex: String) {
 		var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
 		hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
@@ -23,6 +30,7 @@ extension UIColor {
 
 		let length = hexSanitized.count
 
+		//scan it into unsigned int 32
 		guard Scanner(string: hexSanitized).scanHexInt32(&rgb) else { return nil }
 
 		if length == 6 {

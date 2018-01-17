@@ -8,10 +8,11 @@
 
 import UIKit
 
-internal class CTFont
-{
-	internal enum Weight: Int
-	{
+/**
+This class is an easy wrapper around UIFont class.
+*/
+internal class CTFont {
+	internal enum Weight: Int {
 		case Regular
 		case Medium
 		case Bold
@@ -19,8 +20,7 @@ internal class CTFont
 		case SemiBold
 		case Italic
 
-		fileprivate var uiFontWeight: UIFont.Weight
-		{
+		fileprivate var uiFontWeight: UIFont.Weight {
 			switch self {
 			case .Regular:
 				return UIFont.Weight.regular
@@ -38,8 +38,14 @@ internal class CTFont
 		}
 	}
 
-	internal static func systemFont(ofSize: CGFloat, weight: Weight) -> UIFont
-	{
+	/**
+	This is a static function which returns system font for size and weight
+
+	- Parameter ofSize: Size of font in pts.
+	- Parameter weight: weight of font.
+	- Returns: system font for size and weight.
+	*/
+	internal static func systemFont(ofSize: CGFloat, weight: Weight) -> UIFont {
 			return UIFont.systemFont(ofSize: ofSize, weight: weight.uiFontWeight)
 	}
 }

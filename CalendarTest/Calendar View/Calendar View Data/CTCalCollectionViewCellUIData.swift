@@ -34,6 +34,8 @@ Effort is made to reduce memory requirement for objects of this class
 Even if one object is loaded for each date in 10 year range then memory requirement will be -
 10(year) * 12(months) * 4(weeks) * 7(days) * ( 1 Bool + 1 Double + 2 strings with 2 characters on avarage + 1 Int8) = 10 * 12 * 4 * 7 * (1 + 64 + 82 + 8 + some overhead ~= 200 bits) = 82.031KB, which is acceptable ammount of data to keep in memory.
 So on intial launch of calendar view one object of this class is created for each date shown in collection view.
+
+- Note:We are currently just supporting 8 years of data. 7 year past, 1 year future.
 */
 final class CTCalCollectionViewCellUIData {
 

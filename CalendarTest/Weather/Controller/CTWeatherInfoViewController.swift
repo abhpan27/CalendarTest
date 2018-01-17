@@ -8,15 +8,33 @@
 
 import UIKit
 
+/**
+This is view controller for showing weather forcast of user's current location.
+*/
 class CTWeatherInfoViewController: UIViewController {
 
+	/// Table view to show min/max temperature and general weather forcast.
 	weak var weatherInfoTableView: UITableView?
+
+	///Label for showing current name of city based on user's location.
 	var cityNameLabel:UILabel?
+
+	///Label for showing Current temperature
 	var tempratureLabel:UILabel?
+
+	///Label for showing wether condition
 	var generalWeatherText:UILabel?
-	let weatherInfoApiHelper = CTWeatherApiHelper()
+
+	///Circuler loader to show user some activity for async task
 	var loader:UIActivityIndicatorView?
+
+	///UIView which shows error with some hint to resolve the error
 	var errorView:UIView?
+
+	///Api helper, used to get data
+	let weatherInfoApiHelper = CTWeatherApiHelper()
+
+	///Array of weather info objects which includes min/mac temp, weather condition, city name, date etc
 	var arrayOfWeatherInfo = [CTWeatherInfo]()
 
 	override func viewDidLoad() {
@@ -26,6 +44,9 @@ class CTWeatherInfoViewController: UIViewController {
 		loadWeatherInfo()
     }
 
+	/**
+	This method adds and layout all the views. Nothing is added in XIB
+	*/
 	private func addAndLayoutViews() {
 		let separator = addTitleAndTodayWeatherViewSeparator()
 		addCloseButton(above: separator)
@@ -38,6 +59,10 @@ class CTWeatherInfoViewController: UIViewController {
 		weatherInfoTableView?.tableFooterView = UIView()
 	}
 
+
+	/**
+	This method loads array of CTWeatherInfo objects with help of weatherInfoApiHelper
+	*/
 	private func loadWeatherInfo() {
 		showLoader()
 		weatherInfoApiHelper.getWeatherForcast {
@@ -65,6 +90,10 @@ class CTWeatherInfoViewController: UIViewController {
 		}
 	}
 
+	/**
+	This method updates UI of controller when some weather info is present.
+	In includes hiding of error view if shown, hiding or loader if shown, updating city, temperature, future forcast etc.
+	*/
 	private func updateUIForWeatherInfoChange() {
 		self.hideError()
 		let todayInfo = self.arrayOfWeatherInfo.first!
@@ -75,14 +104,24 @@ class CTWeatherInfoViewController: UIViewController {
 		self.weatherInfoTableView?.reloadData()
 	}
 
+	/**
+	This method is action handler for tap on retry button in error view. It just tries to load weather information once again.
+	*/
 	@objc func didSelectedRetryButton(sender: UIButton!) {
 		self.loadWeatherInfo()
 	}
 
+	/**
+	This method is action handler for tap on close button.
+	*/
 	@objc func didSelectedCloseButton(sender: UIButton!) {
 		self.dismiss(animated: true, completion: nil)
 	}
 
+	/**
+	This method adds error view error text and retry button.
+	Error view is added above table view with left right top bottom aligned to this controller's view.
+	*/
 	private func showError(error:Error) {
 		self.hideError()//hide error if already shown
 		var text = "Oops!\n"
@@ -96,16 +135,25 @@ class CTWeatherInfoViewController: UIViewController {
 		self.errorView = self.addErrorView(withErrorText:text)
 	}
 
+	/**
+	This method removes error view if added.
+	*/
 	private func hideError() {
 		self.errorView?.removeFromSuperview()
 	}
 
+	/**
+	This method adds a circuler loader in middle of screen.
+	*/
 	private func showLoader() {
 		self.hideError() //hide if already shown
 		self.loader = self.addLoaderView()
 		self.loader?.startAnimating()
 	}
 
+	/**
+	This method hides loader if shown
+	*/
 	private func hideLoader() {
 		self.loader?.removeFromSuperview()
 	}
@@ -116,6 +164,8 @@ class CTWeatherInfoViewController: UIViewController {
 
 }
 
+
+//MARK:UITableView data source and delegate
 extension CTWeatherInfoViewController:UITableViewDataSource, UITableViewDelegate {
 
 	func numberOfSections(in tableView: UITableView) -> Int {

@@ -7,19 +7,11 @@
 //
 
 import UIKit
-
+/**
+This is just a place holder view controller which is launched intially. Nothing is done here. After some app data intialization, Root view controller will be replaced.
+It just shows app name in center of screen.
+*/
 class CTLaunchViewController: UIViewController {
-
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
-	}
-
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
-
 
 }
 

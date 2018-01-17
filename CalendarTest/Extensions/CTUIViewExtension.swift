@@ -8,8 +8,16 @@
 
 import UIKit
 
+/**
+This is UIView extension
+*/
 extension UIView {
 
+	/**
+	This is a helper method to add subview with left, right, top, bottom aligned to view.
+
+	- Parameter subView: UIView object needs to added to current view.
+	*/
 	func addFittingSubview(subView: UIView) {
 		let superView = self
 		let view = subView

@@ -34,7 +34,7 @@ final class CTCalTableViewData {
 }
 
 /**
-This class loads data which is used to create Calendar view. It helps in loading Basic UI data which is used to draw cells and also loads no of event available on any particuler date.
+This class loads data which is used to create and update Calendar view.
 */
 final class CTCalViewDataHelper {
 
@@ -156,6 +156,7 @@ final class CTCalViewDataHelper {
 	During intial UI creation (using getBasicCollectionViewCalData) color of dots for each cell is set as clear color. After call to this method each cell will have actual colors.
 
 	- Parameter completion: Completion handler called when loading dot color of every cell is completed.
+	- Note: This should not be done in main thread. There can be many events and so doing such DB query in Main thread will cuase mejor lag in UI.
 	*/
 	final func loadEventAvailabiltyForShowingDots(completion:@escaping () -> ()) {
 		let nextStartDate = CTAppConstants.shared.minMaxDate.minDate
@@ -170,8 +171,8 @@ final class CTCalViewDataHelper {
 	it keeps celling itself recursively untill every cell has dot color.
 	It runs in background context to avoid any lag in Main thread.
 
-	 - Parameter fromDate: Minimum dates for query.
-	 - Parameter toDate: Maximum dates for query.
+	 - Parameter fromDate: Minimum date for query.
+	 - Parameter toDate: Maximum date for query.
 	 - Parameter completion: Completion handler called at the end of recursion.
 	*/
 	private func loadEventAvailablityInCalData(fromDate:Date, toDate:Date, completion:@escaping () -> ()) {
