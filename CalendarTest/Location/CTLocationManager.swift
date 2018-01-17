@@ -51,9 +51,9 @@ class  CTLocationManager:NSObject, CLLocationManagerDelegate {
 		self.currentCompletion = withCompletion
 		//try getting location service permission. It will show alert only for first time
 		self.locationHelper.requestWhenInUseAuthorization()
-		locationHelper.delegate = self
-		locationHelper.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-		locationHelper.startUpdatingLocation()
+		self.locationHelper.delegate = self
+		self.locationHelper.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+		self.locationHelper.startUpdatingLocation()
 	}
 
 	/**
@@ -62,14 +62,14 @@ class  CTLocationManager:NSObject, CLLocationManagerDelegate {
 	*/
 	private func checkForLocationAuthorization() {
 		if !CLLocationManager.locationServicesEnabled() {
-			currentCompletion!(locationError.locationServiceDisabled, nil)
-			currentCompletion = nil
+			self.currentCompletion!(locationError.locationServiceDisabled, nil)
+			self.currentCompletion = nil
 			return
 		}
 
 		if CLLocationManager.authorizationStatus() == .denied {
-			currentCompletion!(locationError.permissionDenied, nil)
-			currentCompletion = nil
+			self.currentCompletion!(locationError.permissionDenied, nil)
+			self.currentCompletion = nil
 			return
 		}
 	}
@@ -78,7 +78,7 @@ class  CTLocationManager:NSObject, CLLocationManagerDelegate {
 	//MARK: Location manager delegate
 	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
 		self.locationHelper.stopUpdatingLocation()
-		checkForLocationAuthorization()
+		self.checkForLocationAuthorization()
 		//if error is not related to permission or location service
 		self.locationHelper.delegate = nil
 		self.currentCompletion?(error, nil)
@@ -86,10 +86,9 @@ class  CTLocationManager:NSObject, CLLocationManagerDelegate {
 
 	//got location
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		//stop more location update, one ie enough
+		//stop more location update, one is enough
 		self.locationHelper.stopUpdatingLocation()
 		self.locationHelper.delegate = nil
-		
 		self.currentCompletion?(nil, manager.location!)
 	}
 }
