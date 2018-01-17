@@ -128,7 +128,7 @@ final class CTWeatherApiHelper {
 		self.lastDataTask?.cancel()
 
 		//get user's current location
-		locationManager.getCurrentLocation {
+		self.locationManager.getCurrentLocation {
 			[weak self]
 			(error, location)
 			in

@@ -10,7 +10,9 @@
 import Foundation
 import CoreData
 
-
+/**
+This auto generated subclass of CTCalendar.
+*/
 extension CTCalendar {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<CTCalendar> {
@@ -21,8 +23,13 @@ extension CTCalendar {
 		return "CTCalendar"
 	}
 
+	///Unique ID of calendar
     @NSManaged public var uniqueID: String
+
+	///Hex color string for calenar
     @NSManaged public var colorHex: String
+
+	///Name of calendar
     @NSManaged public var name: String
 
 }

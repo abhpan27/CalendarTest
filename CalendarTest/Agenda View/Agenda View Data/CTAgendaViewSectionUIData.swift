@@ -27,7 +27,7 @@ final class CTAgendaViewSectionUIData {
 
 	var backgroundColor:UIColor {
 		//if it's today section then color should be different.
-		if dateOfSection.isToday {
+		if self.dateOfSection.isToday {
 			return UIColor(red: 206/255, green: 226/255, blue: 246/255, alpha: 1.0)
 		}
 

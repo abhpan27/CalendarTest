@@ -66,9 +66,9 @@ class CTCalDayViewCellCollectionViewCell: UICollectionViewCell {
 			updateFontAndColorForNonSelectedCell()
 		}
 		///common operation needs to be done irrespective of selection state
-		setBackgroundColor()
-		setFontForDateLabel()
-		setEventAvailabiltyDotColor()
+		self.setBackgroundColor()
+		self.setFontForDateLabel()
+		self.setEventAvailabiltyDotColor()
 	}
 
 	/**

@@ -9,15 +9,27 @@
 import XCTest
 @testable import CalendarTest
 
+/**
+Unit tests for method used in Calendar view for loadind data
+*/
+
 class CTCalendarViewDataTest: XCTestCase {
 
+	///Minimum date to show calendar view
 	var minDateToShowInCal:Date!
+
+	///Maximum date to show in Calendar view
 	var maxDateToShowInCal:Date!
+
+	///Cal UI data helper class which will be tested here
 	var calUIDataHelper:CTCalViewDataHelper!
+
+	///DB query helper class which will be tested here.
 	var dbQueryHelper:CTDBQueryDataHelper!
 
     override func setUp() {
 		let minMaxDate = CTAppConstants.shared.minMaxDate
+		//Currently testing over complete range of dates supported by app.
 		self.minDateToShowInCal = minMaxDate.minDate
 		self.maxDateToShowInCal = minMaxDate.maxDate
 		self.calUIDataHelper = CTCalViewDataHelper()
@@ -32,7 +44,11 @@ class CTCalendarViewDataTest: XCTestCase {
         super.tearDown()
     }
 
+	/**
+	Unit test for loading basic grid style data for collection view of calendar view.
+	*/
 	func testCollectionViewDataForCalendarView() {
+		//load data
 		calUIDataHelper.loadBaicUIdata()
 
 		//till min date in first row there should be blank cells
@@ -60,7 +76,8 @@ class CTCalendarViewDataTest: XCTestCase {
 				if currentDateEpoch != -1 {
 					let currentDate = Date(timeIntervalSince1970: currentDateEpoch)
 					if let lastDate = currentLastDate {
-						XCTAssert(currentDate > lastDate, "Dates are not in sequence")
+						//there should not be any missing date in between. And dates should be in chronological order.
+						XCTAssert(currentDate == lastDate.nextDate, "Dates are not in sequence")
 					}
 					currentLastDate = currentDate
 				}
@@ -68,7 +85,11 @@ class CTCalendarViewDataTest: XCTestCase {
 		}
 	}
 
+	/**
+	Unit test for loading data of semi transparent overlay table view of calendar view.
+	*/
 	func testMonthOverlayTableViewDataForCalendarView() {
+		//load data
 		calUIDataHelper.loadBaicUIdata()
 
 		var currentMonthDate = self.minDateToShowInCal!
@@ -77,24 +98,32 @@ class CTCalendarViewDataTest: XCTestCase {
 		while currentMonthDate <= self.maxDateToShowInCal {
 			let expectedMonthName = currentMonthDate.monthName
 			let monthNameInData = calUIDataHelper.calTableViewUIData[calTableMonthDataIndex].monthName
-
+			//Match month names
 			XCTAssert(expectedMonthName == monthNameInData, "Mismatch between dates shown in collection view and month name shown in overlay tableview")
 
 			currentMonthDate = Calendar.current.nextMonthEndDate(currentMonthDate)
 			calTableMonthDataIndex += 1
 		}
 
-		//there should be same no of months in collection view and overlay month tableview
+		//there should be same number of months in collection view and overlay month tableview
 		let noMonthsBetweenMinAndMaxDates = self.maxDateToShowInCal!.months(from: self.minDateToShowInCal!)
-		XCTAssert((noMonthsBetweenMinAndMaxDates + 1) == calTableMonthDataIndex, "Mismatch bewtween no of months to show in collection view and data generated for overlay table view")
+		XCTAssert((noMonthsBetweenMinAndMaxDates + 1) == calTableMonthDataIndex, "Mismatch bewtween number of months to show in collection view and data generated for overlay table view")
 	}
 
+
+	/**
+	Unit test for loading dot colors of collection view cell of calendar view.
+	*/
 	func testEventAvailabilityDataForCalCollectionView() {
+		//load basic UI data first, then only dot colors can be added.
 		calUIDataHelper.loadBaicUIdata()
 
 		let expectation = self.expectation(description: "Async DB fetch for event availability")
 
+		//Test will be performed over complete range
 		let completeRangeContentRequest = CTDBQueryContentRequest(fromDate: CTAppConstants.shared.minMaxDate.minDate, endDate: CTAppConstants.shared.minMaxDate.maxDate, type: .calViewdata)
+
+		//load data from DB
 		dbQueryHelper.dictionaryOfEventAvalabilty(forContentRequest: completeRangeContentRequest) {
 			[weak self]
 			(expectedEventAvailabiltyDict, error)
@@ -117,6 +146,7 @@ class CTCalendarViewDataTest: XCTestCase {
 						return
 				}
 
+				//check if data loaded from DB and Data loaded using UI helper class is same
 				blockSelf.validateEventAvailability(withExpectedAvailability: expectedEventAvailabiltyDict!)
 				expectation.fulfill()
 			}
@@ -129,6 +159,9 @@ class CTCalendarViewDataTest: XCTestCase {
 		}
 	}
 
+	/**
+	This method tests if color of dots shown in cells of collection view are correct or not
+	*/
 	private func validateEventAvailability(withExpectedAvailability:[Date:Int]) {
 		for row in 0 ... self.calUIDataHelper.calCollectionViewUIData.count - 1 {
 			for coloum in 0 ... 6 {

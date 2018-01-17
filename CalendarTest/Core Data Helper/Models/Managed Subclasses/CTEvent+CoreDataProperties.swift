@@ -10,7 +10,9 @@
 import Foundation
 import CoreData
 
-
+/**
+This auto generated subclass of CTEvent.
+*/
 extension CTEvent {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<CTEvent> {
@@ -21,14 +23,33 @@ extension CTEvent {
 		return "CTEvent"
 	}
 
+	///title of event
 	@NSManaged public var title: String
+
+	///unique ID of event
     @NSManaged public var uniqueID: String
+
+	///Unix epoch for start time
     @NSManaged public var startTime: Double
+
+	///Unix epoch for end time
     @NSManaged public var endTime: Double
+
+	///Bool which shows wheteher current event is All Day event
     @NSManaged public var isAllDay: Bool
+
+	///Optional location of event
     @NSManaged public var loactionString: String?
+
+	///optional set of attendees of event
     @NSManaged public var attendees: NSSet?
+
+	///Calendar to which this event belongs to.
     @NSManaged public var calendar: CTCalendar
+
+	/*
+	Many more properties can be added here based on features supported by app. For example one property called type of event (birthday, flight, meeting, date etc) can be added.
+	*/
 
 }
 

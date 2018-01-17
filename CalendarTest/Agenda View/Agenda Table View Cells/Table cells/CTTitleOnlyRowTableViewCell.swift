@@ -34,7 +34,7 @@ class CTTitleOnlyRowTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 		self.selectionStyle = .none
-		addCommonUIElements()
+		self.addCommonUIElements()
     }
 
 	/**

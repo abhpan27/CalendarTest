@@ -39,8 +39,8 @@ class CTWeatherInfoViewController: UIViewController {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
-		addAndLayoutViews()
-		CTWeatherInfoTableViewCell.registerCell(inTableView: weatherInfoTableView!, withIdentifier: "CTWeatherInfoTableViewCell")
+		self.addAndLayoutViews()
+		CTWeatherInfoTableViewCell.registerCell(inTableView: self.weatherInfoTableView!, withIdentifier: "CTWeatherInfoTableViewCell")
 		loadWeatherInfo()
     }
 
@@ -48,15 +48,15 @@ class CTWeatherInfoViewController: UIViewController {
 	This method adds and layout all the views. Nothing is added in XIB
 	*/
 	private func addAndLayoutViews() {
-		let separator = addTitleAndTodayWeatherViewSeparator()
-		addCloseButton(above: separator)
-		addTitleLabel(above: separator)
-		let todayWeatherInfoContainer = addTodayWeatherView(below: separator)
-		cityNameLabel = addCityNameLabel(inView: todayWeatherInfoContainer)
-		tempratureLabel = addCurrTempLabel(inView: todayWeatherInfoContainer, below: cityNameLabel!)
-		generalWeatherText = addWeatherInfoLabel(inView: todayWeatherInfoContainer, below: tempratureLabel!)
-		weatherInfoTableView = addWeatherInfoTableView(below: todayWeatherInfoContainer)
-		weatherInfoTableView?.tableFooterView = UIView()
+		let separator = self.addTitleAndTodayWeatherViewSeparator()
+		self.addCloseButton(above: separator)
+		self.addTitleLabel(above: separator)
+		let todayWeatherInfoContainer = self.addTodayWeatherView(below: separator)
+		self.cityNameLabel = self.addCityNameLabel(inView: todayWeatherInfoContainer)
+		self.tempratureLabel = self.addCurrTempLabel(inView: todayWeatherInfoContainer, below: cityNameLabel!)
+		self.generalWeatherText = self.addWeatherInfoLabel(inView: todayWeatherInfoContainer, below: tempratureLabel!)
+		self.weatherInfoTableView = self.addWeatherInfoTableView(below: todayWeatherInfoContainer)
+		self.weatherInfoTableView?.tableFooterView = UIView()
 	}
 
 
@@ -64,8 +64,8 @@ class CTWeatherInfoViewController: UIViewController {
 	This method loads array of CTWeatherInfo objects with help of weatherInfoApiHelper
 	*/
 	private func loadWeatherInfo() {
-		showLoader()
-		weatherInfoApiHelper.getWeatherForcast {
+		self.showLoader()
+		self.weatherInfoApiHelper.getWeatherForcast {
 			[weak self]
 			(error, weatherInfoList)
 			in

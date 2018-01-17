@@ -10,6 +10,9 @@
 import Foundation
 import CoreData
 
+/**
+This is autogenrated subclass of CTPerson. This object is used as attendee in event.
+*/
 
 extension CTPerson {
 
@@ -21,9 +24,16 @@ extension CTPerson {
 		return "CTPerson"
 	}
 
+	///unique ID of person
     @NSManaged public var uniqueID: String
+
+	///Name of person
     @NSManaged public var name: String
+
+	///Email ID of person
     @NSManaged public var emailID: String
+
+	///Hex color string for person.
 	@NSManaged public var colorHex: String
 
 }

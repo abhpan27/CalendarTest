@@ -10,6 +10,9 @@
 import Foundation
 import CoreData
 
+/**
+This auto generated subclass of CTEvent. Currently there are no methods here, it can be added as app grows.
+*/
 @objc(CTEvent)
 public class CTEvent: NSManagedObject {
 

@@ -15,7 +15,7 @@ This class represent single event in Agenda view. For every row in agenda view t
 final class CTAgendaViewRowUIData {
 
 	/**
-	Represents Attendees if event. More attributes such as RSVP status etc can be added. But for now only name, email and color is added.
+	Represents Attendees of event. More attributes such as RSVP status etc can be added. But for now only name, email and color is added.
 	*/
 	struct AttendeeData {
 		let name:String

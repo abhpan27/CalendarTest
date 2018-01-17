@@ -32,8 +32,8 @@ class CTWeatherInfoTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-		addDateLabel()
-		addWeatherInfoLabel()
+		self.addDateLabel()
+		self.addWeatherInfoLabel()
 		self.selectionStyle = .none
     }
 

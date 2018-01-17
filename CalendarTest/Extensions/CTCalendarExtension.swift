@@ -45,9 +45,9 @@ extension Calendar {
 	}
 
 	/**
-	This method returns start of month of date obtained after subtracting given number of months from given Date.
+	This method returns start date of month of date which is obtained after subtracting given number of months from given Date.
 
-	- Parameter noOfMonths: No of months to be subtracted from given date
+	- Parameter noOfMonths: number of months to be subtracted from given date
 	- Parameter date: Date from which given number of months will be subtracted.
 	- Returns: Date object for start of month of date obtained after subtracting given number of months from given Date.
 	*/
@@ -57,13 +57,14 @@ extension Calendar {
 
 
 	/**
-	This method returns start of month of date obtained after adding given number of months to given Date.
+	This method returns start date of month of date which obtained after adding given number of months to given Date.
 
-	- Parameter noOfMonths: No of months to be added to given date
+	- Parameter noOfMonths: number of months to be added to given date
 	- Parameter date: Date to which given number of months will be added.
 	- Returns: Date object for start of month of date obtained after adding given number of months to given Date.
 	*/
 	func futureMonth(noOfMonths:Int, date:Date) -> Date {
+		//add one extra month and reduce 1 day to get last day of previous month
 		return self.date(byAdding: DateComponents(month: (noOfMonths + 1), day: -1), to: self.startOfMonth(date))!
 	}
 

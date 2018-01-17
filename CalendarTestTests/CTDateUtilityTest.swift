@@ -9,12 +9,18 @@
 import XCTest
 @testable import CalendarTest
 
+/**
+Unit tests for Date extension.
+*/
 class CTDateUtilityTest: XCTestCase {
 
 	override func setUp() {
         super.setUp()
     }
 
+	/**
+	Unit test for getting next date from date
+	*/
 	func testNextDateUtility() {
 		let firstDate = dateFromText(fullDateText: "Jan 14, 2018 12:00:00")
 		let secondDateSameTime = dateFromText(fullDateText: "Jan 15, 2018 12:00:00")
@@ -25,6 +31,10 @@ class CTDateUtilityTest: XCTestCase {
 		XCTAssert(firstDate.nextDate != thirdDateDifferentTime, "Next date with different time is accepted")
 	}
 
+
+	/**
+	Unit test for getting first moment of any day
+	*/
 	func testStartOfDateUtility() {
 		let endOfDate = dateFromText(fullDateText: "Jan 14, 2018 23:59:59")
 		let expectedStartOfDate = dateFromText(fullDateText: "Jan 14, 2018 00:00:00")
@@ -33,6 +43,9 @@ class CTDateUtilityTest: XCTestCase {
 		XCTAssert(endOfDate.startOfDate == expectedStartOfDate, "Start of date not returnig first moment of day")
 	}
 
+	/**
+	Unit test for getting last moment of any day
+	*/
 	func testEndOfDayUtility() {
 		let startOfDay = dateFromText(fullDateText: "Jan 14, 2018 00:00:00")
 		let expectedEndOfDay = dateFromText(fullDateText: "Jan 14, 2018 23:59:59")
@@ -41,6 +54,9 @@ class CTDateUtilityTest: XCTestCase {
 		XCTAssert(startOfDay.endOfDate == expectedEndOfDay, "End of day is not returning last moment of day")
 	}
 
+	/**
+	Unit test for checking if dates are in same year
+	*/
 	func testIsInSameYearUtility() {
 		let firstDayOfYear = dateFromText(fullDateText: "Jan 1, 2018 00:00:00")
 		let lastDayOfYear = dateFromText(fullDateText: "Dec 31, 2018 23:59:59")
@@ -53,6 +69,9 @@ class CTDateUtilityTest: XCTestCase {
 		XCTAssert(!lastDayOfYear.isInSameYear(with: firstDayOfNextYear), "First day of next and last day of current year are detected in same year")
 	}
 
+	/**
+	Unit test for checking if dates are in same month
+	*/
 	func testIsInSameMonthUtility() {
 		let firstDate = dateFromText(fullDateText: "Jan 4, 2018 00:00:00")
 		let dateInSameYearSameMonth = dateFromText(fullDateText: "Jan 25, 2018 00:00:00")
@@ -67,6 +86,9 @@ class CTDateUtilityTest: XCTestCase {
 		XCTAssert(!firstDate.isInSameMonth(with: dateInSameMonthDiffYear), "Different month with same year are detected in same month")
 	}
 
+	/**
+	Unit test for checking if dates are in same week
+	*/
 	func testIsInSameWeekUtility() {
 		let firstDate = dateFromText(fullDateText: "Jan 4, 2018 00:00:00")
 		let sameWeekSameMonthSameYear = dateFromText(fullDateText: "Jan 1, 2018 00:00:00")
@@ -81,6 +103,12 @@ class CTDateUtilityTest: XCTestCase {
 		XCTAssert(!firstDate.isInSameWeek(with: sameWeekDifferentYear), "Same weeks in different year are detected as same")
 	}
 
+	/**
+	This method returns date from string. It expects date in format - "MMM d, yyyy HH:mm:ss"
+
+	- Parameter fullDateText: String in format "MMM d, yyyy HH:mm:ss"
+	- Note: This will crash if correct string is not passed.
+	*/
 	private func dateFromText(fullDateText:String) -> Date {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "MMM d, yyyy HH:mm:ss"
@@ -90,5 +118,4 @@ class CTDateUtilityTest: XCTestCase {
     override func tearDown() {
         super.tearDown()
     }
-    
 }

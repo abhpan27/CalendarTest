@@ -52,7 +52,7 @@ class CTCompleteInfoTableViewCell: UITableViewCell {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		self.selectionStyle = .none
-		addUIElements()
+		self.addUIElements()
 	}
 
 	/**
@@ -86,44 +86,44 @@ class CTCompleteInfoTableViewCell: UITableViewCell {
 
 		//Logic for showing attendee first name and color
 		//first hide all labels
-		firstAttendeeLabel.isHidden = true
-		secondAttendeeLabel.isHidden = true
-		thirdAttendeeLabel.isHidden = true
-		remaingAttendeeCountLabel.isHidden = true
+		self.firstAttendeeLabel.isHidden = true
+		self.secondAttendeeLabel.isHidden = true
+		self.thirdAttendeeLabel.isHidden = true
+		self.remaingAttendeeCountLabel.isHidden = true
 
 		var attendees = uiData.attendeesInfo
 
 		//There will always be atleast one attendee, other wise this cell will not be used
 		//get first attendee and show
 		let firstAttendee = attendees[0]
-		firstAttendeeLabel.isHidden = false
-		firstAttendeeLabel.text = firstAttendee.name.first!.description
-		firstAttendeeLabel.backgroundColor = firstAttendee.color
+		self.firstAttendeeLabel.isHidden = false
+		self.firstAttendeeLabel.text = firstAttendee.name.first!.description
+		self.firstAttendeeLabel.backgroundColor = firstAttendee.color
 		///remove first attendee from list
 		attendees.remove(at: 0)
 
 		//check and show second attendee, remove after showing
 		if attendees.count > 0 {
 			let secondAttendee = attendees[0]
-			secondAttendeeLabel.isHidden = false
-			secondAttendeeLabel.text = secondAttendee.name.first!.description
-			secondAttendeeLabel.backgroundColor = secondAttendee.color
+			self.secondAttendeeLabel.isHidden = false
+			self.secondAttendeeLabel.text = secondAttendee.name.first!.description
+			self.secondAttendeeLabel.backgroundColor = secondAttendee.color
 			attendees.remove(at: 0)
 		}
 
 		//check and show third attendee, remove after showing
 		if attendees.count > 0 {
 			let thirdAttendee = attendees[0]
-			thirdAttendeeLabel.isHidden = false
-			thirdAttendeeLabel.text = thirdAttendee.name.first!.description
-			thirdAttendeeLabel.backgroundColor = thirdAttendee.color
+			self.thirdAttendeeLabel.isHidden = false
+			self.thirdAttendeeLabel.text = thirdAttendee.name.first!.description
+			self.thirdAttendeeLabel.backgroundColor = thirdAttendee.color
 			attendees.remove(at: 0)
 		}
 
 		//Still more attendees left then show remaining count label
 		if attendees.count > 0 {
-			remaingAttendeeCountLabel.isHidden = false
-			remaingAttendeeCountLabel.text = "+" + "\(attendees.count)"
+			self.remaingAttendeeCountLabel.isHidden = false
+			self.remaingAttendeeCountLabel.text = "+" + "\(attendees.count)"
 		}
 	}
 }

@@ -87,7 +87,7 @@ final class CTCalendarViewController: UIViewController {
 			if oldValue != viewingMode {
 				if viewingMode == .twoRows {
 					//stop scrolling animation to avoid jerk.
-					stopScrolling()
+					self.stopScrolling()
 				}
 				//inform delegate about viewing mode change
 				self.delegate?.viewingModeDidChange(viewingMode: viewingMode)
@@ -109,7 +109,7 @@ final class CTCalendarViewController: UIViewController {
 		//load minimal UI data neede for drawing collection view and table view.
 		self.calendarViewUIDataHelper.loadBaicUIdata()
 		CTCalDayViewCellCollectionViewCell.registerCell(collectionView: calCollectionView, withIdentifier: "CTCalDayViewCellCollectionViewCell")
-		setUpBasicTableUI()
+		self.setUpBasicTableUI()
 		//select current date after some delay so that current drawing of cells is completed
 		delayedRunInMainQueue(0.1) {
 			self.selectDate(date: Date(), animated: false)

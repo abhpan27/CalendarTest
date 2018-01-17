@@ -13,7 +13,7 @@ import Foundation
 enum for Errors encountered during dummy app data creation
 */
 internal enum DummyDataFillerErrors:Error {
-	//thrwn when static dummy app data creation failed for some reason.
+	//thrown when static dummy app data creation failed for some reason.
 	case dummyDataCreationFailed
 }
 
@@ -195,14 +195,14 @@ final class CTIntialDummyDataFiller {
 	private func getDummyEvent(onDate:Date, isAllDay:Bool, person:[CTPerson], calendar:CTCalendar, inContext:NSManagedObjectContext) -> CTEvent {
 
 		let dummyEvent = NSEntityDescription.insertNewObject(forEntityName: CTEvent.entityName, into: inContext) as! CTEvent
-		let randomizedStartEndTime = getRandomizedStartEndTime(onDate: onDate, isAllDay: isAllDay)
+		let randomizedStartEndTime = self.getRandomizedStartEndTime(onDate: onDate, isAllDay: isAllDay)
 		dummyEvent.uniqueID = UUID().uuidString
 		dummyEvent.startTime = randomizedStartEndTime.startTime.timeIntervalSince1970
 		dummyEvent.endTime = randomizedStartEndTime.endTime.timeIntervalSince1970
 		dummyEvent.isAllDay = isAllDay
-		dummyEvent.loactionString = getRandomizedDummyLocation()
-		dummyEvent.attendees = getRandomizedArrayOfPeople(originalArrayOfPeople: person)
-		dummyEvent.title = getRandomizedDummyTitle()
+		dummyEvent.loactionString = self.getRandomizedDummyLocation()
+		dummyEvent.attendees = self.getRandomizedArrayOfPeople(originalArrayOfPeople: person)
+		dummyEvent.title = self.getRandomizedDummyTitle()
 		dummyEvent.calendar = calendar
 		return dummyEvent
 	}

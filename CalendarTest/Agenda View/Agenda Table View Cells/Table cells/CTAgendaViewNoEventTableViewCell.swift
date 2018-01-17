@@ -25,7 +25,7 @@ class CTAgendaViewNoEventTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 		self.selectionStyle = .none
-        addNoEventLabel()
+        self.addNoEventLabel()
     }
 
 	/**

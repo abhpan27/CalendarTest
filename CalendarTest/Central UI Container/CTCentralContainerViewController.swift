@@ -45,7 +45,7 @@ class CTCentralContainerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		addAndLayoutViews()
+		self.addAndLayoutViews()
     }
 
 	override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -56,11 +56,11 @@ class CTCentralContainerViewController: UIViewController {
 	This method is responsible to adding views and adding constraints for these views.
 	*/
 	private func addAndLayoutViews() {
-		addAndLayoutTopBar()
-		addTopBarAndCalendarViewSeparator()
-		addAndLayoutCalendarView()
-		addCalAndAgendaViewSeparator()
-		addAgendaView()
+		self.addAndLayoutTopBar()
+		self.addTopBarAndCalendarViewSeparator()
+		self.addAndLayoutCalendarView()
+		self.addCalAndAgendaViewSeparator()
+		self.addAgendaView()
 		self.view.layoutIfNeeded()
 	}
 

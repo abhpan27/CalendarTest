@@ -68,10 +68,10 @@ extension CTCentralContainerViewController {
 	This methods adds Calendar view below top bar.
 	*/
 	func addAndLayoutCalendarView() {
-		self.addChildViewController(calendarViewController)
-		self.view.addSubview(calendarViewController.view)
-		calendarViewController.didMove(toParentViewController: self)
-		calendarViewController.view.translatesAutoresizingMaskIntoConstraints = false
+		self.addChildViewController(self.calendarViewController)
+		self.view.addSubview(self.calendarViewController.view)
+		self.calendarViewController.didMove(toParentViewController: self)
+		self.calendarViewController.view.translatesAutoresizingMaskIntoConstraints = false
 
 		/*
 		left and right align to central container.
@@ -84,10 +84,10 @@ extension CTCentralContainerViewController {
 
 		height is kept according to viewing mode of calendar, ie for two row mode 2*row height and for five row mode 5*row height
 		*/
-		let left = NSLayoutConstraint(item: calendarViewController.view, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1.0, constant: 0)
-		let right = NSLayoutConstraint(item: calendarViewController.view, attribute: .right, relatedBy: .equal, toItem: self.view, attribute: .right, multiplier: 1.0, constant: 0)
-		let top = NSLayoutConstraint(item: calendarViewController.view, attribute: .top, relatedBy: .equal, toItem: self.topBar, attribute: .bottom, multiplier: 1.0, constant: 1)
-		let height = NSLayoutConstraint(item: calendarViewController.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: calendarViewController.viewingMode.totalHeightNeeded)
+		let left = NSLayoutConstraint(item: self.calendarViewController.view, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1.0, constant: 0)
+		let right = NSLayoutConstraint(item: self.calendarViewController.view, attribute: .right, relatedBy: .equal, toItem: self.view, attribute: .right, multiplier: 1.0, constant: 0)
+		let top = NSLayoutConstraint(item: self.calendarViewController.view, attribute: .top, relatedBy: .equal, toItem: self.topBar, attribute: .bottom, multiplier: 1.0, constant: 1)
+		let height = NSLayoutConstraint(item: self.calendarViewController.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: self.calendarViewController.viewingMode.totalHeightNeeded)
 
 		NSLayoutConstraint.activate([left, right, top, height])
 		//also keep reference to height constraint. It will be used to change viweing mode from five rows to two rows and vice versa
@@ -121,10 +121,10 @@ extension CTCentralContainerViewController {
 	This methods adds agenda view below calendar view
 	*/
 	func addAgendaView() {
-		self.addChildViewController(agendaViewController)
-		self.view.addSubview(agendaViewController.view)
-		agendaViewController.didMove(toParentViewController: self)
-		agendaViewController.view.translatesAutoresizingMaskIntoConstraints = false
+		self.addChildViewController(self.agendaViewController)
+		self.view.addSubview(self.agendaViewController.view)
+		self.agendaViewController.didMove(toParentViewController: self)
+		self.agendaViewController.view.translatesAutoresizingMaskIntoConstraints = false
 
 		/*
 		left, right and bottom align to central container.
@@ -135,10 +135,10 @@ extension CTCentralContainerViewController {
 			|
 		Agenda view
 		*/
-		let left = NSLayoutConstraint(item: agendaViewController.view, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1.0, constant: 0)
-		let right = NSLayoutConstraint(item: agendaViewController.view, attribute: .right, relatedBy: .equal, toItem: self.view, attribute: .right, multiplier: 1.0, constant: 0)
-		let top = NSLayoutConstraint(item: agendaViewController.view, attribute: .top, relatedBy: .equal, toItem: self.calendarViewController.view, attribute: .bottom, multiplier: 1.0, constant: 1)
-		let bottom = NSLayoutConstraint(item: agendaViewController.view, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 0)
+		let left = NSLayoutConstraint(item: self.agendaViewController.view, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1.0, constant: 0)
+		let right = NSLayoutConstraint(item: self.agendaViewController.view, attribute: .right, relatedBy: .equal, toItem: self.view, attribute: .right, multiplier: 1.0, constant: 0)
+		let top = NSLayoutConstraint(item: self.agendaViewController.view, attribute: .top, relatedBy: .equal, toItem: self.calendarViewController.view, attribute: .bottom, multiplier: 1.0, constant: 1)
+		let bottom = NSLayoutConstraint(item: self.agendaViewController.view, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 0)
 
 		NSLayoutConstraint.activate([left, right, top, bottom])
 	}

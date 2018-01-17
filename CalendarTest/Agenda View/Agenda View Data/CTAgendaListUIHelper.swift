@@ -47,7 +47,7 @@ final class CTAgendaListUIHelper {
 	*/
 	final func loadOnFirstLaunch(completion: @escaping (_ error: Error?) -> ()) {
 		let contentRequestForDB = self.contentRequest(contentLoadState: .loadContentOnLaunch)
-		dbQueryHelper.arrayOfAgendaSectionUIData(forContentRequest: contentRequestForDB) {
+		self.dbQueryHelper.arrayOfAgendaSectionUIData(forContentRequest: contentRequestForDB) {
 			[weak self]
 			(sectionUIDataList, error)
 			in
@@ -80,7 +80,7 @@ final class CTAgendaListUIHelper {
 	*/
 	final func loadFutureUIData(completion: @escaping (_ error: Error?) -> ()) {
 		let contentRequestForDB = self.contentRequest(contentLoadState: .loadFutureContent)
-		dbQueryHelper.arrayOfAgendaSectionUIData(forContentRequest: contentRequestForDB) {
+		self.dbQueryHelper.arrayOfAgendaSectionUIData(forContentRequest: contentRequestForDB) {
 			[weak self]
 			(sectionUIDataList, error)
 			in
@@ -114,7 +114,7 @@ final class CTAgendaListUIHelper {
 	*/
 	final func loadPastUIData(completion: @escaping (_ error: Error?) -> ()) {
 		let contentRequest = self.contentRequest(contentLoadState: .loadPastContent)
-		dbQueryHelper.arrayOfAgendaSectionUIData(forContentRequest: contentRequest) {
+		self.dbQueryHelper.arrayOfAgendaSectionUIData(forContentRequest: contentRequest) {
 			[weak self]
 			(sectionUIDataList, error)
 			in
@@ -151,7 +151,7 @@ final class CTAgendaListUIHelper {
 
 		let contentRequest = self.contentRequest(contentLoadState: .loadContentForDateSelectionInCalendar(date: selectedDateInCalendar))
 
-		dbQueryHelper.arrayOfAgendaSectionUIData(forContentRequest: contentRequest) {
+		self.dbQueryHelper.arrayOfAgendaSectionUIData(forContentRequest: contentRequest) {
 			[weak self]
 			(sectionUIDataList, error)
 			in
@@ -215,7 +215,7 @@ final class CTAgendaListUIHelper {
 			return CTDBQueryContentRequest(fromDate: startDate, endDate: endDate, type: .agendaViewData)
 
 		case .loadContentForDateSelectionInCalendar(let dateSelectedInCal):
-			//there should be minimum 15 days above and 15 days below loaded in list from dateSelectedInCal
+			//there should be minimum 15 days above and 15 days below in list from dateSelectedInCal
 			let minDateLoadedCurrently = self.arrayOfSectionUIData.first!.dateOfSection
 			let maxDateLoadedCurrently = self.arrayOfSectionUIData.last!.dateOfSection
 			let minNumberOfDayBeforeAndAfter = 15
@@ -236,7 +236,7 @@ final class CTAgendaListUIHelper {
 	}
 
 	/**
-	This Method returns index path of table view for date. It linearly searches in current loaded list of events.
+	This Method returns index path of table view for date. It linearly searches in current loaded list of dates.
 
 	- Parameter date: Date for which index path is needed
 	- Returns: Optional index path for date. If date is not yet loaded in list then nil will be returned.

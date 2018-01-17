@@ -39,10 +39,10 @@ class CTTopBarOnCentralView: UIView {
 	}
 
 	override func awakeFromNib() {
-		addMonthLabel()
-		addWeekDayLabels()
-		addWeatherInfoButton()
-		updateMonthLabel(date: Date())
+		self.addMonthLabel()
+		self.addWeekDayLabels()
+		self.addWeatherInfoButton()
+		self.updateMonthLabel(date: Date())
 		self.backgroundColor = UIColor.white
 	}
 
@@ -50,7 +50,7 @@ class CTTopBarOnCentralView: UIView {
 	Action handler for weather button.
 	*/
 	@objc func didSelectedWeatherInfoButton(sender: UIButton!) {
-		delegate?.didSelectedWeatherInfoButton()
+		self.delegate?.didSelectedWeatherInfoButton()
 	}
 
 	/**
@@ -100,12 +100,12 @@ class CTTopBarOnCentralView: UIView {
 	In Y Direction --- (bottom of label - 33pt gap - bottom of cell)
 	*/
 	private func addMonthLabel() {
-		monthLabel = UILabel()
+		self.monthLabel = UILabel()
 		self.addSubview(monthLabel!)
-		monthLabel?.textColor = UIColor(red: 41/255, green: 127/255, blue: 246/255, alpha: 1.0)
-		monthLabel?.font = CTFont.systemFont(ofSize: 22, weight: .Medium)
-		monthLabel?.text = "Month Name"
-		monthLabel?.translatesAutoresizingMaskIntoConstraints = false
+		self.monthLabel?.textColor = UIColor(red: 41/255, green: 127/255, blue: 246/255, alpha: 1.0)
+		self.monthLabel?.font = CTFont.systemFont(ofSize: 22, weight: .Medium)
+		self.monthLabel?.text = "Month Name"
+		self.monthLabel?.translatesAutoresizingMaskIntoConstraints = false
 
 		let centerX = NSLayoutConstraint(item: monthLabel!, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0)
 		let bottom = NSLayoutConstraint(item: monthLabel!, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -33)

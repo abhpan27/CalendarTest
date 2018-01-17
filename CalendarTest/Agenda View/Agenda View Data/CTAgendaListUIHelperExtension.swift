@@ -9,7 +9,7 @@
 import UIKit
 
 /**
-This is extension for Agenda list UI helper. It helps providing tableview essential UI information such as no of rows, no of sections, height, cell etc.
+This is extension for Agenda list UI helper. It helps providing tableview essential UI information such as number of rows, number of sections, height, cell etc.
 */
 extension CTAgendaListUIHelper {
 

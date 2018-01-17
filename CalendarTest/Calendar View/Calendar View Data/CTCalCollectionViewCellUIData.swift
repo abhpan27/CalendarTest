@@ -68,7 +68,7 @@ final class CTCalCollectionViewCellUIData {
 			let date = Date(timeIntervalSince1970: dateEpoch)
 			let dateFormatter = DateFormatter()
 			dateFormatter.dateFormat = "d"
-			dateNumberString = dateFormatter.string(from: date)
+			self.dateNumberString = dateFormatter.string(from: date)
 
 			//full date string
 			if date.isFirstDateOfMonth {
@@ -83,8 +83,8 @@ final class CTCalCollectionViewCellUIData {
 			self.fullDateString = dateFormatter.string(from: date).replacingOccurrences(of: "#", with: "\n")
 		}else {
 			//for blank cell both strings are empty
-			dateNumberString = ""
-			fullDateString = ""
+			self.dateNumberString = ""
+			self.fullDateString = ""
 		}
 	}
 }

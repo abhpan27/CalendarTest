@@ -66,10 +66,10 @@ class CTAgendaViewController: UIViewController {
 
 		if (scrollOffset <= optimalGapValue && self.isUserScrollingUP) {
 			//user is scrolling up and now in top 1/3rd portion of list, it is good time to add more days on top
-			loadPastEventsInAgendaView()
+			self.loadPastEventsInAgendaView()
 		}else if (((scrollOffset+scrollViewHeight+optimalGapValue) > scrollContentSizeHeight) && !self.isUserScrollingUP) {
 			///user is scrolling down and now in bottom 1/3rd part of list. It is good time to add more days below list.
-			loadFutureEventsInAgendaView()
+			self.loadFutureEventsInAgendaView()
 		}
 	}
 
@@ -132,7 +132,7 @@ class CTAgendaViewController: UIViewController {
 	This method is used to load days on first launch of agenda view. It takes help from listUIHelper to get data from DB.
 	*/
 	private func loadEventForFirstLaunch() {
-		listUIHelper.loadOnFirstLaunch { (error) in
+		self.listUIHelper.loadOnFirstLaunch { (error) in
 			guard error == nil
 				else{
 					return
@@ -217,11 +217,11 @@ extension CTAgendaViewController:UIScrollViewDelegate {
 		//inform delegate that user started dragging table view
 		self.delegate?.didDragAgendaView(agendaView: self.agendaTableView)
 		//also see if more events needs to loaded in list
-		checkScrollAndLoadMoreFutureOrPastEvents()
+		self.checkScrollAndLoadMoreFutureOrPastEvents()
 	}
 
 	func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-		checkScrollAndLoadMoreFutureOrPastEvents()
+		self.checkScrollAndLoadMoreFutureOrPastEvents()
 	}
 
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -230,7 +230,7 @@ extension CTAgendaViewController:UIScrollViewDelegate {
 		}else {
 			isUserScrollingUP = true
 		}
-		lastContentOffSetOfAgendaView = scrollView.contentOffset.y
+		self.lastContentOffSetOfAgendaView = scrollView.contentOffset.y
 
 		mainQueueAsync {
 			//update date selected in calendar and in month name shown on top bar

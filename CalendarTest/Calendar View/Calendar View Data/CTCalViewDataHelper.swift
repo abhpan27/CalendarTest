@@ -9,7 +9,7 @@
 import Foundation
 
 /**
-Mapping between day name and day no - Sunday is 1 saturday is 7
+Mapping between day name and day number - Sunday is 1 saturday is 7
 */
 internal enum WeekDayNumber:Int {
 	case sunday = 1, monday, tuesday, wednesday, thursday, friday, saturday
@@ -24,7 +24,7 @@ final class CTCalTableViewData {
 	///Name of month shown in overlay table view.
 	let monthName:String
 
-	///No of different week in any month. Used to calculate height for row for this month
+	///Number of different week in any month. Used to calculate height for row for this month
 	let noOfDifferentWeeksInMonth:Int
 
 	init(monthName:String, noOfDifferentWeeksInMonth:Int) {
@@ -47,7 +47,7 @@ final class CTCalViewDataHelper {
 	///Helps in querying Core data. Used to load availability of events on any date
 	private let dbQueryHelper = CTDBQueryDataHelper()
 
-	///No of days queried from DB in single call
+	///Number of days queried from DB in single chunk
 	let noOfDatesToQueryEachTime = 30
 
 	/**
@@ -61,7 +61,7 @@ final class CTCalViewDataHelper {
 
 
 	/**
-	This method loads Barebone UI data for collection view. It is a 2D array where each row represents 1 Week. So no of coloumns in each row is 7 (equal to no of day in week).
+	This method loads Barebone UI data for collection view. It is a 2D array where each row represents 1 Week. So number of coloumns in each row is 7 (equal to number of day in week).
 	2D array of CTCalCollectionViewCellUIData is generated in form of -
 	- - - - d d d
 	d d d d d d d
@@ -132,7 +132,7 @@ final class CTCalViewDataHelper {
 
 		while(currentDateInIteration <= minMaxDateInfo.maxDate) {
 
-			//no of different weeks in a month can be 4 or 5
+			//number of different weeks in a month can be 4 or 5
 			var noOfWeeksToShowForCurrentMonth = currentDateInIteration.numberOfWeeksInCurrentMonth
 			let lastDayOfMonth = Calendar.current.endOfMonth(currentDateInIteration).weekDay
 
@@ -152,7 +152,7 @@ final class CTCalViewDataHelper {
 
 
 	/**
-	This method loads color of dots shown in each cell of collection view. Color of dot shown in cell depends of no of events avaiable on that date.
+	This method loads color of dots shown in each cell of collection view. Color of dot shown in cell depends of number of events available on that date.
 	During intial UI creation (using getBasicCollectionViewCalData) color of dots for each cell is set as clear color. After call to this method each cell will have actual colors.
 
 	- Parameter completion: Completion handler called when loading dot color of every cell is completed.
@@ -162,12 +162,12 @@ final class CTCalViewDataHelper {
 		let nextStartDate = CTAppConstants.shared.minMaxDate.minDate
 		let nextEndDate = nextStartDate.nextDateAfter(days: self.noOfDatesToQueryEachTime)
 		//call for chunk of intial 30 days
-		loadEventAvailablityInCalData(fromDate: nextStartDate, toDate: nextEndDate, completion: completion)
+		self.loadEventAvailablityInCalData(fromDate: nextStartDate, toDate: nextEndDate, completion: completion)
 	}
 
 
 	/**
-	This method does actual task of querying no of events on dates. It queries core data in chunk of 30 days and calls appendEventAvailabilityInCurrentCalData to change color of dots of cells in that range.
+	This method does actual task of querying number of events on dates. It queries core data in chunk of 30 days and calls appendEventAvailabilityInCurrentCalData to change color of dots of cells in that range.
 	it keeps celling itself recursively untill every cell has dot color.
 	It runs in background context to avoid any lag in Main thread.
 
@@ -187,7 +187,7 @@ final class CTCalViewDataHelper {
 		//DB content reuest for current chunk
 		let contentRequest = CTDBQueryContentRequest(fromDate: fromDate, endDate: toDate, type: .calViewdata)
 		//get dictonary of event available on dates of current range
-		dbQueryHelper.dictionaryOfEventAvalabilty(forContentRequest: contentRequest) {
+		self.dbQueryHelper.dictionaryOfEventAvalabilty(forContentRequest: contentRequest) {
 			[weak self]
 			(availabiltyDict, error)
 			in
@@ -231,13 +231,13 @@ final class CTCalViewDataHelper {
 				let dateForCell = Date(timeIntervalSince1970: cellData.dateEpoch)
 				if let noOfEventsOnDay = availabiltyDict[dateForCell] {
 					if noOfEventsOnDay == 1 {
-						//if no of events on date is 1, use light grey color for dot
+						//if number of events on date is 1, use light grey color for dot
 						self.calCollectionViewUIData[rowIndex][coloumnIndex].eventAvailabilityColor = CalendarViewCellEventAvailablityColor.lightGrey.rawValue
 					}else if noOfEventsOnDay == 2 {
-						//if no of events on date is 2, use medium grey color for dot
+						//if number of events on date is 2, use medium grey color for dot
 						self.calCollectionViewUIData[rowIndex][coloumnIndex].eventAvailabilityColor = CalendarViewCellEventAvailablityColor.mediumGrey.rawValue
 					}else {
-						//if no of events on date is 3 or more than 3, then use dark grey color for dot
+						//if number of events on date is 3 or more than 3, then use dark grey color for dot
 						self.calCollectionViewUIData[rowIndex][coloumnIndex].eventAvailabilityColor = CalendarViewCellEventAvailablityColor.darkGrey.rawValue
 					}
 					//by default dot's color for each cell is already set to clear color, so need to check for 0 events, process next item
@@ -264,7 +264,7 @@ final class CTCalViewDataHelper {
 			return IndexPath(row: firstDateInfo.indexPath.row + daysBetween, section: 0)
 		}
 
-		//get no of weeks between first date shown in first row and Date passes as parameter
+		//get number of weeks between first date shown in first row and Date passes as parameter
 		let numberOfWeeksBetweenDates = date.numberOfWeeks(from: firstDateInfo.date)
 		let rowOfDate = date.weekDay - 1 //week days are in range (1..7) rows are in range (0...6)
 

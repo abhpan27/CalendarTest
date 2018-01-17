@@ -39,18 +39,18 @@ class CTAppRootViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		setupUI()
-		changeAppUIState()
+		self.setupUI()
+		self.changeAppUIState()
     }
 
 	/**
 	Sets view's background color and centerInfoLabel's font and color
 	*/
 	private func setupUI() {
-		view.backgroundColor = UIColor(red: 0, green: 119/255, blue: 189/255, alpha: 1.0)
-		centerInfoLabel.textColor = UIColor.white
-		centerInfoLabel.font = CTFont.systemFont(ofSize: 18, weight: .Bold)
-		centerInfoLabel.text = "Calendar Test"
+		self.view.backgroundColor = UIColor(red: 0, green: 119/255, blue: 189/255, alpha: 1.0)
+		self.centerInfoLabel.textColor = UIColor.white
+		self.centerInfoLabel.font = CTFont.systemFont(ofSize: 18, weight: .Bold)
+		self.centerInfoLabel.text = "Calendar Test"
 	}
 
 	/**
@@ -58,7 +58,7 @@ class CTAppRootViewController: UIViewController {
 	 - Parameter message: Message to show.
 	*/
 	private func showMessage(message:String) {
-		centerInfoLabel.text = message
+		self.centerInfoLabel.text = message
 	}
 
 	/**
@@ -76,8 +76,8 @@ class CTAppRootViewController: UIViewController {
 	Loads central container. Which will contain calendar view, aganeda view and top bar.
 	*/
 	private func showCenterContainer() {
-		centralContainerViewController = CTCentralContainerViewController()
-		centralContainerViewController?.modalTransitionStyle = .crossDissolve
+		self.centralContainerViewController = CTCentralContainerViewController()
+		self.centralContainerViewController?.modalTransitionStyle = .crossDissolve
 		present(self.centralContainerViewController, animated: true, completion: nil)
 	}
 
@@ -89,20 +89,20 @@ class CTAppRootViewController: UIViewController {
 		switch self.appDataState {
 
 		case .creatingDummyData:
-			showMessage(message: "Just a sec.\n Creating static app data...")
+			self.showMessage(message: "Just a sec.\n Creating static app data...")
 
 		case .finishedDummyDataCreation:
-			showCenterContainer()
+			self.showCenterContainer()
 
 		case .creatingDummyAppDataFailed:
-			showError(errorText: "Dummy data creation failed.\n Please try reinstalling app", errorTitle: "Oops!")
+			self.showError(errorText: "Dummy data creation failed.\n Please try reinstalling app", errorTitle: "Oops!")
 
 		case .intialization:
-			showMessage(message: "Calendar Test")
+			self.showMessage(message: "Calendar Test")
 
 		case .persistentStoreFailed:
-			showMessage(message: "Calendar Test")
-			showError(errorText: "App data creation failed.\n Please try reinstalling app", errorTitle: "Oops!")
+			self.showMessage(message: "Calendar Test")
+			self.showError(errorText: "App data creation failed.\n Please try reinstalling app", errorTitle: "Oops!")
 		}
 	}
 }

@@ -108,7 +108,7 @@ extension Date {
 	}
 
 	/**
-	This method returns past date after given number of days
+	This method returns past date before given number of days
 
 	- Parameter days: Number of days to subtract from current date.
 	- Returns: Date before given number of days
@@ -199,7 +199,7 @@ extension Date {
 	}
 
 	/**
-	This method returns number of weeks from given date
+	This method returns number of days from given date
 
 	- Parameter date: Date from which difference of days needs to be calculated.
 	- Returns: Difference bewtween dates in days.

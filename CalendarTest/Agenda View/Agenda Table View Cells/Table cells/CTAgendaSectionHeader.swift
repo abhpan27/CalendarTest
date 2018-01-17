@@ -30,8 +30,8 @@ class CTAgendaSectionHeader: UITableViewHeaderFooterView {
 	}
 
 	override func awakeFromNib() {
-		addBackgroundContainer()
-		addDateLabel()
+		self.addBackgroundContainer()
+		self.addDateLabel()
 	}
 
 	/**
