@@ -48,7 +48,8 @@ extension CTEvent {
     @NSManaged public var calendar: CTCalendar
 
 	/*
-	Many more properties can be added here based on features supported by app. For example one property called type of event (birthday, flight, meeting, date etc) can be added.
+	Many more properties can be added here based on features supported by app.
+	For example one property called type of event (birthday, flight, meeting, date etc) can be added.
 	*/
 
 }

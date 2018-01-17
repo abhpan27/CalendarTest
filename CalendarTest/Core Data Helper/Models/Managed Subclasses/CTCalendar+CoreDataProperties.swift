@@ -32,4 +32,8 @@ extension CTCalendar {
 	///Name of calendar
     @NSManaged public var name: String
 
+	/*
+	Many more properties can be added here based on features supported by app.
+	For example one property called isVisible can be added to show wether events from this calendar should be shown or not.
+	*/
 }

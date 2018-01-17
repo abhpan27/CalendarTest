@@ -286,5 +286,4 @@ class CTAgendaViewDataTest: XCTestCase {
 		dateFormatter.dateFormat = "MMM d, yyyy HH:mm:ss"
 		return dateFormatter.date(from: fullDateText)!
 	}
-    
 }

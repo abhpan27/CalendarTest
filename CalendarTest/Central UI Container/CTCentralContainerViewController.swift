@@ -11,7 +11,7 @@ import UIKit
 /**
 This class is container of top bar, calendar view and agenda view.
 Top bar shows current month name selected in app.
-Calendar view is grid style calendar which scrolls in both direction vertically.
+Calendar view is grid style calendar which scrolls vertically.
 Agenda view is chronological list of dates which scrolls vertically.
 */
 class CTCentralContainerViewController: UIViewController {
@@ -53,7 +53,7 @@ class CTCentralContainerViewController: UIViewController {
 	}
 
 	/**
-	This method is responsible to adding views and adding constraints for these views.
+	This method is responsible for adding views and adding constraints for these views.
 	*/
 	private func addAndLayoutViews() {
 		self.addAndLayoutTopBar()

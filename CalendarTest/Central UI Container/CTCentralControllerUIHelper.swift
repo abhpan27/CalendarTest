@@ -10,7 +10,7 @@ import UIKit
 
 /**
 This is an extension of CTCentralContainerViewController. View layout related code is added here.
-Complete struture (vertically)
+Complete struture -
 	|Top bar view|
 		|
 	|1px Separator|

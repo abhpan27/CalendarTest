@@ -36,4 +36,9 @@ extension CTPerson {
 	///Hex color string for person.
 	@NSManaged public var colorHex: String
 
+	/*
+	Many more properties can be added here based on features supported by app.
+	For example one property called RSVP status (going, not going, etc) can be added.
+	*/
+
 }

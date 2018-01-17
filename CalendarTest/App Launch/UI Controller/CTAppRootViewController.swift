@@ -69,7 +69,7 @@ class CTAppRootViewController: UIViewController {
 	private func showError(errorText:String, errorTitle:String) {
 		let alert = UIAlertController(title: errorTitle, message: errorText, preferredStyle: UIAlertControllerStyle.alert)
 		alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-		present(alert, animated: true, completion: nil)
+		self.present(alert, animated: true, completion: nil)
 	}
 
 	/**
@@ -78,7 +78,7 @@ class CTAppRootViewController: UIViewController {
 	private func showCenterContainer() {
 		self.centralContainerViewController = CTCentralContainerViewController()
 		self.centralContainerViewController?.modalTransitionStyle = .crossDissolve
-		present(self.centralContainerViewController, animated: true, completion: nil)
+		self.present(self.centralContainerViewController, animated: true, completion: nil)
 	}
 
 	/**

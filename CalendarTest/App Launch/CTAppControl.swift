@@ -40,7 +40,7 @@ internal enum UserDefaultKeys:String {
 }
 
 /**
-This class if responsible for intiation of UI, intialization of core data stack and dummy data creation. It takes over app as soon as appDidLaunched is called. It's singelton reference is kept so that different part of modules can interact with each other through this object. eg - Calendar view can access core data controller through this singelton.
+This class if responsible for intiation of UI, intialization of core data stack and dummy data creation. It takes over app as soon as appDidLaunched is called. It's reference is kept so that different part of modules can interact with each other through this object. eg - Calendar view can access core data controller through this object.
 */
 final class CTAppControl {
 
