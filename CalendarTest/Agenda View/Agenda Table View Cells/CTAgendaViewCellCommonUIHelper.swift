@@ -35,6 +35,30 @@ final class CTAgendaViewCellCommonUIHelper {
 		return label
 	}
 
+
+	/**
+	Adds label to indicate that this is the first upcoming event today.
+	In X Direction --- (left of cell - Label)
+	In Y Direction --- (top of cell - 15pt gap - Label)
+
+	- Parameter inCell: UITableViewCell object in which start time lable needs to added.
+	- Returns: Start time label.
+	*/
+	func addFirstUpComingEventIndicator(inCell:UITableViewCell) -> UILabel {
+		let label = UILabel()
+		inCell.addSubview(label)
+		label.font = CTFont.systemFont(ofSize: 14, weight: .Regular)
+		label.textColor = UIColor(red: 41/255, green: 127/255, blue: 246/255, alpha: 1.0)
+		label.text = "▶"
+		label.translatesAutoresizingMaskIntoConstraints = false
+
+		let left = NSLayoutConstraint(item: label, attribute: .left, relatedBy: .equal, toItem: inCell, attribute: .left, multiplier: 1.0, constant: 0)
+		let top = NSLayoutConstraint(item: label, attribute: .top, relatedBy: .equal, toItem: inCell, attribute: .top, multiplier: 1.0, constant: 15)
+		NSLayoutConstraint.activate([left, top])
+
+		return label
+	}
+
 	/**
 	Adds event duration lable in cell.
 	In X Direction --- (left align to start time label)

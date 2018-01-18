@@ -22,6 +22,9 @@ class CTTitleOnlyRowTableViewCell: UITableViewCell {
 	///Lable used to show title of event
 	var titleLabel:UILabel!
 
+	///Lable used to show whether this is first upcoming event today
+	var arrowLabelForUpcomingEvent:UILabel!
+
 	/**
 	This is static method used to register cell for reusablity in tableview.
 	-Parameter inTableView: Table view in which this cell should be registered.
@@ -45,6 +48,7 @@ class CTTitleOnlyRowTableViewCell: UITableViewCell {
 		self.startTimeLabel = uiLayoutHelper.addStartTimeLable(inCell: self)
 		self.circleView = uiLayoutHelper.addCalColorCircleView(inCell: self, centerAlignedWith: self.startTimeLabel!)
 		self.titleLabel = uiLayoutHelper.addTitleLabel(inCell: self, centerAlignedWith: circleView!, inRightOf: circleView!)
+		self.arrowLabelForUpcomingEvent = uiLayoutHelper.addFirstUpComingEventIndicator(inCell: self)
 	}
 
 	/**
@@ -55,5 +59,6 @@ class CTTitleOnlyRowTableViewCell: UITableViewCell {
 		self.startTimeLabel.text = uiData.startTimeText
 		self.circleView.backgroundColor = uiData.calColor
 		self.titleLabel.text = uiData.eventTitle
+		self.arrowLabelForUpcomingEvent.isHidden = !uiData.isFistUpcomingEventToday
 	}
 }

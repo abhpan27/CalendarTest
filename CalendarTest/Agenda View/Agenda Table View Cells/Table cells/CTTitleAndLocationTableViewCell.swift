@@ -28,6 +28,9 @@ class CTTitleAndLocationTableViewCell: UITableViewCell {
 	///label used to show location of event
 	var locationLabel:UILabel!
 
+	///Lable used to show whether this is first upcoming event today
+	var arrowLabelForUpcomingEvent:UILabel!
+
 
 	/**
 	This is static method used to register cell for reusablity in tableview.
@@ -54,6 +57,7 @@ class CTTitleAndLocationTableViewCell: UITableViewCell {
 		self.circleView = uiLayoutHelper.addCalColorCircleView(inCell: self, centerAlignedWith: self.startTimeLabel!)
 		self.titleLabel = uiLayoutHelper.addTitleLabel(inCell: self, centerAlignedWith: circleView!, inRightOf: circleView!)
 		self.locationLabel = uiLayoutHelper.addLocationLabel(inCell: self, alignLeftTo: self.titleLabel, below: self.titleLabel)
+		self.arrowLabelForUpcomingEvent = uiLayoutHelper.addFirstUpComingEventIndicator(inCell: self)
 	}
 
 	/**
@@ -66,6 +70,7 @@ class CTTitleAndLocationTableViewCell: UITableViewCell {
 		self.circleView.backgroundColor = uiData.calColor
 		self.titleLabel.text = uiData.eventTitle
 		self.locationLabel.text = "⚲ " + uiData.locationString
+		self.arrowLabelForUpcomingEvent.isHidden = !uiData.isFistUpcomingEventToday
 	}
     
 }

@@ -69,6 +69,9 @@ final class CTAgendaViewRowUIData {
 	///Holds kind of row
 	let typeOfRow:TypeOfRow
 
+	///Bool to show weather this is the first upcoming event today. It is Updated every 5 minute. Only valid for today's section
+	var isFistUpcomingEventToday = false
+
 	///height neede for drawing this Row
 	var heightNeededForRow:CGFloat {
 		switch self.typeOfRow {

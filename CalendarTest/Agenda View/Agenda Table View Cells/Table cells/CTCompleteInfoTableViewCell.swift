@@ -25,6 +25,9 @@ class CTCompleteInfoTableViewCell: UITableViewCell {
 	///Label to show title of event
 	var titleLabel:UILabel!
 
+	///Lable used to show whether this is first upcoming event today
+	var arrowLabelForUpcomingEvent:UILabel!
+
 	///Label to show location of event
 	var locationLabel:UILabel!
 
@@ -38,7 +41,7 @@ class CTCompleteInfoTableViewCell: UITableViewCell {
 	var thirdAttendeeLabel:UILabel!
 
 	///Remaining count attendee label. This is used when there are more than 3 attendees.
-	var remaingAttendeeCountLabel:UILabel!
+	var remainingAttendeeCountLabel:UILabel!
 
 	/**
 	This is static method used to register cell for reusablity in tableview.
@@ -62,13 +65,14 @@ class CTCompleteInfoTableViewCell: UITableViewCell {
 		let uiLayoutHelper = CTAgendaViewCellCommonUIHelper()
 		self.startTimeLabel = uiLayoutHelper.addStartTimeLable(inCell: self)
 		self.eventDurationLabel = uiLayoutHelper.addEventDurationLabel(inCell: self, below: startTimeLabel!, leftAlignedTo: startTimeLabel!)
+		self.arrowLabelForUpcomingEvent = uiLayoutHelper.addFirstUpComingEventIndicator(inCell: self)
 		self.circleView = uiLayoutHelper.addCalColorCircleView(inCell: self, centerAlignedWith: self.startTimeLabel!)
 		self.titleLabel = uiLayoutHelper.addTitleLabel(inCell: self, centerAlignedWith: circleView!, inRightOf: circleView!)
 		let attendeeInfoViews = uiLayoutHelper.addAttendeesLabels(inCell: self, alignLeftTo: self.titleLabel, below: self.titleLabel)
 		self.firstAttendeeLabel = attendeeInfoViews.first
 		self.secondAttendeeLabel = attendeeInfoViews.second
 		self.thirdAttendeeLabel = attendeeInfoViews.third
-		self.remaingAttendeeCountLabel = attendeeInfoViews.fourth
+		self.remainingAttendeeCountLabel = attendeeInfoViews.fourth
 		self.locationLabel = uiLayoutHelper.addLocationLabel(inCell: self, alignLeftTo: self.titleLabel, below: self.firstAttendeeLabel)
 	}
 
@@ -83,13 +87,14 @@ class CTCompleteInfoTableViewCell: UITableViewCell {
 		self.circleView.backgroundColor = uiData.calColor
 		self.titleLabel.text = uiData.eventTitle
 		self.locationLabel.text = !uiData.locationString.isEmpty ? "⚲ " + uiData.locationString : ""
+		self.arrowLabelForUpcomingEvent.isHidden = !uiData.isFistUpcomingEventToday
 
 		//Logic for showing attendee first name and color
 		//first hide all labels
 		self.firstAttendeeLabel.isHidden = true
 		self.secondAttendeeLabel.isHidden = true
 		self.thirdAttendeeLabel.isHidden = true
-		self.remaingAttendeeCountLabel.isHidden = true
+		self.remainingAttendeeCountLabel.isHidden = true
 
 		var attendees = uiData.attendeesInfo
 
@@ -122,8 +127,8 @@ class CTCompleteInfoTableViewCell: UITableViewCell {
 
 		//Still more attendees left then show remaining count label
 		if attendees.count > 0 {
-			self.remaingAttendeeCountLabel.isHidden = false
-			self.remaingAttendeeCountLabel.text = "+" + "\(attendees.count)"
+			self.remainingAttendeeCountLabel.isHidden = false
+			self.remainingAttendeeCountLabel.text = "+" + "\(attendees.count)"
 		}
 	}
 }

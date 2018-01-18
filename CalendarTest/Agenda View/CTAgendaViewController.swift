@@ -51,8 +51,8 @@ class CTAgendaViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		listUIHelper.registerCells(inTableView: agendaTableView)
-		loadEventForFirstLaunch()
+		self.listUIHelper.registerCells(inTableView: agendaTableView)
+		self.loadEventForFirstLaunch()
     }
 
 	/**
@@ -140,6 +140,8 @@ class CTAgendaViewController: UIViewController {
 			mainQueueAsync {
 				self.agendaTableView.reloadData()
 				self.scrollToDate(date:Date(), animated: false)
+				//start timer which will check and show first upcoming event today
+				self.startTimerForUpdatingFirstUpcomingEventToday()
 			}
 		}
 	}
@@ -192,7 +194,7 @@ class CTAgendaViewController: UIViewController {
 	}
 
 	/**
-	This method detects top visible date and informs delegate about date change. This methos is triggering change of date in calendar view and change of month name on top bar
+	This method detects top visible date and informs delegate about date change. This method is triggering change of date in calendar view and change of month name on top bar
 	*/
 	private func checkAndUpDateTopVisibleSectionDate() {
 		guard let visibleIndexPath = self.agendaTableView.indexPathsForVisibleRows, visibleIndexPath.count > 0
@@ -206,6 +208,33 @@ class CTAgendaViewController: UIViewController {
 		}
 
 		self.delegate?.agendaViewScrolledToDate(date: date)
+	}
+
+
+	/**
+	This Method updates first upcoming event from list of events today and reloads today's section
+	*/
+	@objc private func checkAndShowFirstUpComingEventToday() {
+		guard let todaySectionIndexPath = self.listUIHelper.indexPathForDate(date: Date())
+			else{
+				return
+		}
+
+		self.listUIHelper.updateFirstUpcomingEventForToday()
+
+		//only today's date section needs to be reloaded
+		self.agendaTableView.reloadRows(at: [todaySectionIndexPath], with: .none)
+	}
+
+	/**
+	This Method shows arrow indicator in row for first upcoming event today. And also schedules one time to update first upcoming event row.
+	*/
+	private func startTimerForUpdatingFirstUpcomingEventToday() {
+		//show for first time
+		checkAndShowFirstUpComingEventToday()
+		
+		//update every 5*60 seconds, assuming that event durations are usually more than 5 mins
+		Timer.scheduledTimer(timeInterval: 5*60, target: self, selector: #selector(CTAgendaViewController.checkAndShowFirstUpComingEventToday), userInfo: nil, repeats: true)
 	}
 
 }
