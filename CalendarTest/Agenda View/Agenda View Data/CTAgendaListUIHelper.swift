@@ -267,7 +267,7 @@ final class CTAgendaListUIHelper {
 
 
 	/**
-	This Method iterates in list of today's event and updates first upcoming event.
+	This Method iterates in list of today's event and updates first upcoming event. A blue arrow is shown for such events
 	*/
 	final func updateFirstUpcomingEventForToday() {
 		guard let sectionNumberForToday = self.indexPathForDate(date: Date().startOfDate)?.section
@@ -277,6 +277,11 @@ final class CTAgendaListUIHelper {
 
 		//this is sorted array, so first match will be first upcoming event
 		let arrayOfEventsToday = self.arrayOfSectionUIData[sectionNumberForToday].arrayOfEventsRowUIDataOnDay
+
+		//first set every element to false
+		(0 ..< arrayOfEventsToday.count).forEach { arrayOfEventsToday[$0].isFistUpcomingEventToday = false }
+
+		//now find first upcoming event
 		for index in 0...arrayOfEventsToday.count - 1 {
 			let eventRowData = arrayOfEventsToday[index]
 
