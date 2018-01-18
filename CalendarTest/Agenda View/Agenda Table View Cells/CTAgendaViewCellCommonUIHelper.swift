@@ -141,7 +141,7 @@ final class CTAgendaViewCellCommonUIHelper {
 	}
 
 	/**
-	Adds Labels for attendees of event. There can be maximum four label. Three labels will show first three attendees and last label will show remaining attendee count not shown.
+	Adds Labels for attendees of event. There can be maximum four label. Three labels will show first three attendees and last label will show remaining attendee count.
 	In X Direction --- (left of title of event label - first label - 5pt gap - second label - 5pt gap - third label - 5pt gap - fourth label)
 	In Y Direction --- (title of event label - 8pt gap - Top of first label) (Center align all other labels to first label)
 

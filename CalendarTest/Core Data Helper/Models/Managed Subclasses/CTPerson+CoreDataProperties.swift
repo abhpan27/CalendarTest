@@ -38,7 +38,7 @@ extension CTPerson {
 
 	/*
 	Many more properties can be added here based on features supported by app.
-	For example one property called RSVP status (going, not going, etc) can be added.
+	For example one property called thumbnail (small display image of person) can be added.
 	*/
 
 }

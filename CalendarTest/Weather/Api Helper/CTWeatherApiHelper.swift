@@ -78,7 +78,7 @@ final class CTWeatherInfo {
 This class usage Yahoo weather api and CLLocationManager to get today's weather information as well as some future weather forcast for user's current location.
 
 It is based on Yahoo weather api - https://developer.yahoo.com/weather/
-This class is using public weather API which has limitation of 2000 hits per day. Also attribution is not added here.
+This class is using public weather API which has limitation of 2000 hits per day. Also attribution is not added here which should be added for real app.
 */
 final class CTWeatherApiHelper {
 
@@ -154,7 +154,7 @@ final class CTWeatherApiHelper {
 					return
 			}
 
-			// Now fire Yahoo weather api
+			// Got URL, Now fire Yahoo weather api
 			blockSelf.lastDataTask = URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
 				guard error == nil
 					else {
@@ -210,10 +210,16 @@ final class CTWeatherApiHelper {
 	*/
 	private func getUrlForWeatherAPI(latitude:Double, longitude:Double) -> URL? {
 		let woeidString = self.getWoiedQueryString(latitude: latitude, longitude: longitude)
+
+		//query params
 		let woeidQueryParam = URLQueryItem(name: "q", value: woeidString)
 		let formateQueryParam = URLQueryItem(name: "format", value: "json")
+
+		//end point of api
 		let endPointString = "https://query.yahooapis.com/v1/public/yql"
 		var urlcomponents = URLComponents(string: endPointString)
+
+		//add query in end point
 		urlcomponents?.queryItems = [woeidQueryParam, formateQueryParam]
 		return urlcomponents?.url
 	}

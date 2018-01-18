@@ -29,7 +29,7 @@ class  CTLocationManager:NSObject, CLLocationManagerDelegate {
 		///User has not given us permission to use location
 		case permissionDenied
 
-		///Human readable description for error. It also provide some error resolution tips also
+		///Human readable description for error. It also provide some error resolution tips
 		var locationErrorDescription: String {
 			switch self {
 			case .locationServiceDisabled:

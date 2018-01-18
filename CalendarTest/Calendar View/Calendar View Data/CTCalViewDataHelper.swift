@@ -13,6 +13,9 @@ Mapping between day name and day number - Sunday is 1 saturday is 7
 */
 internal enum WeekDayNumber:Int {
 	case sunday = 1, monday, tuesday, wednesday, thursday, friday, saturday
+
+	///Number of days in a week.
+	static let numberOfDaysInWeek = 7
 }
 
 
@@ -62,6 +65,7 @@ final class CTCalViewDataHelper {
 
 	/**
 	This method loads Barebone UI data for collection view. It is a 2D array where each row represents 1 Week. So number of coloumns in each row is 7 (equal to number of day in week).
+
 	2D array of CTCalCollectionViewCellUIData is generated in form of -
 	- - - - d d d
 	d d d d d d d
@@ -70,12 +74,14 @@ final class CTCalViewDataHelper {
 	.
 	d d d d d d d
 	d d d - - - -
+	where 'd' represent data and '-' represents blank cell. Only first and last row will have blank cells.
 
-	where d represent data and - represents blank cell. Only first and last row will have blank cells
+	Data is loaded for complete range of date supproted by app (8 years currently). Becuase CTCalCollectionViewCellUIData object needs very low memory, we can support large range of dates in app.
 
 	 - Returns: 2D array of CTCalCollectionViewCellUIData.
 	*/
 	private func getBasicCollectionViewCalData() -> [[CTCalCollectionViewCellUIData]] {
+		//maximum and minimum date supported by app
 		let minMaxDateInfo = CTAppConstants.shared.minMaxDate
 		var currentDay = WeekDayNumber.sunday.rawValue
 		var shouldFillGrey = false
@@ -94,7 +100,7 @@ final class CTCalViewDataHelper {
 
 		//fill all other row and coloums of cal data
 		while currentDateInIteration <= endDate {
-			//Fill each row. Current day will be in range (1-8) 1- sunday 8- saturday
+			//Fill each row. Current day will be in range (1-7) 1- sunday 7- saturday
 			while currentDay <= WeekDayNumber.saturday.rawValue {
 				//next date can be blank cell also if this is last row and currentDateInIteration is after endDate
 				let nextCellUIData = currentDateInIteration <= endDate ? CTCalCollectionViewCellUIData(dateEpoch: currentDateInIteration.timeIntervalSince1970, shouldDrawInGrey: shouldFillGrey) : CTCalCollectionViewCellUIData(dateEpoch: -1, shouldDrawInGrey: false)
@@ -168,7 +174,7 @@ final class CTCalViewDataHelper {
 
 	/**
 	This method does actual task of querying number of events on dates. It queries core data in chunk of 30 days and calls appendEventAvailabilityInCurrentCalData to change color of dots of cells in that range.
-	it keeps celling itself recursively untill every cell has dot color.
+	it keeps calling itself recursively untill every cell has dot color.
 	It runs in background context to avoid any lag in Main thread.
 
 	 - Parameter fromDate: Minimum date for query.
@@ -218,13 +224,14 @@ final class CTCalViewDataHelper {
 	private func appendEventAvailabilityInCurrentCalData(availabiltyDict:[Date:Int], tillEndDate:Date) {
 		//go to each cell and update it's dot color
 		for rowIndex in 0 ... self.calCollectionViewUIData.count - 1 {
-			for coloumnIndex in 0 ... 6 {
+			for coloumnIndex in 0 ... WeekDayNumber.numberOfDaysInWeek - 1 {
 				let cellData = self.calCollectionViewUIData[rowIndex][coloumnIndex]
 				if cellData.isBlankDay {
 					continue
 				}
 
 				if cellData.dateEpoch > tillEndDate.timeIntervalSince1970 {
+					//no more data, so need to process more dates
 					return
 				}
 
@@ -271,7 +278,7 @@ final class CTCalViewDataHelper {
 		//Section of date is simply week between dates
 		let sectionOfDate = numberOfWeeksBetweenDates
 
-		guard sectionOfDate < self.calCollectionViewUIData.count && rowOfDate < 7
+		guard sectionOfDate < self.calCollectionViewUIData.count && rowOfDate < WeekDayNumber.numberOfDaysInWeek
 			else {
 				return nil
 		}
@@ -285,7 +292,7 @@ final class CTCalViewDataHelper {
 	*/
 	private func getFirstDateInfo() -> (date:Date, indexPath:IndexPath)? {
 		let firstRow = self.calCollectionViewUIData[0]
-		for index in 0 ... 6 {
+		for index in 0 ... WeekDayNumber.numberOfDaysInWeek - 1 {
 			if firstRow[index].dateEpoch != -1 {
 				let indexPath = IndexPath(row: index, section: 0)
 				let date = Date(timeIntervalSince1970: firstRow[index].dateEpoch)
@@ -305,7 +312,7 @@ final class CTCalViewDataHelper {
 		let row = indexPath.section
 		let coloumn = indexPath.row
 
-		if coloumn < 7 && coloumn >= 0 {
+		if coloumn < WeekDayNumber.numberOfDaysInWeek && coloumn >= 0 {
 			if row >= 0 && row < self.calCollectionViewUIData.count {
 				let epoch = self.calCollectionViewUIData[row][coloumn].dateEpoch
 				return Date(timeIntervalSince1970: epoch).startOfDate

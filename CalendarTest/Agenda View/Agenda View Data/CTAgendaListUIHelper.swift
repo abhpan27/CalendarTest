@@ -14,26 +14,26 @@ This enum represents different satges of data load into agenda view.
 */
 internal enum AgendaViewContentLoadState {
 
-	///Loading of more events from past dates. This adds more event at top of list
+	///Loading of more events from past dates. This adds more dates at top of list
 	case loadPastContent
 
-	///Loading of more events from future dates. This add more events at bottom of list
+	///Loading of more events from future dates. This add more dates at bottom of list
 	case loadFutureContent
 
-	///Loading of events on first launch of agenda view, This loads some events on first launch. Also inclues today date
+	///Loading of dates on first launch of agenda view, This loads some dates on first launch. Also inclues today date
 	case loadContentOnLaunch
 
-	///Loading of events when some date is selected in Calendar view.
+	///Loading of dates when some date is selected in Calendar view.
 	case loadContentForDateSelectionInCalendar(date:Date)
 
 }
 
 /**
-This class is responsible for providing data and table view cells to table view of agenda view. This takes help from CTDBQueryHelper class and dynamically add events on top or bottom of list as user scrolls.
+This class is responsible for providing data and table view cells to table view of agenda view. This takes help from CTDBQueryHelper class and dynamically add dates on top or bottom of list as user scrolls.
 */
 final class CTAgendaListUIHelper {
 
-	///This is **sorted** list of data for sections of Table view. Every date in table view is shown as a section. And events are shown as rows in that section.
+	///This is **sorted** list of data for sections of Table view. Every date in table view is shown as a section. And events are shown as rows in that section. So this array contains all dates currently shown in agenda view.
 	var arrayOfSectionUIData = [CTAgendaViewSectionUIData]()
 
 	///Db query helper class which takes request for DB query and returns data from DB.
@@ -73,7 +73,7 @@ final class CTAgendaListUIHelper {
 
 
 	/**
-	This method loads future events. This will eventually add more events in bottom of agenda view.
+	This method loads future events. This will eventually add more dates in bottom of agenda view.
 
 	- Parameter completion: Completion handler called when loading of events from DB is completed
 	- Parameter error: Any error while loading events from DB.
@@ -107,7 +107,7 @@ final class CTAgendaListUIHelper {
 
 
 	/**
-	This method loads past events. This will eventually add more events at top of agenda view.
+	This method loads past events. This will eventually add more dates at top of agenda view.
 
 	- Parameter completion: Completion handler called when loading of events from DB is completed
 	- Parameter error: Any error while loading events from DB.

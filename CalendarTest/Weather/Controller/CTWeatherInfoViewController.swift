@@ -34,14 +34,14 @@ class CTWeatherInfoViewController: UIViewController {
 	///Api helper, used to get data
 	let weatherInfoApiHelper = CTWeatherApiHelper()
 
-	///Array of weather info objects which includes min/mac temp, weather condition, city name, date etc
+	///Array of weather info objects which includes min/max temp, weather condition, city name, date etc
 	var arrayOfWeatherInfo = [CTWeatherInfo]()
 
 	override func viewDidLoad() {
         super.viewDidLoad()
 		self.addAndLayoutViews()
 		CTWeatherInfoTableViewCell.registerCell(inTableView: self.weatherInfoTableView!, withIdentifier: "CTWeatherInfoTableViewCell")
-		loadWeatherInfo()
+		self.loadWeatherInfo()
     }
 
 	/**
@@ -119,11 +119,11 @@ class CTWeatherInfoViewController: UIViewController {
 	}
 
 	/**
-	This method adds error view error text and retry button.
+	This method adds error view, error text and retry button.
 	Error view is added above table view with left right top bottom aligned to this controller's view.
 	*/
 	private func showError(error:Error) {
-		self.hideError()//hide error if already shown
+		self.hideError()//hide error if already shown to avoid addtion of multiple error views
 		var text = "Oops!\n"
 		if let locationError = error as?  CTLocationManager.locationError {
 			text += locationError.locationErrorDescription

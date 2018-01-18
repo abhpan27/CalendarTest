@@ -34,6 +34,6 @@ extension CTCalendar {
 
 	/*
 	Many more properties can be added here based on features supported by app.
-	For example one property called isVisible can be added to show wether events from this calendar should be shown or not.
+	For example one property called isVisible can be added to show weather events from this calendar should be shown or not.
 	*/
 }

@@ -92,7 +92,7 @@ final class CTAgendaViewRowUIData {
 
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "h:mma"
-		//strins like 10:00 will be converted to 10
+		//strings like 10:00 will be converted to 10
 		return dateFormatter.string(from: self.eventStartTime).replacingOccurrences(of: ":00", with: "")
 	}
 

@@ -120,7 +120,7 @@ final class CTCalendarViewController: UIViewController {
 
 
 	/**
-	This method starts loading of event availability for each cell. It takes help from calendarViewUIDataHelper
+	This method starts loading of color of dot for each cell. It takes help from calendarViewUIDataHelper
 	*/
 	private func loadEventAvailabilityInBgThread() {
 		self.calendarViewUIDataHelper.loadEventAvailabiltyForShowingDots {

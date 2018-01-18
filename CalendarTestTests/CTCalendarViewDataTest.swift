@@ -70,7 +70,7 @@ class CTCalendarViewDataTest: XCTestCase {
 		var currentLastDate:Date?
 		//dates should be in sequence
 		for section in 0 ... calUIDataHelper.calCollectionViewUIData.count - 1 {
-			for row in 0 ... 6 {
+			for row in 0 ... WeekDayNumber.numberOfDaysInWeek - 1 {
 				let currData = calUIDataHelper.calCollectionViewUIData[section][row]
 				let currentDateEpoch = currData.dateEpoch
 				if currentDateEpoch != -1 {
@@ -164,7 +164,7 @@ class CTCalendarViewDataTest: XCTestCase {
 	*/
 	private func validateEventAvailability(withExpectedAvailability:[Date:Int]) {
 		for row in 0 ... self.calUIDataHelper.calCollectionViewUIData.count - 1 {
-			for coloum in 0 ... 6 {
+			for coloum in 0 ... WeekDayNumber.numberOfDaysInWeek - 1 {
 				let currCellData = self.calUIDataHelper.calCollectionViewUIData[row][coloum]
 				guard !currCellData.isBlankDay
 					else {

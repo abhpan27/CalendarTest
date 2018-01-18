@@ -163,17 +163,18 @@ final class CTDBQueryDataHelper {
 	*/
 	private func convertListOfDBEventObjectIntoSectionUIData(dbEventList:[CTEvent], forContentRequest:CTDBQueryContentRequest) -> [CTAgendaViewSectionUIData] {
 
-		//Array of events on give date.
+		//Array of events on give date. For every date in given date range there will array of events. If there are no events on date then there will be empty array.
 		var eventsGroupBasedOnDates = [Date: [CTEvent]]()
 
 		var loopStartDate = forContentRequest.fromDate.startOfDate
 		let loopEndDate = forContentRequest.toDate.startOfDate
+		//for every date in given range, intialize it as empty array
 		while loopStartDate <= loopEndDate {
-			//for every date in given range, intialize it as empty array
 			eventsGroupBasedOnDates[loopStartDate] = [CTEvent]()
 			loopStartDate = loopStartDate.nextDate
 		}
 
+		//for every date in given range,empty array added, now add actual events
 		for event in dbEventList {
 			let startDateOfEvent = Date(timeIntervalSince1970: TimeInterval(event.startTime)).startOfDate
 			if eventsGroupBasedOnDates[startDateOfEvent] !=  nil {
