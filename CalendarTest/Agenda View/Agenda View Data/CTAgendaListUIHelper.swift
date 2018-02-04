@@ -278,6 +278,11 @@ final class CTAgendaListUIHelper {
 		//this is sorted array, so first match will be first upcoming event
 		let arrayOfEventsToday = self.arrayOfSectionUIData[sectionNumberForToday].arrayOfEventsRowUIDataOnDay
 
+		guard arrayOfEventsToday.count > 0
+			else{
+				return
+		}
+
 		//first set every element to false
 		(0 ..< arrayOfEventsToday.count).forEach { arrayOfEventsToday[$0].isFistUpcomingEventToday = false }
 
